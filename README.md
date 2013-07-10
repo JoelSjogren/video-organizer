@@ -12,8 +12,8 @@ The purpose of this terminal application is to sort your files: films, series an
  - Best.Movie.Ever.2010.*.avi
 
 it should move them to give you the following file structure:
-.
 
+	.
 	├── Some Show
 	│   └── S01
 	│       ├── E01.mp4
