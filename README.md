@@ -28,7 +28,7 @@ Note that a file called *filelist* is generated in each directory that contains 
 	-u, --undo	
 		undo organizing. FILES may be a *filelist*
 
-	-o, --outdir=DIRECTORY
+	-o DIRECTORY, --outdir=DIRECTORY
 		use DIRECTORY as root of all output; default is current
 		
 	-m, --move

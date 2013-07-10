@@ -25,24 +25,19 @@ it should move them to give you the following file structure:
 		└── filelist
 Note that a file called *filelist* is generated in each directory that contains resulting non-directory files. It contains their original filenames and enables you to undo organizing by using the **-u** flag.
 
-	-u, --undo
-	
+	-u, --undo	
 		undo organizing. FILES may be a *filelist*
- 
+
 	-o, --outdir=DIRECTORY
-	
 		use DIRECTORY as root of all output; default is current
 		
 	-m, --move
-	
 		move FILES (default)
 		
 	-c, --copy
-	
 		copy FILES
 		
 	-l, --link
-	
 		hardlink FILES
 
 ## REPORTING BUGS ##
