@@ -1,5 +1,4 @@
-NAME
-====
+## NAME ##
 video-organizer - organize your videos
 
 ## SYNOPSIS ##
@@ -14,15 +13,16 @@ The purpose of this terminal application is to sort your files: films, series an
 
 it should move them to give you the following file structure:
 .
-├── Some Show
-│   └── S01
-│       ├── E01.mp4
-│       ├── E02.mp4
-│       ├── E02.srt
-│       └── filelist
-└── Best Movie Ever
-    ├── Best Movie Ever.avi
-    └── filelist
+
+	├── Some Show
+	│   └── S01
+	│       ├── E01.mp4
+	│       ├── E02.mp4
+	│       ├── E02.srt
+	│       └── filelist
+	└── Best Movie Ever
+		├── Best Movie Ever.avi
+		└── filelist
 Note that a file called *filelist* is generated in each directory that contains resulting non-directory files. It contains their original filenames and enables you to undo organizing by using the **-u** flag.
 
 	-u, --undo
