@@ -2,8 +2,11 @@
 #include "parser_test.h"
 #include <string>
 #include <vector>
+#include <iostream>
 using std::string;
 using std::vector;
+using std::cout;
+using std::endl;
 
 #include "parser_test_data"
 /* the above defines:
@@ -22,6 +25,7 @@ ParserTest::ParserTest() : Test("Parser") {
 	vector<SeriesParser*> seriesParsers;
 	filmParsers.push_back(new FilmParser1);
 	seriesParsers.push_back(new SeriesParser1);
+	seriesParsers.push_back(new SeriesParser2);
 	vector<Parser*> parsers;
 	for (int i = 0; i < filmParsers.size(); i++)
 		parsers.push_back(filmParsers[i]);

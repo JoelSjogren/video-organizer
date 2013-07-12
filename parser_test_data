@@ -3,10 +3,14 @@ const char* files[] = {
 	"folder//double//The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
 	"Paranormal.Activity.3.2011.UNRATED.DVDRip.XviD-SPARKS.avi",
 	"../../sub/Rise.of.the.Planet.of.the.Apes.2011.TS.XviD-NOVA.avi",
-	// series
+	// series: naming convention 1
 	"some/dir/Chuck.S05E01.HDTV.XviD-LOL.avi",
 	"/Chuck.S05E02.HDTV.XviD-LOL.avi",
 	"Community.S04E02.HDTV.x264-LOL.mp4",
+	// series: naming convention 2
+	"/The Big Bang Theory - 01x01 - Addic7ed.com.srt",
+	"Family Guy - 10x07 - Amish Guy.LOL.English.HI.C.orig.Addic7ed.com.srt",
+	"somedir/../Made up Show - 99x99 - this will be ignored.srt",
 };
 const int filec = sizeof(files) / sizeof(*files);
 	const char* fileNames[] = {
@@ -16,6 +20,9 @@ const int filec = sizeof(files) / sizeof(*files);
 	"Chuck.S05E01.HDTV.XviD-LOL.avi",
 	"Chuck.S05E02.HDTV.XviD-LOL.avi",
 	"Community.S04E02.HDTV.x264-LOL.mp4",
+	"The Big Bang Theory - 01x01 - Addic7ed.com.srt",
+	"Family Guy - 10x07 - Amish Guy.LOL.English.HI.C.orig.Addic7ed.com.srt",
+	"Made up Show - 99x99 - this will be ignored.srt",
 };
 const char* titles[] = {
 	"The Prestige",
@@ -24,6 +31,9 @@ const char* titles[] = {
 	"Chuck",
 	"Chuck",
 	"Community",
+	"The Big Bang Theory",
+	"Family Guy",
+	"Made up Show",
 };
 const char* ext[] = {
 	".mp4",
@@ -32,6 +42,9 @@ const char* ext[] = {
 	".avi",
 	".avi",
 	".mp4",
+	".srt",
+	".srt",
+	".srt",
 };
 const char* season[] = {
 	NULL,
@@ -40,6 +53,9 @@ const char* season[] = {
 	"S05",
 	"S05",
 	"S04",
+	"S01",
+	"S10",
+	"S99",
 };
 const char* episode[] = {
 	NULL,
@@ -48,6 +64,9 @@ const char* episode[] = {
 	"E01",
 	"E02",
 	"E02",
+	"E01",
+	"E07",
+	"E99",
 };
 const char* filenames_nodots[] = {
 	"The Prestige 2006 720p Bluray x264 anoXmous mp4",
@@ -56,4 +75,9 @@ const char* filenames_nodots[] = {
 	"Chuck S05E01 HDTV XviD-LOL avi",
 	"Chuck S05E02 HDTV XviD-LOL avi",
 	"Community S04E02 HDTV x264-LOL mp4",
+	"The Big Bang Theory - 01x01 - Addic7ed com srt",
+	"Family Guy - 10x07 - Amish Guy LOL English HI C orig Addic7ed com srt",
+	"Made up Show - 99x99 - this will be ignored srt",
 };
+
+

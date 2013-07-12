@@ -44,6 +44,19 @@ public:
 	virtual std::string season(std::string fnam);
 	virtual std::string episode(std::string fnam);
 };
+class SeriesParser2 : public SeriesParser {
+	static boost::regex rex;
+	static int rexlen;
+	// e.g. "The Series - 01x01" -> 10, i.e. index of " -"
+	int identifierStart(std::string fnam);
+public:
+	virtual bool matches(std::string fnam);
+	virtual std::string name(std::string fnam);
+	virtual std::string season(std::string fnam);
+	virtual std::string episode(std::string fnam);
+};
+
+
 /*class SeriesParser2 : public SeriesParser {
 	static const boost::regex rex(" - [0-9]{2}x[0-9]{2}",
 		boost::regex::extended);
