@@ -22,8 +22,8 @@ using std::string;
 using std::runtime_error;
 
 void help() {
-	for (int i = 0; i < README_md_len; i++)
-		cout << README_md[i];
+	for (int i = 0; i < HELP_md_len; i++)
+		cout << HELP_md[i];
 	cout << endl;
 }
 
@@ -59,11 +59,12 @@ Args::Args(int argc, char* argv[])
 		{ "move",	 no_argument,		NULL, 'm' },
 		{ "copy",	 no_argument,		NULL, 'c' },
 		{ "link",	 no_argument,		NULL, 'l' },
-		{ "verbose", no_argument,		NULL, 'v' }
+		{ "verbose", no_argument,		NULL, 'v' },
+		{ "help",	 no_argument,		NULL, 'h' },
 	};
 	bool done = false;
 	while (!done) {
-		char c = getopt_long(argc, argv, ":uo:mclv",
+		char c = getopt_long(argc, argv, ":uo:mclvh",
 							 longopts, NULL);
 		switch (c) {
 		case 'u':
@@ -84,6 +85,9 @@ Args::Args(int argc, char* argv[])
 		case 'v':
 			verbose = true;
 			break;
+		case 'h':
+			help();
+			exit(0);
 		case -1:
 			done = true;
 			break;

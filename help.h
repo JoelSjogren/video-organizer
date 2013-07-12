@@ -1,3 +1,3 @@
 #pragma once
-extern unsigned char README_md[];
-extern unsigned int README_md_len;
+extern unsigned char HELP_md[];
+extern unsigned int HELP_md_len;
