@@ -29,6 +29,7 @@ void help() {
 
 std::ostream&
 operator<<(std::ostream& os, const std::vector<std::string>& vec) {
+	if (vec.size() == 0) return os << "[]";
 	os << "[";
 	int i;
 	for (i = 0; i < vec.size() - 1; i++)
@@ -131,9 +132,9 @@ void Args::checkFiles() {
 				throw runtime_error(strerror(errno) + string(": ")
 									+ infiles[i]);
 			if (buf.st_mode & S_IFDIR) {
-				cout << "Omitting directory: " << infiles[i] << endl;
+				cout << "W: Omitting directory: " << infiles[i] << endl;
 				infiles.erase(infiles.begin() + i);
-				i--; // to undo the following i++
+				i--; // to undo the next i++
 			}
 		}
 	}
