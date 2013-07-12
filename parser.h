@@ -26,15 +26,7 @@ public:
 	// e.g. "The.Series.S02E01.mp4" -> "E01"
 	virtual std::string episode(std::string fnam) = 0;
 };
-// e.g. The.Film.2010.XviD.avi
-class FilmParser1 : public FilmParser {
-	static boost::regex rex;
-	static int rexlen;
-public:
-	virtual bool matches(std::string fnam);
-	virtual std::string name(std::string fnam);
-};
-// e.g. The Film 2010 XviD.avi
+// e.g. The Film 2010 XviD.avi or The.Film.2010.XviD.avi
 class FilmParser2 : public FilmParser {
 	static boost::regex rex;
 	static int rexlen;
@@ -42,7 +34,7 @@ public:
 	virtual bool matches(std::string fnam);
 	virtual std::string name(std::string fnam);
 };
-// e.g. The Film (2010) XviD.avi
+// e.g. The Film (2010) XviD.avi or The.Film.[2010].XviD.avi
 class FilmParser3 : public FilmParser {
 	static boost::regex rex;
 	static int rexlen;
@@ -50,6 +42,7 @@ public:
 	virtual bool matches(std::string fnam);
 	virtual std::string name(std::string fnam);
 };
+// e.g. The.Series.S02E01.avi or The Series S02E01.avi
 class SeriesParser1 : public SeriesParser {
 	static boost::regex rex;
 	static int rexlen;
@@ -61,6 +54,7 @@ public:
 	virtual std::string season(std::string fnam);
 	virtual std::string episode(std::string fnam);
 };
+// e.g. The Series - 02x01.avi
 class SeriesParser2 : public SeriesParser {
 	static boost::regex rex;
 	static int rexlen;

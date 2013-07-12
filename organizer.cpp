@@ -22,7 +22,6 @@ using std::setw;
 Organizer::Organizer(const Args& pargs)
 	: args(pargs), fileman(args) {
 	// init filename Parsers
-	filmParsers.push_back(new FilmParser1);
 	filmParsers.push_back(new FilmParser2);
 	filmParsers.push_back(new FilmParser3);
 	seriesParsers.push_back(new SeriesParser1);

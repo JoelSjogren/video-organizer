@@ -37,25 +37,9 @@ string Parser::dotsToSpaces(string str) {
 	return str;
 }
 /**********************************************
-*  FilmParser1								  *
-**********************************************/
-regex FilmParser1::rex("[.][0-9]{4}", regex::extended);
-int FilmParser1::rexlen(string(".2010").size());
-bool FilmParser1::matches(string fnam) {
-//	if (isSeries(fnam)) return false; // TODO use this line
-	// search for ".dddd" where d are digits
-	return regex_search(fnam, rex);
-}
-string FilmParser1::name(string fnam) {
-	for (string::iterator i = fnam.begin(); i < fnam.end(); i++)
-		if (regex_match(i, i + rexlen, rex))
-			return dotsToSpaces(string(fnam.begin(), i));
-	throw logic_error("FilmParser1::name failed. fnam: " + fnam);
-}
-/**********************************************
 *  FilmParser2							  *
 **********************************************/
-regex FilmParser2::rex(" [0-9]{4}", regex::extended);
+regex FilmParser2::rex("[. ][0-9]{4}", regex::extended);
 int FilmParser2::rexlen(string(" 2010").size());
 bool FilmParser2::matches(string fnam) {
 //	if (isSeries(fnam)) return false; // TODO use this line
@@ -71,7 +55,7 @@ string FilmParser2::name(string fnam) {
 /**********************************************
 *  FilmParser3								  *
 **********************************************/
-regex FilmParser3::rex(" [(][0-9]{4}[)]", regex::extended);
+regex FilmParser3::rex("[. ][([][0-9]{4}[])]", regex::extended);
 int FilmParser3::rexlen(string(" (2010)").size());
 bool FilmParser3::matches(string fnam) {
 //	if (isSeries(fnam)) return false; // TODO use this line
@@ -87,7 +71,7 @@ string FilmParser3::name(string fnam) {
 /**********************************************
 *  SeriesParser1							  *
 **********************************************/
-regex SeriesParser1::rex("[.]S[0-9]{2}E[0-9]{2}", regex::extended);
+regex SeriesParser1::rex("[. ]S[0-9]{2}E[0-9]{2}", regex::extended);
 int SeriesParser1::rexlen(string(".S01E01").size());
 bool SeriesParser1::matches(string fnam) {
 	// search for ".SddEdd" where d are digits
