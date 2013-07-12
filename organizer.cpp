@@ -24,6 +24,7 @@ Organizer::Organizer(const Args& pargs)
 	// init filename Parsers
 	filmParsers.push_back(static_cast<FilmParser*>(new FilmParser1));
 	seriesParsers.push_back(new SeriesParser1);
+	seriesParsers.push_back(new SeriesParser2);
 	if (args.undo) {
 		for (int i = 0; i < args.infiles.size(); i++) {
 			const string full = args.infiles[i];
