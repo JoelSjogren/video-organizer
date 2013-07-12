@@ -1,5 +1,5 @@
 const char* files[] = {
-	// films
+	// film naming convention 1
 	"folder//double//The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
 	"Paranormal.Activity.3.2011.UNRATED.DVDRip.XviD-SPARKS.avi",
 	"../../sub/Rise.of.the.Planet.of.the.Apes.2011.TS.XviD-NOVA.avi",
@@ -11,6 +11,10 @@ const char* files[] = {
 	"/The Big Bang Theory - 01x01 - Addic7ed.com.srt",
 	"Family Guy - 10x07 - Amish Guy.LOL.English.HI.C.orig.Addic7ed.com.srt",
 	"somedir/../Made up Show - 99x99 - this will be ignored.srt",
+	// film naming convention 2
+	"Man of Steel 2013 CAM XviD MP3 MiLLENiUM.srt",
+	// film naming convention 3
+	"/../Whip It (2009) DvdRip [Xvid] {1337x}-X.srt",
 };
 const int filec = sizeof(files) / sizeof(*files);
 	const char* fileNames[] = {
@@ -23,6 +27,8 @@ const int filec = sizeof(files) / sizeof(*files);
 	"The Big Bang Theory - 01x01 - Addic7ed.com.srt",
 	"Family Guy - 10x07 - Amish Guy.LOL.English.HI.C.orig.Addic7ed.com.srt",
 	"Made up Show - 99x99 - this will be ignored.srt",
+	"Man of Steel 2013 CAM XviD MP3 MiLLENiUM.srt",
+	"Whip It (2009) DvdRip [Xvid] {1337x}-X.srt",
 };
 const char* titles[] = {
 	"The Prestige",
@@ -34,6 +40,8 @@ const char* titles[] = {
 	"The Big Bang Theory",
 	"Family Guy",
 	"Made up Show",
+	"Man of Steel",
+	"Whip It",
 };
 const char* ext[] = {
 	".mp4",
@@ -42,6 +50,8 @@ const char* ext[] = {
 	".avi",
 	".avi",
 	".mp4",
+	".srt",
+	".srt",
 	".srt",
 	".srt",
 	".srt",
@@ -56,6 +66,8 @@ const char* season[] = {
 	"S01",
 	"S10",
 	"S99",
+	NULL,
+	NULL,
 };
 const char* episode[] = {
 	NULL,
@@ -67,6 +79,8 @@ const char* episode[] = {
 	"E01",
 	"E07",
 	"E99",
+	NULL,
+	NULL,
 };
 const char* filenames_nodots[] = {
 	"The Prestige 2006 720p Bluray x264 anoXmous mp4",
@@ -78,6 +92,8 @@ const char* filenames_nodots[] = {
 	"The Big Bang Theory - 01x01 - Addic7ed com srt",
 	"Family Guy - 10x07 - Amish Guy LOL English HI C orig Addic7ed com srt",
 	"Made up Show - 99x99 - this will be ignored srt",
+	"Man of Steel 2013 CAM XviD MP3 MiLLENiUM srt",
+	"Whip It (2009) DvdRip [Xvid] {1337x}-X srt",
 };
 
 

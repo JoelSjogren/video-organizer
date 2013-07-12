@@ -24,6 +24,8 @@ ParserTest::ParserTest() : Test("Parser") {
 	vector<FilmParser*> filmParsers;
 	vector<SeriesParser*> seriesParsers;
 	filmParsers.push_back(new FilmParser1);
+	filmParsers.push_back(new FilmParser2);
+	filmParsers.push_back(new FilmParser3);
 	seriesParsers.push_back(new SeriesParser1);
 	seriesParsers.push_back(new SeriesParser2);
 	vector<Parser*> parsers;
@@ -39,6 +41,7 @@ ParserTest::ParserTest() : Test("Parser") {
 			for (int j = 0; j < parsers.size(); j++)
 				if (parsers[j]->matches(file))
 					matches++;
+			cout << "matches: " << matches << endl;
 			EQ(matches, 1);
 		}
 		for (int j = 0; j < filmParsers.size(); j++)
