@@ -1,6 +1,6 @@
-#include "organizer_test.h"
+#include "parser_test.h"
 #include "filelist_test.h"
 int main() {
-	OrganizerTest t1;
+	ParserTest t1;
 	FileListTest t2;
 }

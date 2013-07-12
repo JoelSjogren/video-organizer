@@ -1,44 +1,39 @@
 /**********************************
 *   organizer.h                   *
 *                                 *
-*   This is where the sorting     *
-*   logic resides.                *
+*   The core of all organizing.   *
 **********************************/
 #include "args.h"
 #include "fileman.h"
+#include "parser.h"
 #include <string>
 #include <stdexcept>
 #include <boost/regex.hpp>
+#include <vector>
 class Organizer {
-	// configuration
+	/* configuration */
 	const Args& args;
 	
-	// file operations
+	/* file operations */
 	FileMan fileman;
 	
-	// logic
-	// e.g. "Film.2.2010.mp4" -> "Film 2"
-	static std::string extractFilmName(std::string fnam);
-	// e.g. "The.Series.S02E01" -> "The Series"
-	static std::string extractSeriesName(std::string fnam);
-	// e.g. "The.Series.S02E01" -> "S02"
-	static std::string extractSeriesSeason(std::string fnam);
-	// e.g. "The.Series.S02E01" -> "E01"
-	static std::string extractSeriesEpisode(std::string fnam);
-	// e.g. "Film.2010.mp4" -> ".mp4"
-	static std::string extractExtension(std::string fnam);
-	// e.g. "The.Series.S02E01" -> 10, i.e. index of .S
-	static int seriesIdentifierStart(std::string fnam);
-	static bool isFilm(std::string fnam);
-	static bool isSeries(std::string fnam);
-	static std::string dotsToSpaces(std::string str);
+	/* filename parsing */
+	std::vector<FilmParser*> filmParsers;
+	std::vector<SeriesParser*> seriesParsers;
+	//  find a parser that is capable of parsing *fnam*
+	int findFilmParser(std::string fnam);
+	int findSeriesParser(std::string fnam);
 	
-	// debugging
+	/* debugging */
 	friend class OrganizerTest;
 public:
 	Organizer(const Args& pargs);
+	~Organizer();
 };
 
 /*class FileAlreadyExists : public runtime_error {
 
 };*/
+
+
+

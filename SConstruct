@@ -11,9 +11,9 @@ with open('help.cpp', 'w') as help_cpp:
 ###
 env = Environment()
 link = env.Object(['args.cpp', 'help.cpp', 'organizer.cpp',
-				   'organizer_test.cpp', 'tinyxml2.cpp',
+				   'parser_test.cpp', 'tinyxml2.cpp',
 				   'fileman.cpp', 'test.cpp', 'filelist_test.cpp',
-				   'filelist.cpp', 'filename.cpp'])
+				   'filelist.cpp', 'parser.cpp'])
 LIBS = ['boost_regex']
 env.Program('video-organizer', ['main.cpp'] + link, LIBS=LIBS)
 env.Program('test-suite', ['testsuite.cpp'] + link, LIBS=LIBS)

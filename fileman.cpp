@@ -3,7 +3,7 @@
 **********************************/
 #include "fileman.h"
 #include "filelist.h"
-#include "filename.h"
+#include "parser.h"
 #include <unistd.h>
 #include <sys/stat.h>
 #include <iostream>
@@ -87,8 +87,8 @@ void FileMan::action(string from, string to) {
 	}
 }
 void FileMan::registerAction(string from, string to) {
-	FileList list(extractDirectory(to), args);
-	list.add(extractFilename(from), extractFilename(to));
+	FileList list(Parser::directory(to), args);
+	list.add(Parser::filename(from), Parser::filename(to));
 	list.write();
 }
 void FileMan::unregisterAction(string dir, const Record& rec) {

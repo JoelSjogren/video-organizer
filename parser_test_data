@@ -1,0 +1,59 @@
+const char* files[] = {
+	// films
+	"folder//double//The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
+	"Paranormal.Activity.3.2011.UNRATED.DVDRip.XviD-SPARKS.avi",
+	"../../sub/Rise.of.the.Planet.of.the.Apes.2011.TS.XviD-NOVA.avi",
+	// series
+	"some/dir/Chuck.S05E01.HDTV.XviD-LOL.avi",
+	"/Chuck.S05E02.HDTV.XviD-LOL.avi",
+	"Community.S04E02.HDTV.x264-LOL.mp4",
+};
+const int filec = sizeof(files) / sizeof(*files);
+	const char* fileNames[] = {
+	"The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
+	"Paranormal.Activity.3.2011.UNRATED.DVDRip.XviD-SPARKS.avi",
+	"Rise.of.the.Planet.of.the.Apes.2011.TS.XviD-NOVA.avi",
+	"Chuck.S05E01.HDTV.XviD-LOL.avi",
+	"Chuck.S05E02.HDTV.XviD-LOL.avi",
+	"Community.S04E02.HDTV.x264-LOL.mp4",
+};
+const char* titles[] = {
+	"The Prestige",
+	"Paranormal Activity 3",
+	"Rise of the Planet of the Apes",
+	"Chuck",
+	"Chuck",
+	"Community",
+};
+const char* ext[] = {
+	".mp4",
+	".avi",
+	".avi",
+	".avi",
+	".avi",
+	".mp4",
+};
+const char* season[] = {
+	NULL,
+	NULL,
+	NULL,
+	"S05",
+	"S05",
+	"S04",
+};
+const char* episode[] = {
+	NULL,
+	NULL,
+	NULL,
+	"E01",
+	"E02",
+	"E02",
+};
+const char* filenames_nodots[] = {
+	"The Prestige 2006 720p Bluray x264 anoXmous mp4",
+	"Paranormal Activity 3 2011 UNRATED DVDRip XviD-SPARKS avi",
+	"Rise of the Planet of the Apes 2011 TS XviD-NOVA avi",
+	"Chuck S05E01 HDTV XviD-LOL avi",
+	"Chuck S05E02 HDTV XviD-LOL avi",
+	"Community S04E02 HDTV x264-LOL mp4",
+};
