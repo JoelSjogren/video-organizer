@@ -34,8 +34,9 @@ class FileList {
 private:
 	const Args& args;
 	const std::string dir;
-	void read();
 	std::vector<Record> records;
+	Console console;
+	void read();
 	int getIndex(std::string to) const;
 	static void validateXML(tinyxml2::XMLElement* root,
 							std::string file);

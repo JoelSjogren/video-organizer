@@ -6,18 +6,18 @@ void Console::f(string msg, ...) {
 	fprintf(stderr, "E: ");
 	va_list args;
 	va_start(args, msg);
-	vprintf(msg.c_str(), args);
+	vfprintf(stderr, msg.c_str(), args);
 	va_end(args);
-	printf("\n");
+	fprintf(stderr, "\n");
 }
 void Console::e(string msg, ...) {
 	if (-2 < verbosity) {
 		fprintf(stderr, "E: ");
 		va_list args;
 		va_start(args, msg);
-		vprintf(msg.c_str(), args);
+		vfprintf(stderr, msg.c_str(), args);
 		va_end(args);
-		printf("\n");
+		fprintf(stderr, "\n");
 	}
 }
 void Console::w(string msg, ...) {

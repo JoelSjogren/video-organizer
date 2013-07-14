@@ -16,7 +16,7 @@ using tinyxml2::XMLError;
 using std::logic_error;
 
 FileList::FileList(string pdir, const Args& pargs)
-	: dir(pdir), args(pargs) {
+	: dir(pdir), args(pargs), console(args.verbosity) {
 	read();
 }
 int FileList::getIndex(string to) const {
@@ -102,7 +102,7 @@ void FileList::write() {
 		doc.InsertEndChild(filelist);
 	}
 	XMLError ret = doc.SaveFile((dir + "/filelist").c_str());
-	if (ret) cout << "Error writing filelist: " << ret << endl;
+	if (ret) console.e("Error writing filelist: %s" << ret.c_str());
 }
 Record::Record(string pfrom, string pto, Args::MCL paction)
 	: from(pfrom), to(pto), action(paction) {}

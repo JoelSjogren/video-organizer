@@ -129,7 +129,7 @@ Args::Args(int argc, char* const* argv)
 			exit(1);
 		default:
 			console.f("Failed to interpret command line arguments. "
-				 	  "Please file a bug report.");
+				 	  "getopt returned %d", c);
 			exit(1);
 		}
 	}
