@@ -102,7 +102,7 @@ void FileList::write() {
 		doc.InsertEndChild(filelist);
 	}
 	XMLError ret = doc.SaveFile((dir + "/filelist").c_str());
-	if (ret) console.e("Error writing filelist: %s" << ret.c_str());
+	if (ret) console.e("Error writing filelist: %s" << ret);
 }
 Record::Record(string pfrom, string pto, Args::MCL paction)
 	: from(pfrom), to(pto), action(paction) {}
