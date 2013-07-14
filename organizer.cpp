@@ -20,12 +20,24 @@ using std::stringstream;
 using std::setfill;
 using std::setw;
 Organizer::Organizer(const Args& pargs)
-	: args(pargs), fileman(args) {
+	: args(pargs), fileman(args), console(args.verbosity) {
 	// init filename Parsers
 	filmParsers.push_back(new FilmParser2);
 	filmParsers.push_back(new FilmParser3);
 	seriesParsers.push_back(new SeriesParser1);
 	seriesParsers.push_back(new SeriesParser2);
+/*	if (args.ls) {
+		for (int i = 0; i < args.infiles.size(); i++) {
+			const string full = args.infiles[i];
+			const string fnam = Parser::filename(full);
+			if (0 <= findFilmParser(fnam) || 0 <= findSeriesParser(fnam)) {
+				cout << full << endl;
+			} else if (args.verbose) {
+				cout << "Could not be parsed: " << full << endl;
+			}
+		}		
+		return;
+	}*/
 	// iterate over input files
 	if (args.undo) {
 		for (int i = 0; i < args.infiles.size(); i++) {
@@ -46,9 +58,9 @@ Organizer::Organizer(const Args& pargs)
 					const Record rec = list.get(fnam);
 					fileman.undo(dir, rec);
 				} else {
-					cerr << "E: could not find a filelist containing "
-							"information on how to undo: "
-						 << full << endl;
+					console.e("Could not find a filelist containing "
+							  "information on how to undo: %s",
+							  full.c_str());
 				}
 			}
 		}
@@ -71,8 +83,8 @@ Organizer::Organizer(const Args& pargs)
 								+ se + "/" + ep + ext;
 				fileman.action(full, to);
 			} else {
-				cerr << "E: Unable to interpret filename: " << file
-					 << endl;
+				console.e("Unable to interpret filename: %s",
+						  file.c_str());
 			}
 		}
 	}

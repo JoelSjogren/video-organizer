@@ -13,7 +13,8 @@ env = Environment()
 link = env.Object(['args.cpp', 'help.cpp', 'organizer.cpp',
 				   'parser_test.cpp', 'tinyxml2.cpp',
 				   'fileman.cpp', 'test.cpp', 'filelist_test.cpp',
-				   'filelist.cpp', 'parser.cpp'])
+				   'filelist.cpp', 'parser.cpp', 'args_test.cpp',
+				   'console.cpp'])
 LIBS = ['boost_regex']
 env.Program('video-organizer', ['main.cpp'] + link, LIBS=LIBS)
 env.Program('test-suite', ['testsuite.cpp'] + link, LIBS=LIBS)

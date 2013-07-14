@@ -5,11 +5,14 @@
 *   inherit from.                 *
 **********************************/
 #pragma once
+#include "ostream_overloads.h"
 #include <cassert>
 #include <string>
 #include <cstdlib>
 #include <iostream>
+#include <vector>
 #define EQ(X, Y) eq((X), (Y), #X, #Y, __FILE__, __LINE__); passed++
+#define TR(X) assert((X)); passed++
 class Test {
 	std::string name;
 protected:
@@ -21,6 +24,11 @@ protected:
 			std::string file, int line);
 	void eq(std::string a, std::string b, std::string astr,
 			std::string bstr, std::string file, int line);
+	void eq(std::vector<std::string> a, std::vector<std::string> b,
+			std::string astr, std::string bstr,
+			std::string file, int line);
+	void eq(bool a, bool b, std::string astr, std::string bstr,
+			std::string file, int line);
 public:
 	Test(std::string name);
 	~Test();

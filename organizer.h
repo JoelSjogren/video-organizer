@@ -24,6 +24,9 @@ class Organizer {
 	int findFilmParser(std::string fnam);
 	int findSeriesParser(std::string fnam);
 	
+	/* console output*/
+	Console console;
+	
 	/* debugging */
 	friend class OrganizerTest;
 public:

@@ -5,11 +5,15 @@
 *   line arguments.               *
 **********************************/
 #pragma once
+#include "console.h"
 #include <vector>
 #include <string>
 #include <ostream>
 class Args {
+	Console console;
 	void checkFiles();
+	void expandDirectories();
+	int parseInt(std::string str);
 public:
 	bool undo;
 	std::string outdir;
@@ -17,10 +21,12 @@ public:
 	enum MCL {
 		MOVE, COPY, LINK
 	} mcl;
-	bool verbose;
+	int verbosity;
+//	bool ls;
+	bool recursive;
+	bool simulate;
 	Args(); // default; for testing
-	Args(int argc, char* argv[]);
-	friend std::ostream& operator<<(std::ostream& os, const Args& args);
+	Args(int argc, char* const* argv);
 };
 
 //TODO: rename mcl to action

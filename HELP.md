@@ -22,7 +22,18 @@ video-organizer [OPTIONS] [FILES]
 		hardlink FILES
 		
 	-v, --verbose
-		output progress
+		output more info than usually
 
 	-h, --help
-		show this text and exit
+		just show this text
+
+	-r, --recursive
+		step into directories instead of omitting them
+		TO BE IMPLEMENTED
+
+	-s, --simulate
+		do not write changes to disk
+
+
+
+
