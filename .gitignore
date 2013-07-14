@@ -1,0 +1,5 @@
+.sconsign.dblite
+*~
+*.o
+test-suite
+video-organizer
