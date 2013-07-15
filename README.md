@@ -20,7 +20,7 @@ it should move them to give you the following file structure:
 	└── Best Movie Ever
 		├── CD01.avi
 		└── filelist
-Note that a file called *filelist* is generated in each directory that contains resulting non-directory files. It contains the original filenames of the files. By using the **-u** flag, a *filelist* can be used to undo a previous operation.
+Note that a file called *filelist* is generated next to resulting non-directory files. It contains the original filenames of the files. By using the **-u** flag, a *filelist* can be used to undo a previous operation.
 
 ## COMPILE & INSTALL ##
 Packages needed:
