@@ -1,5 +1,5 @@
 ## NAME ##
-video-organizer - organize your videos
+vorg - organize your videos
 
 ## DESCRIPTION ##
 The purpose of this text-based application is to sort your files: films, series and subtitles. If you, for example, give it the files
@@ -34,7 +34,7 @@ To compile, run:
 
 To install, copy the generated executable to a directory in your $PATH. I suggest /usr/local/bin:
 
-	# cp video-organizer /usr/local/bin
+	# cp vorg /usr/local/bin
 
 ## OPTIONS ##
 See *HELP.md*.

@@ -1,5 +1,5 @@
 /**************************
-*   video-organizer 1.0   *
+*  vorg - video organizer *
 *   by Joel Sjögren       *
 **************************/
 #include "args.h"

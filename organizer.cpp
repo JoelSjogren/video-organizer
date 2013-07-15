@@ -26,18 +26,6 @@ Organizer::Organizer(const Args& pargs)
 	filmParsers.push_back(new FilmParser3);
 	seriesParsers.push_back(new SeriesParser1);
 	seriesParsers.push_back(new SeriesParser2);
-/*	if (args.ls) {
-		for (int i = 0; i < args.infiles.size(); i++) {
-			const string full = args.infiles[i];
-			const string fnam = Parser::filename(full);
-			if (0 <= findFilmParser(fnam) || 0 <= findSeriesParser(fnam)) {
-				cout << full << endl;
-			} else if (args.verbose) {
-				cout << "Could not be parsed: " << full << endl;
-			}
-		}		
-		return;
-	}*/
 	// iterate over input files
 	if (args.undo) {
 		for (int i = 0; i < args.infiles.size(); i++) {
@@ -73,8 +61,9 @@ Organizer::Organizer(const Args& pargs)
 			int j;
 			if (0 <= (j = findFilmParser(file))) {
 				const string film = filmParsers[j]->name(file);
-				fileman.action(full, args.outdir + "/" + film
-							   + "/" + film + ext);
+				const string cd = filmParsers[j]->cd(file);
+				const string to = args.outdir + "/" + film + "/" + cd + ext;
+				fileman.action(full, to);
 			} else if (0 <= (j = findSeriesParser(file))) {
 				const string series = seriesParsers[j]->name(file);
 				const string se = seriesParsers[j]->season(file);
@@ -111,15 +100,6 @@ int Organizer::findSeriesParser(string fnam) {
 			return i;
 	return -1;
 }
-/*
-bool Organizer::isSeries(string fnam) {
-	// search for ".SddEdd." where d are digits
-	if (regex_search(fnam, series_regex1) return true;
-	// search for " - ddxdd" where d are digits
-	if (regex_search(fnam, series_regex2) return true;
-	return false;
-}*/
-
 
 
 

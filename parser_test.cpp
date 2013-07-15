@@ -8,17 +8,6 @@ using std::vector;
 using std::cout;
 using std::endl;
 
-#include "parser_test_data"
-/* the above defines:
-const char* files[];
-const int filec;
-const char* titles[];
-const char* ext[];
-const char* season[];
-const char* episode[];
-const char* filenames_nodots[];
-*/
-
 ParserTest::ParserTest() : Test("Parser") {
 	// init parsers
 	vector<FilmParser*> filmParsers;
@@ -60,9 +49,11 @@ void ParserTest::film(FilmParser* parser, int index) {
 	EQ(Parser::extension(fnam), ext[index]);
 	EQ(parser->matches(fnam), true);
 	EQ(Parser::dotsToSpaces(fnam), filenames_nodots[index]);
+	EQ(parser->cd(fnam), cd[index]);
 }
 void ParserTest::series(SeriesParser* parser, int index) {
 	const string fnam = Parser::filename(files[index]);
+//	cout << "index: " << index << endl;
 	EQ(fnam, fileNames[index]);
 	EQ(parser->name(fnam), titles[index]);
 	EQ(parser->season(fnam), season[index]);

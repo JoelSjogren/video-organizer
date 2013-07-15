@@ -1,4 +1,5 @@
-const char* files[] = {
+#include "parser_test.h"
+const char* ParserTest::files[] = {
 	// film naming convention 2
 	"folder//double//The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
 	"Paranormal.Activity.3.2011.UNRATED.DVDRip.XviD-SPARKS.avi",
@@ -16,9 +17,14 @@ const char* files[] = {
 	// film naming convention 3
 	"/../Whip It (2009) DvdRip [Xvid] {1337x}-X.srt",
 	"Seven.[1995].DVDRip.Xvid.Blood.avi",
+	// multi-disc films
+	"Cube.Zero.2004.SWESUB.AC3.DVDRip.XviD-Pride86.CD01.avi",
+	"./Cube.Zero.2004.SWESUB.AC3.DVDRip.XviD-Pride86.CD02.avi",
+	"../The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD01.avi",
+	"/The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD02.avi",
 };
-const int filec = sizeof(files) / sizeof(*files);
-	const char* fileNames[] = {
+const int ParserTest::filec = sizeof(files) / sizeof(*files);
+const char* ParserTest::fileNames[] = {
 	"The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
 	"Paranormal.Activity.3.2011.UNRATED.DVDRip.XviD-SPARKS.avi",
 	"Rise.of.the.Planet.of.the.Apes.2011.TS.XviD-NOVA.avi",
@@ -31,8 +37,12 @@ const int filec = sizeof(files) / sizeof(*files);
 	"Man of Steel 2013 CAM XviD MP3 MiLLENiUM.srt",
 	"Whip It (2009) DvdRip [Xvid] {1337x}-X.srt",
 	"Seven.[1995].DVDRip.Xvid.Blood.avi",
+	"Cube.Zero.2004.SWESUB.AC3.DVDRip.XviD-Pride86.CD01.avi",
+	"Cube.Zero.2004.SWESUB.AC3.DVDRip.XviD-Pride86.CD02.avi",
+	"The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD01.avi",
+	"The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD02.avi",
 };
-const char* titles[] = {
+const char* ParserTest::titles[] = {
 	"The Prestige",
 	"Paranormal Activity 3",
 	"Rise of the Planet of the Apes",
@@ -45,8 +55,12 @@ const char* titles[] = {
 	"Man of Steel",
 	"Whip It",
 	"Seven",
+	"Cube Zero",
+	"Cube Zero",
+	"The Book Of Eli",
+	"The Book Of Eli",
 };
-const char* ext[] = {
+const char* ParserTest::ext[] = {
 	".mp4",
 	".avi",
 	".avi",
@@ -59,8 +73,12 @@ const char* ext[] = {
 	".srt",
 	".srt",
 	".avi",
+	".avi",
+	".avi",
+	".avi",
+	".avi",
 };
-const char* season[] = {
+const char* ParserTest::season[] = {
 	NULL,
 	NULL,
 	NULL,
@@ -73,8 +91,12 @@ const char* season[] = {
 	NULL,
 	NULL,
 	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
 };
-const char* episode[] = {
+const char* ParserTest::episode[] = {
 	NULL,
 	NULL,
 	NULL,
@@ -87,8 +109,12 @@ const char* episode[] = {
 	NULL,
 	NULL,
 	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
 };
-const char* filenames_nodots[] = {
+const char* ParserTest::filenames_nodots[] = {
 	"The Prestige 2006 720p Bluray x264 anoXmous mp4",
 	"Paranormal Activity 3 2011 UNRATED DVDRip XviD-SPARKS avi",
 	"Rise of the Planet of the Apes 2011 TS XviD-NOVA avi",
@@ -100,7 +126,30 @@ const char* filenames_nodots[] = {
 	"Made up Show - 99x99 - this will be ignored srt",
 	"Man of Steel 2013 CAM XviD MP3 MiLLENiUM srt",
 	"Whip It (2009) DvdRip [Xvid] {1337x}-X srt",
-	"Seven [1995] DVDRip Xvid Blood avi"
+	"Seven [1995] DVDRip Xvid Blood avi",
+	"Cube Zero 2004 SWESUB AC3 DVDRip XviD-Pride86 CD01 avi",
+	"Cube Zero 2004 SWESUB AC3 DVDRip XviD-Pride86 CD02 avi",
+	"The Book Of Eli 2010 SWESUB DVDRip XviD-Pride86 CD01 avi",
+	"The Book Of Eli 2010 SWESUB DVDRip XviD-Pride86 CD02 avi",
 };
+const char* ParserTest::cd[] = {
+    "CD01",
+    "CD01",
+    "CD01",
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    "CD01",
+    "CD01",
+    "CD01",
+    "CD01",
+    "CD02",
+    "CD01",
+    "CD02",
+};
+
 
 

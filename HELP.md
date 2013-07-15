@@ -35,5 +35,3 @@ video-organizer [OPTIONS] [FILES]
 		do not write changes to disk
 
 
-
-

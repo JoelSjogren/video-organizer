@@ -10,11 +10,11 @@ with open('help.cpp', 'w') as help_cpp:
 	
 ###
 env = Environment()
-link = env.Object(['args.cpp', 'help.cpp', 'organizer.cpp',
-				   'parser_test.cpp', 'tinyxml2.cpp',
-				   'fileman.cpp', 'test.cpp', 'filelist_test.cpp',
-				   'filelist.cpp', 'parser.cpp', 'args_test.cpp',
-				   'console.cpp'])
+link = env.Object(
+    ['args.cpp', 'args_test.cpp', 'console.cpp', 'filelist.cpp',
+     'filelist_test.cpp', 'fileman.cpp', 'help.cpp',
+     'organizer.cpp', 'parser.cpp', 'parser_test.cpp',
+     'parser_test_data.cpp', 'test.cpp', 'tinyxml2.cpp'])
 LIBS = ['boost_regex']
-env.Program('video-organizer', ['main.cpp'] + link, LIBS=LIBS)
+env.Program('vorg', ['main.cpp'] + link, LIBS=LIBS)
 env.Program('test-suite', ['testsuite.cpp'] + link, LIBS=LIBS)
