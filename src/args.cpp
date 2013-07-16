@@ -32,8 +32,8 @@ using std::vector;
 using std::istringstream;
 using std::ios_base;
 void help() {
-	for (int i = 0; i < HELP_md_len; i++)
-		cout << HELP_md[i];
+	for (int i = 0; i < ___HELP_md_len; i++)
+		cout << ___HELP_md[i];
 	cout << endl;
 }
 int Args::parseInt(string str) {
