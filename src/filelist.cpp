@@ -72,7 +72,7 @@ void FileList::validateXML(tinyxml2::XMLElement* root, string file) {
 }
 void FileList::read() {
 	XMLDocument doc;
-	const string filepath = dir + "/filelist";
+	const string filepath = dir + "filelist";
 	doc.LoadFile(filepath.c_str());
 	XMLElement* filelist = doc.FirstChildElement();
 	try { validateXML(filelist, filepath); }
@@ -102,7 +102,7 @@ void FileList::write() {
 		}
 		doc.InsertEndChild(filelist);
 	}
-	XMLError ret = doc.SaveFile((dir + "/filelist").c_str());
+	XMLError ret = doc.SaveFile((dir + "filelist").c_str());
 	if (ret) console.e("Error writing filelist: %s", ret);
 }
 Record::Record(string pfrom, string pto, Args::MCL paction)

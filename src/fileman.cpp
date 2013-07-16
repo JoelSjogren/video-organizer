@@ -24,30 +24,25 @@ using std::ofstream;
 using std::ios_base;
 FileMan::FileMan(const Args& pargs) : args(pargs) {}
 void FileMan::move(string from, string to, int reg) {
-	if (0 < args.verbosity)
-		cout << "Moving: " << from << " -> " << to << endl;
+	console.v("Moving: %s -> %s", from, to);
 	if (args.simulate) return;
 	if (exists(to)) {
-		if (-2 < args.verbosity)
-			cerr << "E: " << strerror(EEXIST) << ": " << to << endl;
+		console.e("%s: %s", strerror(EEXIST), to.c_str());
 		return;
 	}
 	dig(to);
 	int ret = rename(from.c_str(), to.c_str());
 	if (ret) {
-		if (-2 < args.verbosity)
-			cerr << "E: " << strerror(errno) << ": " << to << endl;
+		console.e("%s: %s", strerror(errno), to.c_str());
 		return;
 	}
 	if (reg) registerAction(from, to);
 }
 void FileMan::copy(string from, string to, int reg) {
-	if (0 < args.verbosity)
-		cout << "Copying: " << from << " -> " << to << endl;
+	console.v("Copying: %s -> %s", from, to);
 	if (args.simulate) return;
 	if (exists(to)) {
-		if (-2 < args.verbosity)
-			cerr << "E: " << strerror(EEXIST) << ": " << to << endl;
+		console.e("%s: %s", strerror(EEXIST), to.c_str());
 		return;
 	}
 	dig(to);
@@ -56,26 +51,22 @@ void FileMan::copy(string from, string to, int reg) {
 		ofstream dst(to.c_str());
 		dst << src;
 	} catch (ios_base::failure e) {
-		if (-2 < args.verbosity)
-			cerr << "E: " << e.what() << endl;
+		console.e("%s", e.what());
 		return;
 	}
 	if (reg) registerAction(from, to);
 }
 void FileMan::link(string from, string to, int reg) {
-	if (0 < args.verbosity)
-		cout << "Linking: " << from << " -> " << to << endl;
+	console.v("Linking: %s -> %s", from, to);
 	if (args.simulate) return;
 	if (exists(to)) {
-		if (-2 < args.verbosity)
-			cerr << "E: " << strerror(EEXIST) << ": " << to << endl;
+		console.e("%s: %s", strerror(EEXIST), to.c_str());
 		return;
 	}
 	dig(to);
 	int ret = ::link(from.c_str(), to.c_str());
 	if (ret) {
-		if (-2 < args.verbosity)
-			cerr << "E: " << strerror(errno) << ": " << to << endl;
+		console.e("%s: %s", strerror(errno), to.c_str());
 		return;
 	}
 	if (reg) registerAction(from, to);
@@ -124,10 +115,10 @@ bool FileMan::exists(string file) {
 	return true;
 }
 void FileMan::undo(string dir, const Record& rec) {
-	const string full = dir + "/" + rec.to;
+	const string full = dir + rec.to;
 	switch (rec.action) {
 	case Args::MOVE:
-		move(full, args.outdir + "/" + rec.from, false);
+		move(full, args.outdir + rec.from, false);
 		break;
 	case Args::COPY:
 		remove(full);
@@ -141,13 +132,12 @@ void FileMan::undo(string dir, const Record& rec) {
 	unregisterAction(dir, rec);
 }
 void FileMan::remove(string file) {
-	if (0 < args.verbosity)
-		cout << "Removing: " << file << endl;
+	console.v("Removing: %s", file.c_str());
 	if (args.simulate) return;
 	int ret = ::remove(file.c_str());
 	if (ret) {
-		if (-2 < args.verbosity)
-			cerr << "E: " << strerror(errno) << ": " << file << endl;
+		console.e("%s: %s", strerror(errno), file.c_str());
 		return;
 	}
 }
+

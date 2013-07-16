@@ -39,7 +39,7 @@ Organizer::Organizer(const Args& pargs)
 					const Record rec = list[j];
 					fileman.undo(dir, rec);
 				}
-			} else if (FileMan::exists(dir + "/filelist")) {
+			} else if (FileMan::exists(dir + "filelist")) {
 				// undo only fnam
 				FileList list(dir, args);
 				if (list.find(fnam)) {
@@ -62,14 +62,14 @@ Organizer::Organizer(const Args& pargs)
 			if (0 <= (j = findFilmParser(file))) {
 				const string film = filmParsers[j]->name(file);
 				const string cd = filmParsers[j]->cd(file);
-				const string to = args.outdir + "/" + film + "/" + cd + ext;
+				const string to = args.outdir + film + "/" + cd + ext;
 				fileman.action(full, to);
 			} else if (0 <= (j = findSeriesParser(file))) {
 				const string series = seriesParsers[j]->name(file);
 				const string se = seriesParsers[j]->season(file);
 				const string ep = seriesParsers[j]->episode(file);
-				const string to = args.outdir + "/" + series + "/"
-								+ se + "/" + ep + ext;
+				const string to = args.outdir + series + "/"
+							      + se + "/" + ep + ext;
 				fileman.action(full, to);
 			} else {
 				console.e("Unable to interpret filename: %s",
