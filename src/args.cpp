@@ -200,7 +200,7 @@ void Args::checkFiles() {
 			console.f("%s: %s", strerror(ENOTDIR), outdir.c_str());
 			exit(1);	
 		}
-		if (*outdir.rbegin() != "/")
+		if (*outdir.rbegin() != '/')
 		    outdir += "/";
 	}
 	{ // check input files

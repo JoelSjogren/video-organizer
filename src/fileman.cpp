@@ -22,9 +22,10 @@ using std::runtime_error;
 using std::ifstream;
 using std::ofstream;
 using std::ios_base;
-FileMan::FileMan(const Args& pargs) : args(pargs) {}
+FileMan::FileMan(const Args& pargs)
+    : args(pargs), console(args.verbosity) {}
 void FileMan::move(string from, string to, int reg) {
-	console.v("Moving: %s -> %s", from, to);
+	console.v("Moving: %s -> %s", from.c_str(), to.c_str());
 	if (args.simulate) return;
 	if (exists(to)) {
 		console.e("%s: %s", strerror(EEXIST), to.c_str());
@@ -39,7 +40,7 @@ void FileMan::move(string from, string to, int reg) {
 	if (reg) registerAction(from, to);
 }
 void FileMan::copy(string from, string to, int reg) {
-	console.v("Copying: %s -> %s", from, to);
+	console.v("Copying: %s -> %s", from.c_str(), to.c_str());
 	if (args.simulate) return;
 	if (exists(to)) {
 		console.e("%s: %s", strerror(EEXIST), to.c_str());
@@ -57,7 +58,7 @@ void FileMan::copy(string from, string to, int reg) {
 	if (reg) registerAction(from, to);
 }
 void FileMan::link(string from, string to, int reg) {
-	console.v("Linking: %s -> %s", from, to);
+	console.v("Linking: %s -> %s", from.c_str(), to.c_str());
 	if (args.simulate) return;
 	if (exists(to)) {
 		console.e("%s: %s", strerror(EEXIST), to.c_str());
