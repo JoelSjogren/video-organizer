@@ -29,7 +29,6 @@ vorg [OPTIONS] [FILES]
 
 	-r, --recursive
 		step into directories instead of omitting them
-		TO BE IMPLEMENTED
 
 	-s, --simulate
 		do not write changes to disk
