@@ -17,7 +17,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		int argc = sizeof(argv) / sizeof(*argv);
 		Args args(argc, argv);
 		EQ(args.undo, false);
-		EQ(args.outdir, ".");
+		EQ(args.outdir, "./");
 		EQ(args.infiles.size(), 0);
 		EQ(args.mcl, Args::MOVE);
 		EQ(args.verbosity,  -1);
@@ -40,7 +40,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		int argc = sizeof(argv) / sizeof(*argv);
 		Args args(argc, argv);
 		EQ(args.undo,  false);
-		EQ(args.outdir,  "test/args/output");
+		EQ(args.outdir,  "test/args/output/");
 		EQ(args.infiles.size(), 4);
 		EQ(args.mcl,  Args::COPY);
 		EQ(args.verbosity,  -1);
@@ -61,7 +61,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		int argc = sizeof(argv) / sizeof(*argv);
 		Args args(argc, argv);
 		EQ(args.undo,  false);
-		EQ(args.outdir,  "test/args/output");
+		EQ(args.outdir,  "test/args/output/");
 		EQ(args.infiles.size(), 4);
 		EQ(args.mcl,  Args::LINK);
 		EQ(args.verbosity,  -1);
