@@ -33,7 +33,7 @@ vorg [OPTIONS] [FILES]
 	-s, --simulate
 		do not write changes to disk
 
-## TIPS & TICKS ##
+## TIPS & TRICKS ##
 When vorg moves files out of directories, rendering them (almost) empty, it doesn't remove the directories. You may want to recursively remove directories smaller than a given size, say 1 MB. To do this, issue:
 
     $ du -sk [FILES] |
