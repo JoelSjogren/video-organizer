@@ -10,7 +10,6 @@
 class FileMan {
 	const Args& args;
 	Console console;
-	static std::string ectractDir(std::string filepath);
 	// register action in a filelist
 	void registerAction(std::string from, std::string to);
 	void unregisterAction(std::string dir, const Record& rec);
