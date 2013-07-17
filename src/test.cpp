@@ -30,3 +30,6 @@ void Test::eq(bool a, bool b, string astr, string bstr,
 			  string file, int line) {
 	eq<bool, bool>(a, b, astr, bstr, file, line);
 }
+string Test::getdir() {
+    return "test/" + name + "/";
+}

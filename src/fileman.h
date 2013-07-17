@@ -13,8 +13,6 @@ class FileMan {
 	// register action in a filelist
 	void registerAction(std::string from, std::string to);
 	void unregisterAction(std::string dir, const Record& rec);
-	// create directory structure so that *to* may be created
-	void dig(std::string to);
 public:
 	FileMan(const Args& pargs);
 	// move, copy or link, as set in args
@@ -26,7 +24,14 @@ public:
 	// create hard link
 	void link(std::string from, std::string to, int reg=true);
 	void remove(std::string file);
+	// remove recursively
+	void remove_all(std::string file);
 	static bool exists(std::string file);
+	// create directory structure so that *to* may be created
+	// if *to* is a directory (ends with '/'), create it as well
+	void dig(std::string to);
+	// make sure file exists
+	void touch(std::string file);
 };
 
 

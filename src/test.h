@@ -29,6 +29,8 @@ protected:
 			std::string file, int line);
 	void eq(bool a, bool b, std::string astr, std::string bstr,
 			std::string file, int line);
+	// get directory for data storage
+	std::string getdir();
 public:
 	Test(std::string name);
 	~Test();

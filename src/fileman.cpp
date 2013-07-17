@@ -4,6 +4,7 @@
 #include "fileman.h"
 #include "filelist.h"
 #include "parser.h"
+#include <boost/filesystem.hpp>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <iostream>
@@ -141,4 +142,19 @@ void FileMan::remove(string file) {
 		return;
 	}
 }
+void FileMan::remove_all(string file) {
+    console.v("Removing recursively: %s", file.c_str());
+    if (args.simulate) return;
+    boost::filesystem::remove_all(file);
+}
+void FileMan::touch(std::string file) {
+    console.v("Touching %s", file.c_str());
+    if (args.simulate) return;
+    if (!exists(file)) {
+        dig(file);
+        ofstream of(file.c_str());
+    }
+}
+
+
 
