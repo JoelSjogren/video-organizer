@@ -4,6 +4,7 @@
 *   Handles basic file            *
 *   operations.                   *
 **********************************/
+#pragma once
 #include "args.h"
 #include "filelist.h"
 #include <string>
