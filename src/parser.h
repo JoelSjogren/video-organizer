@@ -1,3 +1,8 @@
+/**********************************
+*   parser.h                      *
+*                                 *
+*   Interprets filenames.         *
+**********************************/
 #pragma once
 #include <string>
 #include <boost/regex.hpp>

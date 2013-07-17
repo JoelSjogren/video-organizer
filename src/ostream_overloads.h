@@ -1,3 +1,9 @@
+/**********************************
+*   ostream_test.h                *
+*                                 *
+*   Overloads ostream::operator<< *
+*   for simplified printing.      *
+**********************************/
 #pragma once
 #include <ostream>
 #include <vector>

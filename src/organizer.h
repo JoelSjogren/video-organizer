@@ -3,6 +3,7 @@
 *                                 *
 *   The core of all organizing.   *
 **********************************/
+#pragma once
 #include "args.h"
 #include "fileman.h"
 #include "parser.h"

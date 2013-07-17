@@ -1,3 +1,8 @@
+/**********************************
+*   console.h                     *
+*                                 *
+*   Provides conditional output.  *
+**********************************/
 #pragma once
 #include <string>
 class Console {
