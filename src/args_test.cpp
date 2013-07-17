@@ -18,17 +18,14 @@ ArgsTest::ArgsTest() : Test("Args") {
     const string indir = getdir() + "input/";
     const string outdir = getdir() + "output/";
     { // Prepare workspace
-        cout << "Preparing workspace\n";
         Args args;
         FileMan fileman(args);
         fileman.remove_all(getdir());
         for (int i = 0; i < filec; i++)
             fileman.touch(indir + files[i]);
         fileman.dig(outdir);
-        cout << "Prepared workspace\n";
     }
 	{ // Test 1: minimal
-		// TODO fix deprecated conversion
 		char* argv[] = {
 			(char*) "video-organizer",
 			(char*) indir.c_str(), // dir will be omitted
@@ -44,9 +41,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.recursive,  false);
 		EQ(args.simulate,  false);
 	}
-	cout << "Test 1 check\n";
 	{ // Test 2: short options
-		// TODO fix deprecated conversion
 		char* argv[] = {
 			(char*) "video-organizer",
 			(char*) indir.c_str(), // dir will be omitted
@@ -68,23 +63,19 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.recursive,  true);
 		EQ(args.simulate,  true);
 	}
-	cout << "Test 2 check\n";
 	{ // Test 3: long options
-		// TODO fix deprecated conversion
+		string outdirarg = "--outdir=" + outdir; // put on stack
 		char* argv[] = {
 			(char*) "video-organizer",
 			(char*) "--link",
 			(char*) indir.c_str(), // dir will be omitted
-			(char*) "--verbosity=1",
-			(char*) ("--outdir=" + outdir).c_str(),
+			(char*) "--verbosity=-1",
+			(char*) outdirarg.c_str(),
 			(char*) "--recursive",
 			(char*) "--simulate",
 		};
-		cout << "pg: " << argv[2] << endl;
 		int argc = sizeof(argv) / sizeof(*argv);
-		cout << "a\n";
 		Args args(argc, argv);
-		cout << "b\n";
 		EQ(args.undo,  false);
 		EQ(args.outdir,  outdir);
 		EQ(args.infiles.size(), 4);
@@ -93,7 +84,6 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.recursive,  true);
 		EQ(args.simulate,  true);
 	}
-	cout << "Test 3 check\n";
 }
 
 

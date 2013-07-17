@@ -14,7 +14,7 @@ FileListTest::FileListTest() : Test("FileList") {
 	const int records_length = sizeof(records) / sizeof(*records);
 	Args args;
 	{
-		FileList fl("test", args);
+		FileList fl(getdir(), args);
 		for (int i = 0; i < records_length; i++) {
 			fl.add(records[i][0], records[i][1]);
 		}
@@ -24,7 +24,7 @@ FileListTest::FileListTest() : Test("FileList") {
 		fl.write();
 	} // Close filelist
 	{ // Reopen filelist
-		FileList fl("test", args);
+		FileList fl(getdir(), args);
 		for (int i = 0; i < records_length; i++) {
 			EQ(fl.get(records[i][1]).from, records[i][0]);
 		}

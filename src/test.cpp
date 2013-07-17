@@ -2,6 +2,8 @@
 *   test.cpp                      *
 **********************************/
 #include "test.h"
+#include "args.h"
+#include "fileman.h"
 #include <iostream>
 #include <string>
 #include <cassert>
@@ -31,5 +33,9 @@ void Test::eq(bool a, bool b, string astr, string bstr,
 	eq<bool, bool>(a, b, astr, bstr, file, line);
 }
 string Test::getdir() {
-    return "test/" + name + "/";
+    string result = "test/" + name + "/";
+    Args args;
+    FileMan fileman(args);
+    fileman.dig(result);
+    return result;
 }

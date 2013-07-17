@@ -67,7 +67,6 @@ Args::Args()
 Args::Args(int argc, char* const* argv)
 	: undo(false), outdir("."), mcl(MOVE), verbosity(0),
 	  recursive(false), simulate(false) {
-	cout << "very beginning: " << argv[2] << endl;
 	static const struct option longopts[] = {
 		{ "undo",		no_argument,		NULL, 'u' },
 		{ "outdir",	 	required_argument,	NULL, 'o' },
@@ -98,10 +97,7 @@ Args::Args(int argc, char* const* argv)
 			undo = true;
 			break;
 		case 'o':
-		    cout << "o: " << optarg << endl;
-		    cout << "o: " << outdir << endl;
 			outdir = optarg;
-		    cout << "o: " << outdir << endl;
 			break;
 		case 'm':
 			mcl = Args::MOVE;
@@ -137,7 +133,6 @@ Args::Args(int argc, char* const* argv)
 			exit(1);
 		}
 	}
-	cout << "before processing: " << outdir << endl;
 	console.setVerbosity(verbosity);
 	for (/*optind is set*/; optind < argc; optind++)
 		infiles.push_back(string(argv[optind]));
@@ -195,8 +190,6 @@ void::Args::expandDirectories() {
 }
 void Args::checkFiles() {
 	console.v("Checking files");
-	cout << outdir << endl;
-	cout << infiles << endl;
 	{ // check output dir
 		struct stat buf;
 		int ret = stat(outdir.c_str(), &buf);

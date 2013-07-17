@@ -1,6 +1,0 @@
-<filelist application="video-organizer" version="1.0">
-    <record from="Some.Film.2013.asdf.asdf.mkv" to="Some Film.mkv" action="0"/>
-    <record from="Hello.World.2009.avi" to="Hello World.avi" action="0"/>
-    <record from="from" to="to" action="0"/>
-    <record from="My name.srt" to="is Joel.srt" action="0"/>
-</filelist>
