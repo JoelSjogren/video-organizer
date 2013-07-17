@@ -18,6 +18,6 @@ link = env.Object(
 LIBS = ['boost_regex', 'boost_filesystem', 'boost_system']
 
 ### build ###
-vorg = env.Program('../vorg', ['main.cpp'] + link, LIBS=LIBS)
+vorg = env.Program('../vorg', ['vorg.cpp'] + link, LIBS=LIBS)
 testsuite = env.Program('../test-suite', ['testsuite.cpp'] + link, LIBS=LIBS)
 
