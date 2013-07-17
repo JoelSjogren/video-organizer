@@ -27,6 +27,7 @@ Packages needed:
 
  - scons
  - libboost-regex-dev
+ - libboost-filesystem-dev
 	
 To compile, run:
 
