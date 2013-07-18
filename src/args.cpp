@@ -136,15 +136,15 @@ Args::Args(int argc, char* const* argv)
 	console.setVerbosity(verbosity);
 	for (/*optind is set*/; optind < argc; optind++)
 		infiles.push_back(string(argv[optind]));
-	if (0 < verbosity) cout << *this << endl;
-	if (recursive) expandDirectories();
-	checkFiles();
 	if (infiles.size() == 0) {
 		console.f("missing file operand.\n"
 		          "Try `%s --help' for more information.",
 		          argv[0]);
 		exit(1);
 	}
+	if (0 < verbosity) cout << *this << endl;
+	if (recursive) expandDirectories();
+	checkFiles();
 }
 void::Args::expandDirectories() {
 	set<ino_t> expanded; // infinite looping is avoided by allowing
