@@ -5,6 +5,7 @@
 #include "filelist.h"
 #include "parser.h"
 #include <boost/filesystem.hpp>
+#include <dirent.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <iostream>
@@ -155,6 +156,16 @@ void FileMan::touch(std::string file) {
         ofstream of(file.c_str());
     }
 }
-
+bool FileMan::isEmpty(std::string directory) {
+    DIR* dir = opendir(directory.c_str());
+    assert(dir != NULL);
+    dirent* dent;
+    int count = 0;
+    errno = 0;
+    while (dent = readdir(dir)) count++;
+    if (errno != 0)
+        throw runtime_error("FileMan::isEmpty failed\n");
+    return count == 2; // directory contains only . and ..
+}
 
 

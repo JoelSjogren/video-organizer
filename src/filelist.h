@@ -1,13 +1,14 @@
 /**********************************
 *   filelist.h                    *
 *                                 *
-*   This is where the             *
-*   "undo-logic" resides.         *
+*   This is where the information *
+*   needed to undo operations     *
+*   is stored and retrieved.      *
 **********************************/
 /****************************************************
 *  Whenever a file is sorted, a record of the       *
 *  operation is written to a file called 'filelist' *
-*  in the new directory. This enables the function  *
+*  in the new directory. This enables FileMan::     *
 *  undo() to read the filelist, find the operation  *
 *  and undo it.                                     *
 *                                                   *
@@ -15,6 +16,9 @@
 *  so that the user can open it up in his favorite  *
 *  text editor and find more details about the      *
 *  file, e.g. its release group.                    *
+*                                                   *
+*  The 'filelist' is also used in third party       *
+*  applications, such as addic7ed-cli (see --help). *
 ****************************************************/
 #pragma once
 #include "args.h"

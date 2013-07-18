@@ -94,14 +94,7 @@ OrganizerTest::OrganizerTest() : Test("Organizer") {
         { // Check results
             Args args;
             FileMan fileman(args);
-            DIR* dir = opendir(outdir.c_str());
-            assert(dir != NULL);
-            dirent* dent;
-            int outcount = 0;
-            errno = 0;
-            while (dent = readdir(dir)) outcount++;
-            assert(errno == 0); // no errors when reading
-            EQ(outcount, 2); // dir contains only . and ..
+            EQ(fileman.isEmpty(outdir), true);
         }
 	}
 }

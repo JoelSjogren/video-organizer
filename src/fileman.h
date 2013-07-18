@@ -33,6 +33,7 @@ public:
 	void dig(std::string to);
 	// make sure file exists
 	void touch(std::string file);
+	bool isEmpty(std::string directory);
 };
 
 
