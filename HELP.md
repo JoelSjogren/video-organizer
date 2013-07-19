@@ -21,8 +21,13 @@ vorg [OPTIONS] [FILES]
 	-l, --link
 		hardlink FILES
 		
-	-v, --verbose
-		output more info than usually
+	-v NUM, --verbosity=NUM
+		choose how much info to output:
+		-2: suppress mild errors
+		-1: suppress warnings
+		0: normal
+		1: verbose
+		2: debug
 
 	-h, --help
 		just show this text
