@@ -6,37 +6,37 @@ vorg [OPTIONS] [FILES]
 
 ## OPTIONS ##
 
-	-u, --undo	
-		undo organizing. FILES may be a *filelist*
+    -u, --undo    
+        undo organizing. FILES may be a *filelist*
 
-	-o DIRECTORY, --outdir=DIRECTORY
-		use DIRECTORY as root of all output; default is .
-		
-	-m, --move
-		move FILES (default)
-		
-	-c, --copy
-		copy FILES
-		
-	-l, --link
-		hardlink FILES
-		
-	-v NUM, --verbosity=NUM
-		choose how much info to output: (each level includes those above it)
-		-2: fatal errors
-		-1: errors
-		0: warnings (default)
-		1: verbose
-		2: debug
+    -o DIRECTORY, --outdir=DIRECTORY
+        use DIRECTORY as root of all output; default is .
+        
+    -m, --move
+        move FILES (default)
+        
+    -c, --copy
+        copy FILES
+        
+    -l, --link
+        hardlink FILES
+        
+    -v NUM, --verbosity=NUM
+        choose how much info to output: (each level includes those above it)
+        -2: fatal errors
+        -1: errors
+        0: warnings (default)
+        1: verbose
+        2: debug
 
-	-h, --help
-		just show this text
+    -h, --help
+        just show this text
 
-	-r, --recursive
-		step into directories instead of omitting them
+    -r, --recursive
+        step into directories instead of omitting them
 
-	-s, --simulate
-		do not write changes to disk
+    -s, --simulate
+        do not write changes to disk
 
     -p, --part
         do not omit .part files

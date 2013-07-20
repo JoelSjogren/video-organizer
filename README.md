@@ -10,16 +10,16 @@ The purpose of this text-based application is to sort your files: films, series 
 
 it should move them to give you the following file structure:
 
-	.
-	├── Some Show
-	│   └── S01
-	│       ├── E01.mp4
-	│       ├── E02.mp4
-	│       ├── E02.srt
-	│       └── filelist
-	└── Best Movie Ever
-		├── CD01.avi
-		└── filelist
+    .
+    ├── Some Show
+    │   └── S01
+    │       ├── E01.mp4
+    │       ├── E02.mp4
+    │       ├── E02.srt
+    │       └── filelist
+    └── Best Movie Ever
+        ├── CD01.avi
+        └── filelist
 Note that a file called *filelist* is generated next to resulting non-directory files. It contains the original filenames of the files. By using the **-u** flag, a *filelist* can be used to undo a previous operation.
 
 ## COMPILE & INSTALL ##
@@ -28,14 +28,14 @@ Packages needed:
  - scons
  - libboost-regex-dev
  - libboost-filesystem-dev
-	
+    
 To compile, run:
 
-	$ scons
+    $ scons
 
 To install, copy the generated executable to a directory in your $PATH. I suggest /usr/local/bin:
 
-	# cp vorg /usr/local/bin
+    # cp vorg /usr/local/bin
 
 ## OPTIONS ##
 See *HELP.md*.
