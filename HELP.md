@@ -22,10 +22,10 @@ vorg [OPTIONS] [FILES]
 		hardlink FILES
 		
 	-v NUM, --verbosity=NUM
-		choose how much info to output:
-		-2: suppress mild errors
-		-1: suppress warnings
-		0: normal
+		choose how much info to output: (each level includes those above it)
+		-2: fatal errors
+		-1: errors
+		0: warnings (default)
 		1: verbose
 		2: debug
 
