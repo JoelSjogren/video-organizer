@@ -3,15 +3,17 @@
 #include <stdio.h>
 using std::string;
 void Console::f(string msg, ...) {
-	fprintf(stderr, "E: ");
-	va_list args;
-	va_start(args, msg);
-	vfprintf(stderr, msg.c_str(), args);
-	va_end(args);
-	fprintf(stderr, "\n");
+    if (show_f()) { // always true
+	    fprintf(stderr, "E: ");
+	    va_list args;
+	    va_start(args, msg);
+	    vfprintf(stderr, msg.c_str(), args);
+	    va_end(args);
+	    fprintf(stderr, "\n");
+	}
 }
 void Console::e(string msg, ...) {
-	if (-2 < verbosity) {
+	if (show_e()) {
 		fprintf(stderr, "E: ");
 		va_list args;
 		va_start(args, msg);
@@ -21,7 +23,7 @@ void Console::e(string msg, ...) {
 	}
 }
 void Console::w(string msg, ...) {
-	if (-1 < verbosity) {
+	if (show_w()) {
 		printf("W: ");
 		va_list args;
 		va_start(args, msg);
@@ -31,7 +33,7 @@ void Console::w(string msg, ...) {
 	}
 }
 void Console::v(string msg, ...) {
-	if (0 < verbosity) {
+	if (show_v()) {
 //		printf("V: ");
 		va_list args;
 		va_start(args, msg);
@@ -41,7 +43,7 @@ void Console::v(string msg, ...) {
 	}
 }
 void Console::d(string msg, ...) {
-	if (1 < verbosity) {
+	if (show_d()) {
 //		printf("D: ");
 		va_list args;
 		va_start(args, msg);

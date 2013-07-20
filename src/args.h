@@ -25,6 +25,7 @@ public:
 //	bool ls;
 	bool recursive;
 	bool simulate;
+	bool include_part;
 	Args(); // default; for testing
 	Args(int argc, char* const* argv);
 };

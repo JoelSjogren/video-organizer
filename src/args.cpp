@@ -36,6 +36,10 @@ void help() {
 		cout << ___HELP_md[i];
 	cout << endl;
 }
+bool aEndsWithB(string a, string b) {
+    if (a.size() < b.size()) return false;
+    return a.substr(a.size() - b.size()) == b;
+}
 int Args::parseInt(string str) {
 	int result;
 	istringstream iss(optarg);
@@ -57,6 +61,7 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 	ARGS_D(mcl);
 	ARGS_D(verbosity);
 	ARGS_D(recursive);
+	ARGS_D(include_part);
 	#undef ARGS_D
 	return os;
 }
@@ -78,9 +83,10 @@ Args::Args(int argc, char* const* argv)
 //		{ "ls",		 	no_argument,		NULL,  0  },
 		{ "recursive", 	no_argument,		NULL, 'r' },
 		{ "simulate",	no_argument,		NULL, 's' },
+		{ "part",   	no_argument,		NULL, 'p' },
 		{ NULL,			0,					NULL,  0  },
 	};
-	static const char* shortopts = ":uo:mclv:hrs";
+	static const char* shortopts = ":uo:mclv:hrsp";
 	bool done = false;
 	optind = 1;
 	while (!done) {
@@ -119,6 +125,9 @@ Args::Args(int argc, char* const* argv)
 		case 's':
 			simulate = true;
 			break;
+		case 'p': 
+		    include_part = true;
+		    break;
 		case -1:
 			done = true;
 			break;
@@ -127,8 +136,8 @@ Args::Args(int argc, char* const* argv)
 			console.f("Got unexpected option: %s", argv[optind]);
 			exit(1);
 		default:
-			console.f("Failed to interpret command line arguments. "
-				 	  "getopt returned %d", c);
+			console.f("Failed to interpret command line "
+			          "arguments. getopt returned %d", c);
 			exit(1);
 		}
 	}
@@ -141,7 +150,7 @@ Args::Args(int argc, char* const* argv)
 		          argv[0]);
 		exit(1);
 	}
-	if (console.show_d()) cout << *this << endl;
+	if (console.show_d()) cout << *this;
 	if (recursive) expandDirectories();
 	checkFiles();
 }
@@ -167,19 +176,24 @@ void::Args::expandDirectories() {
 			}
 			dirent* dent;
 			while (dent = readdir(dir)) {
+        		string full(exp + dent->d_name);
+				if (dent->d_type == DT_DIR) full += "/";
 				{ // ignore . and ..
 					if (strcmp(dent->d_name, ".") == 0 ||
 						strcmp(dent->d_name, "..") == 0)
 						continue;
 				}
 				{ // avoid infinite looping
-					if (expanded.count(dent->d_fileno) == 0) {
-						expanded.insert(dent->d_fileno);
-						string full(exp + dent->d_name);
-						if (dent->d_type == DT_DIR) full += "/";
-						i = infiles.insert(i, full);
-						console.d("Expanded to: %s", full.c_str());
+					if (expanded.count(dent->d_fileno) != 0) {
+					    console.w("Directory has already been expanded"
+        					      ": %s", full.c_str());
+					    continue;
 					}
+	            }
+	            { // expand
+					expanded.insert(dent->d_fileno);
+					i = infiles.insert(i, full);
+					console.d("  Expanded: %s", full.c_str());
 				}
 			}
 			closedir(dir);
@@ -190,7 +204,7 @@ void::Args::expandDirectories() {
 }
 void Args::checkFiles() {
 	console.d("Checking files");
-	{ // check output dir
+	{ // check output dir: must be a dir!
 		struct stat buf;
 		int ret = stat(outdir.c_str(), &buf);
 		if (ret) {
@@ -203,8 +217,9 @@ void Args::checkFiles() {
 		}
 		if (*outdir.rbegin() != '/')
 		    outdir += "/";
+		console.d("  Accepted directory: %s", outdir.c_str());
 	}
-	{ // check input files
+	{ // check input files: omit directories
 		for (int i = 0; i < infiles.size(); i++) {
 			struct stat buf;
 			int ret = stat(infiles[i].c_str(), &buf);
@@ -221,6 +236,18 @@ void Args::checkFiles() {
 			}
 		}
 	}
+	{ // check output files: omit .part files if not explicitly wanted
+	    for (int i = 0; i < infiles.size(); i++) {
+	        if (!include_part && aEndsWithB(infiles[i], ".part")) {
+	            console.w("Omitting .part file: %s",
+	                      infiles[i].c_str());
+	            infiles.erase(infiles.begin() + i);
+				i--; // to undo the next i++
+	        }
+	    }
+	}
+	for (int i = 0; i < infiles.size(); i++)
+    	console.d("  Accepted file: %s", infiles[i].c_str());
 }
 
 
