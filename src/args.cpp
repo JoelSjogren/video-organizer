@@ -185,8 +185,8 @@ void::Args::expandDirectories() {
 				}
 				{ // avoid infinite looping
 					if (expanded.count(dent->d_fileno) != 0) {
-					    console.w("Directory has already been expanded"
-        					      ": %s", full.c_str());
+					    console.w("Directory has already been "
+					              "expanded: %s", full.c_str());
 					    continue;
 					}
 	            }
@@ -222,21 +222,20 @@ void Args::checkFiles() {
 	{ // check input files: omit directories
 		for (int i = 0; i < infiles.size(); i++) {
 			struct stat buf;
-			int ret = stat(infiles[i].c_str(), &buf);
+			const char* infile = infiles[i].c_str();
+			int ret = stat(infile, &buf);
 			if (ret) {
-				console.f("%s: %s", strerror(errno),
-						  infiles[i].c_str());
+				console.f("%s: %s", strerror(errno), infile);
 				exit(1);
 			}
 			if (buf.st_mode & S_IFDIR) {
-				console.w("Omitting directory: %s",
-						  infiles[i].c_str());
+				console.w("Omitting directory: %s", infile);
 				infiles.erase(infiles.begin() + i);
 				i--; // to undo the next i++
 			}
 		}
 	}
-	{ // check output files: omit .part files if not explicitly wanted
+	{ // check output files: omit .part files
 	    for (int i = 0; i < infiles.size(); i++) {
 	        if (!include_part && aEndsWithB(infiles[i], ".part")) {
 	            console.w("Omitting .part file: %s",

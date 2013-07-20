@@ -161,7 +161,7 @@ bool FileMan::isEmpty(std::string directory) {
     assert(dir != NULL);
     dirent* dent;
     int count = 0;
-    errno = 0;
+    errno = 0; // no error
     while (dent = readdir(dir)) count++;
     if (errno != 0)
         throw runtime_error("FileMan::isEmpty failed\n");

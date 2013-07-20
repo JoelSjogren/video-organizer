@@ -3,3 +3,4 @@ The things listed here are by no means things I plan to do. They're a collection
  - check that errno isn't used irresponsibly (use int errsv = errno;)
  - ignore .part files by default
  - add header to all .cpp files also
+ - use iosfwd?
