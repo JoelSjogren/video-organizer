@@ -43,10 +43,8 @@ bool aEndsWithB(string a, string b) {
 int Args::parseInt(string str) {
 	int result;
 	istringstream iss(optarg);
-	iss.exceptions(istringstream::failbit |
-				   istringstream::badbit);
-	try { iss >> result; }
-	catch (ios_base::failure) {
+    iss >> result;
+    if (!iss) {
 		console.f("Unable to interpret integer: %s", str.c_str());
 		exit(1);
 	}
