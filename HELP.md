@@ -45,6 +45,6 @@ When vorg moves files out of directories, rendering them (almost) empty, it does
       awk 'BEGIN { FS="\t" }; { if($1 < 1000) printf "%s\0",$2 }' |
       xargs -0 rm -rf
 
-To download subtitles, check out [addic7ed-cli](https://github.com/BenoitZugmeyer/addic7ed-cli). Because it supports the *filelist* format, downloading subtitles is as easy as
+To download subtitles, check out [addic7ed-cli](https://github.com/BenoitZugmeyer/addic7ed-cli). Because it supports the *filelist* format that vorg uses to save file information, downloading subtitles is as easy as
 
     $ addic7ed E19.avi
