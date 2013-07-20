@@ -50,3 +50,8 @@ void Console::d(string msg, ...) {
 		printf("\n");
 	}
 }
+bool Console::show_f() { return true; }
+bool Console::show_e() { return ERROR <= verbosity; } 
+bool Console::show_w() { return WARNING <= verbosity; }
+bool Console::show_v() { return VERBOSE <= verbosity; }
+bool Console::show_d() { return DEBUG <= verbosity; }

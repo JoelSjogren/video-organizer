@@ -56,7 +56,6 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 	ARGS_D(infiles);
 	ARGS_D(mcl);
 	ARGS_D(verbosity);
-//	ARGS_D(ls);
 	ARGS_D(recursive);
 	#undef ARGS_D
 	return os;
@@ -142,7 +141,7 @@ Args::Args(int argc, char* const* argv)
 		          argv[0]);
 		exit(1);
 	}
-	if (0 < verbosity) cout << *this << endl;
+	if (console.show_d()) cout << *this << endl;
 	if (recursive) expandDirectories();
 	checkFiles();
 }
@@ -159,7 +158,7 @@ void::Args::expandDirectories() {
 		}
 		if (S_ISDIR(buf.st_mode)) {
 			const string exp = *i;
-			console.v("Expanding directory: %s", exp.c_str());
+			console.d("Expanding directory: %s", exp.c_str());
 			i = infiles.erase(i); // i will be replaced by its contents
 			DIR* dir = opendir(exp.c_str());
 			if (dir == NULL) {
@@ -190,7 +189,7 @@ void::Args::expandDirectories() {
 	}
 }
 void Args::checkFiles() {
-	console.v("Checking files");
+	console.d("Checking files");
 	{ // check output dir
 		struct stat buf;
 		int ret = stat(outdir.c_str(), &buf);
