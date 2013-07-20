@@ -1,5 +1,5 @@
 /**********************************
-*   fileman.cpp                   *
+*  fileman.cpp                    *
 **********************************/
 #include "fileman.h"
 #include "filelist.h"

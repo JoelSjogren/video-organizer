@@ -1,3 +1,9 @@
+/**********************************
+*  testsuite.cpp                  *
+*                                 *
+*  Runs all tests and crashes if  *
+*  one fails.                     * 
+**********************************/
 #include "parser_test.h"
 #include "filelist_test.h"
 #include "args_test.h"

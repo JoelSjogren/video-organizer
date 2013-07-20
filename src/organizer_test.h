@@ -1,7 +1,7 @@
 /**********************************
-*   organizer_test.h              *
+*  organizer_test.h               *
 *                                 *
-*   Tests Organizer.              *
+*  Tests Organizer.               *
 **********************************/
 #pragma once
 #include "test.h"

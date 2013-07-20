@@ -1,7 +1,7 @@
 /**********************************
-*   args_test.h                   *
+*  args_test.h                    *
 *                                 *
-*   Tests Args.                   *
+*  Tests Args.                    *
 **********************************/
 #pragma once
 #include "test.h"

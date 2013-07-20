@@ -1,8 +1,8 @@
 /**********************************
-*   args.h                        *
+*  args.h                         *
 *                                 *
-*   Parses and stores command     *
-*   line arguments.               *
+*  Parses and stores command      *
+*  line arguments.                *
 **********************************/
 #pragma once
 #include "console.h"

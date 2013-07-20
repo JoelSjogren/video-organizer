@@ -1,7 +1,7 @@
 /**********************************
-*   parser_test.h                 *
+*  parser_test.h                  *
 *                                 *
-*   Tests Parser.                 *
+*  Tests Parser.                  *
 **********************************/
 #pragma once
 // note: this file depends on parser_test_data.cpp

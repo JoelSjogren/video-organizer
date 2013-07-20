@@ -1,7 +1,7 @@
 /**********************************
-*   organizer.h                   *
+*  organizer.h                    *
 *                                 *
-*   The core of all organizing.   *
+*  The core of all organizing.    *
 **********************************/
 #pragma once
 #include "args.h"

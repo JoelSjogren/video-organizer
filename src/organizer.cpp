@@ -1,5 +1,5 @@
 /**********************************
-*   organizer.cpp                 *
+*  organizer.cpp                  *
 **********************************/
 #include "organizer.h"
 #include <fstream>

@@ -1,8 +1,8 @@
 /**********************************
-*   test.h                        *
+*  test.h                         *
 *                                 *
-*   Base test class for others to *
-*   inherit from.                 *
+*  Base test class for others to  *
+*  inherit from.                  *
 **********************************/
 #pragma once
 #include "ostream_overloads.h"

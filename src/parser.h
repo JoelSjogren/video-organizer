@@ -1,7 +1,7 @@
 /**********************************
-*   parser.h                      *
+*  parser.h                       *
 *                                 *
-*   Interprets filenames.         *
+*  Interprets filenames.          *
 **********************************/
 #pragma once
 #include <string>

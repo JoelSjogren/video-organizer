@@ -1,5 +1,5 @@
 /**********************************
-*   filelist.cpp                  *
+*  filelist.cpp                  *
 **********************************/
 #include "filelist.h"
 #include "args.h"

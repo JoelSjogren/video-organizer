@@ -1,7 +1,7 @@
 /**********************************
-*   filelist_test.h               *
+*  filelist_test.h                *
 *                                 *
-*   Tests FileList.               *
+*  Tests FileList.                *
 **********************************/
 #pragma once
 #include "test.h"

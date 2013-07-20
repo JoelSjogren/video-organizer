@@ -1,9 +1,9 @@
 /**********************************
-*   filelist.h                    *
+*  filelist.h                     *
 *                                 *
-*   This is where the information *
-*   needed to undo operations     *
-*   is stored and retrieved.      *
+*  This is where the information  *
+*  needed to undo operations      *
+*  is stored and retrieved.       *
 **********************************/
 /****************************************************
 *  Whenever a file is sorted, a record of the       *

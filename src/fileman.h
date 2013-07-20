@@ -1,8 +1,8 @@
 /**********************************
-*   fileman.h                     *
+*  fileman.h                      *
 *                                 *
-*   Handles basic file            *
-*   operations.                   *
+*  Handles basic file             *
+*  operations.                    *
 **********************************/
 #pragma once
 #include "args.h"

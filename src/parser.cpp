@@ -1,3 +1,6 @@
+/**********************************
+*  parser.cpp                     *
+**********************************/
 #include "parser.h"
 #include <stdexcept>
 using boost::regex_search;

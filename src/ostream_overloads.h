@@ -1,8 +1,8 @@
 /**********************************
-*   ostream_test.h                *
+*  ostream_test.h                 *
 *                                 *
-*   Overloads ostream::operator<< *
-*   for simplified printing.      *
+*  Overloads ostream::operator<<  *
+*  for simplified printing.       *
 **********************************/
 #pragma once
 #include <ostream>

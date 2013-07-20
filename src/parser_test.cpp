@@ -1,3 +1,6 @@
+/**********************************
+*  parser_test.cpp                *
+**********************************/
 #include "parser.h"
 #include "parser_test.h"
 #include <string>
@@ -7,7 +10,6 @@ using std::string;
 using std::vector;
 using std::cout;
 using std::endl;
-
 ParserTest::ParserTest() : Test("Parser") {
 	// init parsers
 	vector<FilmParser*> filmParsers;

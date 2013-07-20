@@ -1,7 +1,7 @@
 /**********************************
-*   help.h                        *
+*  help.h                         *
 *                                 *
-*   Declares help message. (-h)   *
+*  Declares help message. (-h)    *
 **********************************/
 #pragma once
 extern unsigned char ___HELP_md[];

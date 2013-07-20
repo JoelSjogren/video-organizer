@@ -1,7 +1,7 @@
 /**********************************
-*   console.h                     *
+*  console.h                      *
 *                                 *
-*   Provides conditional output.  *
+*  Provides conditional output.   *
 **********************************/
 #pragma once
 #include <string>
