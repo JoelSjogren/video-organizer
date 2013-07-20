@@ -130,9 +130,15 @@ Args::Args(int argc, char* const* argv)
 			done = true;
 			break;
 		case '?':
-			help();
-			console.f("Got unexpected option: %s", argv[optind]);
+			console.f("Got unexpected option: %s"
+			          "Try `%s --help' for more information.",
+			          argv[optind], argv[0]);
 			exit(1);
+		case ':':
+		    console.f("Missing option argument for: %s\n"
+		              "Try `%s --help' for more information.",
+		              argv[optind - 1], argv[0]);
+		    exit(1);
 		default:
 			console.f("Failed to interpret command line "
 			          "arguments. getopt returned %d", c);
@@ -143,7 +149,7 @@ Args::Args(int argc, char* const* argv)
 	for (/*optind is set*/; optind < argc; optind++)
 		infiles.push_back(string(argv[optind]));
 	if (infiles.size() == 0) {
-		console.f("missing file operand.\n"
+		console.f("Missing file operand.\n"
 		          "Try `%s --help' for more information.",
 		          argv[0]);
 		exit(1);
