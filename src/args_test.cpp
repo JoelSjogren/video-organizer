@@ -40,6 +40,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  false);
 		EQ(args.simulate,  false);
+		EQ(args.include_part, false);
 	}
 	{ // Test 2: short options
 		char* argv[] = {
@@ -52,6 +53,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 			(char*) "-c",
 			(char*) "-r",
 			(char*) "-s",
+			(char*) "-p",
 		};
 		int argc = sizeof(argv) / sizeof(*argv);
 		Args args(argc, argv);
@@ -62,6 +64,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  true);
 		EQ(args.simulate,  true);
+		EQ(args.include_part, true);
 	}
 	{ // Test 3: long options
 		string outdirarg = "--outdir=" + outdir; // put on stack
@@ -73,6 +76,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 			(char*) outdirarg.c_str(),
 			(char*) "--recursive",
 			(char*) "--simulate",
+			(char*) "--part",
 		};
 		int argc = sizeof(argv) / sizeof(*argv);
 		Args args(argc, argv);
@@ -83,6 +87,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  true);
 		EQ(args.simulate,  true);
+		EQ(args.include_part, true);
 	}
 }
 

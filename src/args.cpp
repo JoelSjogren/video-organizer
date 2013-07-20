@@ -67,10 +67,10 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 }
 Args::Args()
 	: undo(false), outdir("."), mcl(MOVE), verbosity(0),
-	  recursive(false), simulate(false) {}
+	  recursive(false), simulate(false), include_part(false) {}
 Args::Args(int argc, char* const* argv)
 	: undo(false), outdir("."), mcl(MOVE), verbosity(0),
-	  recursive(false), simulate(false) {
+	  recursive(false), simulate(false), include_part(false) {
 	static const struct option longopts[] = {
 		{ "undo",		no_argument,		NULL, 'u' },
 		{ "outdir",	 	required_argument,	NULL, 'o' },
