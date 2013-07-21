@@ -53,6 +53,7 @@ int Args::parseInt(string str) {
 std::ostream& operator<<(std::ostream& os, const Args& args) {
 	os << "Arguments:\n";
 	#define ARGS_D(X) os << "  " #X ": " << args.X << std::endl
+    os << std::boolalpha; // prettier output
 	ARGS_D(undo);
 	ARGS_D(outdir);
 	ARGS_D(infiles);
@@ -60,6 +61,7 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 	ARGS_D(verbosity);
 	ARGS_D(recursive);
 	ARGS_D(include_part);
+	os << std::noboolalpha;
 	#undef ARGS_D
 	return os;
 }
