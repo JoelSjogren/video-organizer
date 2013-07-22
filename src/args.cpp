@@ -40,6 +40,15 @@ bool aEndsWithB(string a, string b) {
     if (a.size() < b.size()) return false;
     return a.substr(a.size() - b.size()) == b;
 }
+void Args::markDirectories() {
+    for (int i = 0; i < infiles.size(); i++) {
+        string& infile = infiles[i];
+	    console.d("isDir: %s - %s", infile.c_str(),
+                  isDirectory(infile)?"true":"false");
+	    if (isDirectory(infile) && *infile.rbegin() != '/')
+	        infile += "/";
+    }
+}
 int Args::parseInt(string str) {
 	int result;
 	istringstream iss(optarg);
@@ -49,6 +58,14 @@ int Args::parseInt(string str) {
 		exit(1);
 	}
 	return result;
+}
+bool Args::isDirectory(string path) {
+	struct stat buf;
+	if (stat(path.c_str(), &buf) != 0) {
+		console.f("%s: %s", strerror(errno), path.c_str());
+		exit(1);
+	}
+    return S_ISDIR(buf.st_mode);
 }
 std::ostream& operator<<(std::ostream& os, const Args& args) {
 	os << "Arguments:\n";
@@ -148,8 +165,11 @@ Args::Args(int argc, char* const* argv)
 		}
 	}
 	console.setVerbosity(verbosity);
-	for (/*optind is set*/; optind < argc; optind++)
-		infiles.push_back(string(argv[optind]));
+	// parse input filenames
+	for (/*optind is set*/; optind < argc; optind++) {
+	    string infile = argv[optind];
+		infiles.push_back(infile);
+    }
 	if (infiles.size() == 0) {
 		console.f("Missing file operand.\n"
 		          "Try `%s --help' for more information.",
@@ -157,6 +177,7 @@ Args::Args(int argc, char* const* argv)
 		exit(1);
 	}
 	if (console.show_d()) cout << *this;
+	markDirectories(); // append '/'
 	if (recursive) expandDirectories();
 	checkFiles();
 }

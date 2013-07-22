@@ -14,6 +14,8 @@ class Args {
 	void checkFiles();
 	void expandDirectories();
 	int parseInt(std::string str);
+    bool isDirectory(std::string path);
+    void markDirectories();
 public:
 	bool undo;
 	std::string outdir;
