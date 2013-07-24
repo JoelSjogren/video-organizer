@@ -30,26 +30,37 @@ Organizer::Organizer(const Args& pargs)
 	if (args.undo) {
 		for (int i = 0; i < args.infiles.size(); i++) {
 			const string full = args.infiles[i];
+		    console.d("Undoing: %s", full.c_str());
 			const string fnam = Parser::filename(full);
+			console.d("  fnam: %s", fnam.c_str());
 			const string dir = Parser::directory(full);
-			if (fnam == "filelist") {
+			console.d("  dir: %s", dir.c_str());
+			console.d("  FileMan::exists: %s",
+			          FileMan::exists(dir + "filelist") ?
+			          "true" : "false");
+/*			if (fnam == "filelist") {
 				// undo the whole list
 				const FileList list(dir, args);
 				for (int j = 0; j < list.size(); j++) {
 					const Record rec = list[j];
 					fileman.undo(dir, rec);
 				}
-			} else if (FileMan::exists(dir + "filelist")) {
+			} else */
+			if (FileMan::exists(dir + "filelist")) {
 				// undo only fnam
 				FileList list(dir, args);
+				console.d("  list.find: %s",
+				          list.find(fnam) ? "true" : "false");
 				if (list.find(fnam)) {
 					const Record rec = list.get(fnam);
 					fileman.undo(dir, rec);
 				} else {
-					console.e("Could not find a filelist containing "
-							  "information on how to undo: %s",
+					console.e("File unknown to filelist: %s",
 							  full.c_str());
 				}
+			} else {
+			    console.e("Could not find matching filelist: %s",
+			              full.c_str());
 			}
 		}
 	} else {

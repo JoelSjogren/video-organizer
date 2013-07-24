@@ -3,6 +3,7 @@
 **********************************/
 #include "parser.h"
 #include <stdexcept>
+#include <cstdio>
 using boost::regex_search;
 using boost::regex_match;
 using boost::regex;
@@ -16,7 +17,7 @@ bool containsDirectory(string path) {
 **********************************************/
 string Parser::directory(string path) {
 	int lastSlash = path.rfind("/");
-	if (lastSlash == string::npos) return ".";
+	if (lastSlash == string::npos) return "./";
 	return path.substr(0, lastSlash + 1);
 }
 string Parser::filename(string path) {

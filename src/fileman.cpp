@@ -119,6 +119,7 @@ bool FileMan::exists(string file) {
 }
 void FileMan::undo(string dir, const Record& rec) {
 	const string full = dir + rec.to;
+    console.d("FileMan::undo: %s", full.c_str());
 	switch (rec.action) {
 	case Args::MOVE:
 		move(full, args.outdir + rec.from, false);
@@ -149,7 +150,7 @@ void FileMan::remove_all(string file) {
     boost::filesystem::remove_all(file);
 }
 void FileMan::touch(std::string file) {
-    console.v("Touching %s", file.c_str());
+    console.v("Touching: %s", file.c_str());
     if (args.simulate) return;
     if (!exists(file)) {
         dig(file);
