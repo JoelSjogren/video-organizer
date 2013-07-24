@@ -5,7 +5,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 using std::string;
-void Console::f(string msg, ...) {
+void Console::f(string msg, ...) const {
     if (show_f()) { // always true
 	    fprintf(stderr, "E: ");
 	    va_list args;
@@ -15,7 +15,7 @@ void Console::f(string msg, ...) {
 	    fprintf(stderr, "\n");
 	}
 }
-void Console::e(string msg, ...) {
+void Console::e(string msg, ...) const {
 	if (show_e()) {
 		fprintf(stderr, "E: ");
 		va_list args;
@@ -25,7 +25,7 @@ void Console::e(string msg, ...) {
 		fprintf(stderr, "\n");
 	}
 }
-void Console::w(string msg, ...) {
+void Console::w(string msg, ...) const {
 	if (show_w()) {
 		printf("W: ");
 		va_list args;
@@ -35,7 +35,7 @@ void Console::w(string msg, ...) {
 		printf("\n");
 	}
 }
-void Console::v(string msg, ...) {
+void Console::v(string msg, ...) const {
 	if (show_v()) {
 //		printf("V: ");
 		va_list args;
@@ -45,7 +45,7 @@ void Console::v(string msg, ...) {
 		printf("\n");
 	}
 }
-void Console::d(string msg, ...) {
+void Console::d(string msg, ...) const {
 	if (show_d()) {
 //		printf("D: ");
 		va_list args;
@@ -55,8 +55,8 @@ void Console::d(string msg, ...) {
 		printf("\n");
 	}
 }
-bool Console::show_f() { return true; }
-bool Console::show_e() { return ERROR <= verbosity; } 
-bool Console::show_w() { return WARNING <= verbosity; }
-bool Console::show_v() { return VERBOSE <= verbosity; }
-bool Console::show_d() { return DEBUG <= verbosity; }
+bool Console::show_f() const { return true; }
+bool Console::show_e() const { return ERROR <= verbosity; } 
+bool Console::show_w() const { return WARNING <= verbosity; }
+bool Console::show_v() const { return VERBOSE <= verbosity; }
+bool Console::show_d() const { return DEBUG <= verbosity; }

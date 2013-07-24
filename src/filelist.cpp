@@ -28,7 +28,7 @@ int FileList::getIndex(string to) const {
 void FileList::add(string from, string to) {
 	// Ensure there is only one record with the same 'to'; overwrite
 	if (find(to)) remove(to);
-	records.push_back(Record(from, to, args.mcl));
+	records.push_back(Record(from, to, args.action));
 }
 bool FileList::find(string to) const {
 	for (size_t i = 0; i < records.size(); i++)
@@ -81,8 +81,8 @@ void FileList::read() {
 		 i = (XMLElement*) i->NextSibling()) {
 		const string from = i->Attribute("from");
 		const string to = i->Attribute("to");
-		const Args::MCL action =
-			static_cast<Args::MCL>(i->IntAttribute("action"));
+		const Args::Action action =
+			static_cast<Args::Action>(i->IntAttribute("action"));
 		records.push_back(Record(from, to, action));
 	}
 }
@@ -105,7 +105,7 @@ void FileList::write() {
 	XMLError ret = doc.SaveFile((dir + "filelist").c_str());
 	if (ret) console.e("Error writing filelist: %s", ret);
 }
-Record::Record(string pfrom, string pto, Args::MCL paction)
+Record::Record(string pfrom, string pto, Args::Action paction)
 	: from(pfrom), to(pto), action(paction) {}
 FileList::RecordNotFound::RecordNotFound(string to)
 	: runtime_error("Record not found: " + to) {}

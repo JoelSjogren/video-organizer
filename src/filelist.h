@@ -31,8 +31,8 @@ public:
 	// from and to are just the filenames
 	std::string from; // e.g. "Film.3.2010.avi", not "dir/file.avi"
 	std::string to; // e.g. "Film 3.avi"
-	Args::MCL action;
-	Record(std::string from, std::string to, Args::MCL action);
+	Args::Action action;
+	Record(std::string from, std::string to, Args::Action action);
 };
 class FileList {
 private:

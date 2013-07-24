@@ -75,7 +75,7 @@ void FileMan::link(string from, string to, int reg) {
 	if (reg) registerAction(from, to);
 }
 void FileMan::action(string from, string to) {
-	switch (args.mcl) {
+	switch (args.action) {
 	case Args::MOVE:
 		move(from, to);
 		break;

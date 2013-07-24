@@ -47,6 +47,19 @@ void build_no() {
     if (a.size() < b.size()) return false;
     return a.substr(a.size() - b.size()) == b;
 }*/
+string Args::action_pretty() const {
+	switch (action) {
+	case MOVE:
+	    return "move";
+	case COPY:
+	    return "copy";
+	case LINK:
+	    return "link";
+	default:
+	    console.f("Invalid Args::Action: %d", action);
+	    exit(1);
+	}
+}
 void Args::markDirectories() {
     for (int i = 0; i < infiles.size(); i++) {
         string& infile = infiles[i];
@@ -81,7 +94,8 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 	ARGS_D(undo);
 	ARGS_D(outdir);
 	ARGS_D(infiles);
-	ARGS_D(mcl);
+	cout << "action: " << args.action_pretty() << endl;
+	ARGS_D(action);
 	ARGS_D(verbosity);
 	ARGS_D(recursive);
 	ARGS_D(include_part);
@@ -90,10 +104,10 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 	return os;
 }
 Args::Args()
-	: undo(false), outdir("."), mcl(MOVE), verbosity(0),
+	: undo(false), outdir("."), action(MOVE), verbosity(0),
 	  recursive(false), simulate(false), include_part(false) {}
 Args::Args(int argc, char* const* argv)
-	: undo(false), outdir("."), mcl(MOVE), verbosity(0),
+	: undo(false), outdir("."), action(MOVE), verbosity(0),
 	  recursive(false), simulate(false), include_part(false) {
 	static const struct option longopts[] = {
 		{ "undo",		no_argument,		NULL, 'u' },
@@ -130,13 +144,13 @@ Args::Args(int argc, char* const* argv)
 			outdir = optarg;
 			break;
 		case 'm':
-			mcl = Args::MOVE;
+			action = Args::MOVE;
 			break;
 		case 'c':
-			mcl = Args::COPY;
+			action = Args::COPY;
 			break;
 		case 'l':
-			mcl = Args::LINK;
+			action = Args::LINK;
 			break;
 		case 'v':
 			verbosity = parseInt(optarg);

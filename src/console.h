@@ -18,15 +18,15 @@ public:
 	};
 	void setVerbosity(int pv) { verbosity = pv; }
 	// printf wrappers
-	void f(std::string, ...); // always printed
-	void e(std::string, ...);
-	void w(std::string, ...);
-	void v(std::string, ...);
-	void d(std::string, ...);
+	void f(std::string, ...) const; // always printed
+	void e(std::string, ...) const;
+	void w(std::string, ...) const;
+	void v(std::string, ...) const;
+	void d(std::string, ...) const;
 	// fallback if printf is not sufficient
-	bool show_f();
-	bool show_e();
-	bool show_w();
-	bool show_v();
-	bool show_d();
+	bool show_f() const;
+	bool show_e() const;
+	bool show_w() const;
+	bool show_v() const;
+	bool show_d() const;
 };

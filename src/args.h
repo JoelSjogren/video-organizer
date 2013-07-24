@@ -20,16 +20,20 @@ public:
 	bool undo;
 	std::string outdir;
 	std::vector<std::string> infiles;
-	enum MCL {
+	enum Action {
 		MOVE, COPY, LINK
-	} mcl;
+	} action;
 	int verbosity;
 //	bool ls;
 	bool recursive;
 	bool simulate;
 	bool include_part;
+	std::string action_pretty() const;
 	Args(); // default; for testing
 	Args(int argc, char* const* argv);
 };
 
-//TODO: rename mcl to action
+
+
+
+
