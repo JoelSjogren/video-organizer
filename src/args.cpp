@@ -244,7 +244,7 @@ void Args::checkFiles() {
 		}
 		if (*outdir.rbegin() != '/')
 		    outdir += "/";
-		console.d("  Accepted directory: %s", outdir.c_str());
+		console.d("  Accepted outdir: %s", outdir.c_str());
 	}
 	{ // check input files: omit directories
 		for (int i = 0; i < infiles.size(); i++) {
@@ -262,18 +262,20 @@ void Args::checkFiles() {
 			}
 		}
 	}
-	{ // check output files: omit .part files
+	{ // check input files: omit .part and filelist files
 	    for (int i = 0; i < infiles.size(); i++) {
-	        if (!include_part && aEndsWithB(infiles[i], ".part")) {
-	            console.w("Omitting .part file: %s",
-	                      infiles[i].c_str());
+	        bool part = !include_part &&
+	                    aEndsWithB(infiles[i], ".part");
+	        bool filelist = infiles[i] == "filelist";
+	        if (part || filelist) {
+	            console.w("Omitting file: %s", infiles[i].c_str());
 	            infiles.erase(infiles.begin() + i);
 				i--; // to undo the next i++
 	        }
 	    }
 	}
 	for (int i = 0; i < infiles.size(); i++)
-    	console.d("  Accepted file: %s", infiles[i].c_str());
+    	console.d("  Accepted infile: %s", infiles[i].c_str());
 }
 
 
