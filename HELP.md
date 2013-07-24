@@ -40,6 +40,9 @@ vorg [OPTIONS] [FILES]
 
     -p, --part
         do not omit .part files
+        
+    -b, --build-no
+        just print the build number
 
 ## TIPS & TRICKS ##
 When vorg moves files out of directories, rendering them (almost) empty, it doesn't remove the directories. You may want to recursively remove directories smaller than a given size, say 1 MB. To do this, issue:

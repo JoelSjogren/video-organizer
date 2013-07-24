@@ -3,6 +3,7 @@
 **********************************/
 #include "args.h"
 #include "help.h"
+#include "build_no.h"
 #include "parser.h"
 #include "ostream_overloads.h"
 #include <sys/stat.h>
@@ -36,6 +37,11 @@ void help() {
 	for (int i = 0; i < ___HELP_md_len; i++)
 		cout << ___HELP_md[i];
 	cout << endl;
+}
+void build_no() {
+    for (int i = 0; i < build_no_txt_len; i++)
+        cout << build_no_txt[i];
+    cout << endl;
 }
 /*bool aEndsWithB(string a, string b) {
     if (a.size() < b.size()) return false;
@@ -102,9 +108,10 @@ Args::Args(int argc, char* const* argv)
 		{ "recursive", 	no_argument,		NULL, 'r' },
 		{ "simulate",	no_argument,		NULL, 's' },
 		{ "part",   	no_argument,		NULL, 'p' },
+		{ "build-no",  	no_argument,		NULL, 'b' },
 		{ NULL,			0,					NULL,  0  },
 	};
-	static const char* shortopts = ":uo:mclv:hrsp";
+	static const char* shortopts = ":uo:mclv:hrspb";
 	bool done = false;
 	optind = 1;
 	while (!done) {
@@ -146,6 +153,9 @@ Args::Args(int argc, char* const* argv)
 		case 'p': 
 		    include_part = true;
 		    break;
+		case 'b':
+		    build_no();
+		    exit(0);
 		case -1:
 			done = true;
 			break;
