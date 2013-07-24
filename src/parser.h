@@ -11,7 +11,8 @@ public:
 	static std::string directory(std::string whole);
 	// e.g. "somedir/Film.2010.mp4" -> "Film.2010.mp4"
 	static std::string filename(std::string whole);
-	// e.g. "Film.2010.mp4" -> ".mp4"
+	// e.g. "somedir/Film.2010.mp4" -> ".mp4"
+	// e.g. "noext" -> ""
 	static std::string extension(std::string fnam);
 	static std::string dotsToSpaces(std::string str);
 	virtual bool matches(std::string fnam) = 0;

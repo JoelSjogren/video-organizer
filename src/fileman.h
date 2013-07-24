@@ -27,7 +27,9 @@ public:
 	void remove(std::string file);
 	// remove recursively
 	void remove_all(std::string file);
-	static bool exists(std::string file);
+	// get number of files in *directory*, including . and ..
+    int fileCount(std::string directory);
+	bool exists(std::string file);
 	// create directory structure so that *to* may be created
 	// if *to* is a directory (ends with '/'), create it as well
 	void dig(std::string to);

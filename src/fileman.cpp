@@ -157,16 +157,21 @@ void FileMan::touch(std::string file) {
         ofstream of(file.c_str());
     }
 }
-bool FileMan::isEmpty(std::string directory) {
+int FileMan::fileCount(std::string directory) {
     DIR* dir = opendir(directory.c_str());
-    assert(dir != NULL);
+    if (dir == NULL)
+        throw runtime_error("FileMan::fileCount could not open: " +
+                            directory + "\n");
     dirent* dent;
     int count = 0;
     errno = 0; // no error
     while (dent = readdir(dir)) count++;
     if (errno != 0)
-        throw runtime_error("FileMan::isEmpty failed\n");
-    return count == 2; // directory contains only . and ..
+        throw runtime_error("FileMan::fileCount failed\n");
+    return count;
+}
+bool FileMan::isEmpty(std::string directory) {
+    return fileCount(directory) == 2;
 }
 
 

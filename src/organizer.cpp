@@ -35,8 +35,8 @@ Organizer::Organizer(const Args& pargs)
 			console.d("  fnam: %s", fnam.c_str());
 			const string dir = Parser::directory(full);
 			console.d("  dir: %s", dir.c_str());
-			console.d("  FileMan::exists: %s",
-			          FileMan::exists(dir + "filelist") ?
+			console.d("  fileman.exists: %s",
+			          fileman.exists(dir + "filelist") ?
 			          "true" : "false");
 /*			if (fnam == "filelist") {
 				// undo the whole list
@@ -46,7 +46,7 @@ Organizer::Organizer(const Args& pargs)
 					fileman.undo(dir, rec);
 				}
 			} else */
-			if (FileMan::exists(dir + "filelist")) {
+			if (fileman.exists(dir + "filelist")) {
 				// undo only fnam
 				FileList list(dir, args);
 				console.d("  list.find: %s",

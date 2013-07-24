@@ -3,6 +3,7 @@
 **********************************/
 #include "args.h"
 #include "help.h"
+#include "parser.h"
 #include "ostream_overloads.h"
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -36,10 +37,10 @@ void help() {
 		cout << ___HELP_md[i];
 	cout << endl;
 }
-bool aEndsWithB(string a, string b) {
+/*bool aEndsWithB(string a, string b) {
     if (a.size() < b.size()) return false;
     return a.substr(a.size() - b.size()) == b;
-}
+}*/
 void Args::markDirectories() {
     for (int i = 0; i < infiles.size(); i++) {
         string& infile = infiles[i];
@@ -265,8 +266,9 @@ void Args::checkFiles() {
 	{ // check input files: omit .part and filelist files
 	    for (int i = 0; i < infiles.size(); i++) {
 	        bool part = !include_part &&
-	                    aEndsWithB(infiles[i], ".part");
-	        bool filelist = infiles[i] == "filelist";
+	                    Parser::extension(infiles[i]) == ".part";
+	        bool filelist = Parser::filename(infiles[i]) ==
+	                        "filelist";
 	        if (part || filelist) {
 	            console.w("Omitting file: %s", infiles[i].c_str());
 	            infiles.erase(infiles.begin() + i);
