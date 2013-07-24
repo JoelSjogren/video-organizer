@@ -160,9 +160,9 @@ Args::Args(int argc, char* const* argv)
 			done = true;
 			break;
 		case '?':
-			console.f("Got unexpected option: %s"
+			console.f("Got unexpected option: %s\n"
 			          "Try `%s --help' for more information.",
-			          argv[optind], argv[0]);
+			          argv[optind - 1], argv[0]); // FIXME safe?
 			exit(1);
 		case ':':
 		    console.f("Missing option argument for: %s\n"
