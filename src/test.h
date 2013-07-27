@@ -30,8 +30,8 @@ template <class A, class B>
 void Test::eq(A a, B b, std::string astr, std::string bstr,
 			  std::string file, int line) {
 	if (a != b) {
-		std::cout << "Test failed in " << file << ", line " << line << ": "
-				  << "EQ(" << astr << ", " << bstr << ") -> "
+		std::cout << "Test failed in " << file << ", line " << line
+		          << ": EQ(" << astr << ", " << bstr << ") -> "
 				  << "assert(" << a << " == " << b << ")\n";
 		exit(1);
 	}
