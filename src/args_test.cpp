@@ -4,12 +4,8 @@
 #include "args_test.h"
 #include "args.h"
 #include "fileman.h"
-#include <cassert>
-#include <iostream>
 #include <string>
 using std::string;
-using std::cout;
-using std::endl;
 ArgsTest::ArgsTest() : Test("Args") {
     const char* files[] = {
         "Chuck.S05E01.HDTV.XviD-LOL.avi",

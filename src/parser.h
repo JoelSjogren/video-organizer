@@ -8,6 +8,7 @@
 #include <boost/regex.hpp>
 class Parser {
 public:
+    // e.g. "somedir/Film.2010.mp4" -> "somedir/"
 	static std::string directory(std::string whole);
 	// e.g. "somedir/Film.2010.mp4" -> "Film.2010.mp4"
 	static std::string filename(std::string whole);

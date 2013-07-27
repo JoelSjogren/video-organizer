@@ -5,10 +5,6 @@
 #include "args.h"
 #include "tinyxml2.h"
 #include <stdexcept>
-#include <cassert>
-#include <iostream>
-using std::cout;
-using std::endl;
 using std::string;
 using tinyxml2::XMLDocument;
 using tinyxml2::XMLElement;

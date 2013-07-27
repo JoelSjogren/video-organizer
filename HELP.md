@@ -7,7 +7,7 @@ vorg [OPTIONS] [FILES]
 ## OPTIONS ##
 
     -u, --undo    
-        undo organizing. FILES may be a *filelist*
+        undo organization. FILES may be a *filelist*
 
     -o DIRECTORY, --outdir=DIRECTORY
         use DIRECTORY as root of all output; default is .

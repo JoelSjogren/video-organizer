@@ -8,7 +8,6 @@
 #include "console.h"
 #include <vector>
 #include <string>
-#include <ostream>
 class Args {
 	Console console;
 	void checkFiles();
@@ -21,15 +20,15 @@ public:
 	std::string outdir;
 	std::vector<std::string> infiles;
 	enum Action {
+    	// Values, e.g. MOVE = 0, must not change!
 		MOVE, COPY, LINK
 	} action;
 	int verbosity;
-//	bool ls;
 	bool recursive;
 	bool simulate;
 	bool include_part;
 	std::string action_pretty() const;
-	Args(); // default; for testing
+	Args(); // for testing
 	Args(int argc, char* const* argv);
 };
 

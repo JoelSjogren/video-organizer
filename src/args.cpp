@@ -7,28 +7,22 @@
 #include "parser.h"
 #include "ostream_overloads.h"
 #include <sys/stat.h>
-#include <sys/types.h>
 #include <unistd.h> // getopt
 #include <getopt.h> // also getopt
 #include <dirent.h>
-#include <cstdlib>
 #include <string>
 #include <vector>
 #include <ostream>
 #include <iostream>
-#include <stdexcept>
 #include <cstring>
 #include <cerrno>
-#include <cstring>
 #include <set>
-#include <cstdio>
 #include <sstream>
 using std::ostream;
 using std::cerr;
 using std::cout;
 using std::endl;
 using std::string;
-using std::runtime_error;
 using std::set;
 using std::vector;
 using std::istringstream;

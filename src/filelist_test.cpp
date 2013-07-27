@@ -6,9 +6,6 @@
 #include "filelist.h"
 #include "fileman.h"
 #include <dirent.h>
-#include <cassert>
-#include <iostream>
-using std::cout;
 FileListTest::FileListTest() : Test("FileList") {
 	const char* records[][2] = {
 		{ "Some.Film.2013.asdf.asdf.mkv", "Some Film.mkv" },

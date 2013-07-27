@@ -26,13 +26,11 @@ ParserTest::ParserTest() : Test("Parser") {
 	// iterate over *files* and parse them
 	for (int i = 0; i < filec; i++) {
 		const char* const file = files[i];
-//		cout << "file: " << file << endl;
 		{ // check for false positives and false negatives
 			int matches = 0;
 			for (int j = 0; j < parsers.size(); j++)
 				if (parsers[j]->matches(file))
 					matches++;
-//			cout << "matches: " << matches << endl;
 			EQ(matches, 1);
 		}
 		for (int j = 0; j < filmParsers.size(); j++)
@@ -55,7 +53,6 @@ void ParserTest::film(FilmParser* parser, int index) {
 }
 void ParserTest::series(SeriesParser* parser, int index) {
 	const string fnam = Parser::filename(files[index]);
-//	cout << "index: " << index << endl;
 	EQ(fnam, fileNames[index]);
 	EQ(parser->name(fnam), titles[index]);
 	EQ(parser->season(fnam), season[index]);

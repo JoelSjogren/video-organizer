@@ -8,7 +8,6 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include <iostream>
 #include <string>
 #include <cassert>
 #include <stdexcept>
@@ -16,9 +15,6 @@
 #include <cstring>
 #include <cstdio>
 #include <fstream>
-using std::cout;
-using std::cerr;
-using std::endl;
 using std::string;
 using std::runtime_error;
 using std::ifstream;
@@ -107,7 +103,8 @@ void FileMan::dig(string to) {
 		int ret = mkdir(part.c_str(), S_IRWXU | S_IRWXG |
 						S_IROTH | S_IXOTH);
 		if (ret && errno != EEXIST)
-			throw runtime_error("Unable to create directory: " + part);
+			throw runtime_error("Unable to create directory: " +
+			                    part);
 		lookhere = foundhere + 1;
 	}
 }

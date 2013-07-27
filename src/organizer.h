@@ -1,15 +1,13 @@
 /**********************************
 *  organizer.h                    *
 *                                 *
-*  The core of all organizing.    *
+*  The core of all organization.  *
 **********************************/
 #pragma once
 #include "args.h"
 #include "fileman.h"
 #include "parser.h"
 #include <string>
-#include <stdexcept>
-#include <boost/regex.hpp>
 #include <vector>
 class Organizer {
 	/* configuration */
@@ -28,16 +26,14 @@ class Organizer {
 	/* console output*/
 	Console console;
 	
-	/* debugging */
-	friend class OrganizerTest;
+	void initParsers();
+	// iterate over input files
+	void undo();
+	void sort();
 public:
 	Organizer(const Args& pargs);
 	~Organizer();
 };
-
-/*class FileAlreadyExists : public runtime_error {
-
-};*/
 
 
 

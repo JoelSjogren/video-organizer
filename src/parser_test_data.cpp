@@ -4,16 +4,17 @@
 #include "parser_test.h"
 const char* ParserTest::files[] = {
 	// film naming convention 2
-	"folder//double//The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
+	"folder//dbl//The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
 	"Paranormal.Activity.3.2011.UNRATED.DVDRip.XviD-SPARKS.avi",
-	"../../sub/Rise.of.the.Planet.of.the.Apes.2011.TS.XviD-NOVA.avi",
+	"Rise.of.the.Planet.of.the.Apes.2011.TS.XviD-NOVA.avi",
 	// series: naming convention 1
 	"some/dir/Chuck.S05E01.HDTV.XviD-LOL.avi",
 	"/Chuck.S05E02.HDTV.XviD-LOL.avi",
-	"Community.S04E02.HDTV.x264-LOL.mp4",
+	"../../sub/Community.S04E02.HDTV.x264-LOL.mp4",
 	// series: naming convention 2
 	"/The Big Bang Theory - 01x01 - Addic7ed.com.srt",
-	"Family Guy - 10x07 - Amish Guy.LOL.English.HI.C.orig.Addic7ed.com.srt",
+	"Family Guy - 10x07 - Amish"
+	" Guy.LOL.English.HI.C.orig.Addic7ed.com.srt",
 	"somedir/../Made up Show - 99x99 - this will be ignored.srt",
 	// film naming convention 2
 	"Man of Steel 2013 CAM XviD MP3 MiLLENiUM.srt",
@@ -35,7 +36,8 @@ const char* ParserTest::fileNames[] = {
 	"Chuck.S05E02.HDTV.XviD-LOL.avi",
 	"Community.S04E02.HDTV.x264-LOL.mp4",
 	"The Big Bang Theory - 01x01 - Addic7ed.com.srt",
-	"Family Guy - 10x07 - Amish Guy.LOL.English.HI.C.orig.Addic7ed.com.srt",
+	"Family Guy - 10x07 - Amish"
+	" Guy.LOL.English.HI.C.orig.Addic7ed.com.srt",
 	"Made up Show - 99x99 - this will be ignored.srt",
 	"Man of Steel 2013 CAM XviD MP3 MiLLENiUM.srt",
 	"Whip It (2009) DvdRip [Xvid] {1337x}-X.srt",
@@ -125,7 +127,8 @@ const char* ParserTest::filenames_nodots[] = {
 	"Chuck S05E02 HDTV XviD-LOL avi",
 	"Community S04E02 HDTV x264-LOL mp4",
 	"The Big Bang Theory - 01x01 - Addic7ed com srt",
-	"Family Guy - 10x07 - Amish Guy LOL English HI C orig Addic7ed com srt",
+	"Family Guy - 10x07 - Amish"
+	" Guy LOL English HI C orig Addic7ed com srt",
 	"Made up Show - 99x99 - this will be ignored srt",
 	"Man of Steel 2013 CAM XviD MP3 MiLLENiUM srt",
 	"Whip It (2009) DvdRip [Xvid] {1337x}-X srt",

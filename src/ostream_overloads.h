@@ -7,7 +7,6 @@
 #pragma once
 #include <ostream>
 #include <vector>
-#include <string>
 template <class T>
 std::ostream&
 operator<<(std::ostream& os, const std::vector<T>& vec) {

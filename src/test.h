@@ -6,11 +6,9 @@
 **********************************/
 #pragma once
 #include "ostream_overloads.h"
-#include <cassert>
 #include <string>
 #include <cstdlib>
 #include <iostream>
-#include <vector>
 #define EQ(X, Y) eq((X), (Y), #X, #Y, __FILE__, __LINE__); passed++
 #define TR(X) assert((X)); passed++
 class Test {

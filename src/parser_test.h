@@ -8,6 +8,7 @@
 #include "test.h"
 #include "parser.h"
 class ParserTest : public Test {
+    // test data
     static const char* files[];
     static const int filec;
     static const char* fileNames[];
@@ -17,6 +18,7 @@ class ParserTest : public Test {
     static const char* episode[];
     static const char* filenames_nodots[];
     static const char* cd[];
+    
 	void film(FilmParser* parser, int index);
 	void series(SeriesParser* parser, int index);
 public:
