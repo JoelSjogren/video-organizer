@@ -20,15 +20,6 @@ protected:
 	template <class A, class B>
 	void eq(A a, B b, std::string astr, std::string bstr,
 			std::string file, int line);
-	void eq(int a, int b, std::string astr, std::string bstr,
-			std::string file, int line);
-	void eq(std::string a, std::string b, std::string astr,
-			std::string bstr, std::string file, int line);
-	void eq(std::vector<std::string> a, std::vector<std::string> b,
-			std::string astr, std::string bstr,
-			std::string file, int line);
-	void eq(bool a, bool b, std::string astr, std::string bstr,
-			std::string file, int line);
 	// get directory for data storage
 	std::string getdir();
 public:
