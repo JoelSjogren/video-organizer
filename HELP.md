@@ -54,3 +54,6 @@ When vorg moves files out of directories, rendering them (almost) empty, it does
 To download subtitles, check out [addic7ed-cli](https://github.com/BenoitZugmeyer/addic7ed-cli). Because it supports the *filelist* format that vorg uses to save file information, downloading subtitles is as easy as
 
     $ addic7ed E19.avi
+
+For syncing your video folders, for example [local hdd] -> [usb hdd], rsync is handy:
+    $ rsync -a /home/joel/Video /media/USB-HDD/Video
