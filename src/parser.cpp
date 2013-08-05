@@ -30,6 +30,12 @@ string Parser::extension(string path) {
 	if (i == string::npos) return "";
 	return fnam.substr(i, string::npos);
 }
+string Parser::filenameNoExt(string path) {
+	string fnam = filename(path);
+	int i = fnam.rfind(".");
+	if (i == string::npos) return fnam;
+	return fnam.substr(0, i);
+}
 string Parser::dotsToSpaces(string str) {
 	int lookHere = 0;
 	int foundHere;
@@ -140,11 +146,11 @@ int SeriesParser2::episodeOffset() {
     return string(" - 01").size();
 }
 std::string SeriesParser2::season(std::string fnam) {
-    // getting " 01", returning "S01"
+    // e.g. getting " 01", returning "S01"
     return SeriesParser::season(fnam).replace(0, 1, "S");
 }
 std::string SeriesParser2::episode(std::string fnam) {
-    // getting "x01", returning "E01"
+    // e.g. getting "x01", returning "E01"
     return SeriesParser::episode(fnam).replace(0, 1, "E");
 }
 

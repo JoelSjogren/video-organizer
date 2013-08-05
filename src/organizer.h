@@ -30,6 +30,8 @@ class Organizer {
 	// iterate over input files
 	void undo();
 	void sort();
+	// known by filename, not filelist
+	bool isSorted(std::string full);
 public:
 	Organizer(const Args& pargs);
 	~Organizer();

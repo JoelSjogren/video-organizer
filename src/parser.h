@@ -9,12 +9,15 @@
 class Parser {
 public:
     // e.g. "somedir/Film.2010.mp4" -> "somedir/"
-	static std::string directory(std::string whole);
+	static std::string directory(std::string path);
 	// e.g. "somedir/Film.2010.mp4" -> "Film.2010.mp4"
-	static std::string filename(std::string whole);
+	static std::string filename(std::string path);
 	// e.g. "somedir/Film.2010.mp4" -> ".mp4"
 	// e.g. "noext" -> ""
-	static std::string extension(std::string fnam);
+	static std::string extension(std::string path);
+	// e.g. "somedir/Film.2010.mp4" -> "Film.2010"
+	// e.g. "noext" -> "noext"
+	static std::string filenameNoExt(std::string path);
 	static std::string dotsToSpaces(std::string str);
 	virtual bool matches(std::string fnam) = 0;
 	virtual ~Parser() {}

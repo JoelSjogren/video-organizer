@@ -2,6 +2,9 @@
 *  organizer.cpp                  *
 **********************************/
 #include "organizer.h"
+#include <boost/regex.hpp>
+using boost::regex_match;
+using boost::regex;
 using std::string;
 Organizer::Organizer(const Args& pargs)
 	: args(pargs), fileman(args), console(args.verbosity) {
@@ -60,12 +63,28 @@ void Organizer::undo() {
 		fileman.undo(dir, rec);
 	}
 }
+bool Organizer::isSorted(string full) {
+	const string name = Parser::filenameNoExt(full);
+	const regex sorted[] = {
+	    regex("CD[0-9]{2}", regex::extended),
+	    regex("E[0-9]{2}", regex::extended),
+	};
+	const int sortedc = sizeof(sorted) / sizeof(*sorted);
+	for (int i = 0; i < sortedc; i++)
+	    if (regex_match(name, sorted[i]))
+	        return true;
+	return false;
+}
 void Organizer::sort() {
 	for (int i = 0; i < args.infiles.size(); i++) {
 		// e.g. "somedir/Film.2010.mp4"
 		const string full = args.infiles[i];
 		const string file = Parser::filename(full);
-		string ext = Parser::extension(file);
+		const string ext = Parser::extension(file);
+		if (isSorted(full)) {
+		    console.w("Omitting file: %s", full.c_str());
+		    continue;
+		}
 		int j;
 		if (0 <= (j = findFilmParser(file))) {
 			const string film = filmParsers[j]->name(file);
@@ -85,4 +104,7 @@ void Organizer::sort() {
 		}
 	}
 }
+
+
+
 
