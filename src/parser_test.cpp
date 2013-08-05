@@ -40,7 +40,7 @@ ParserTest::ParserTest() : Test("Parser") {
 			if (seriesParsers[j]->matches(file))
 				series(seriesParsers[j], i);
 	}
-	
+	filenameEtc();
 }
 void ParserTest::film(FilmParser* parser, int index) {
 	const string fnam = Parser::filename(files[index]);
@@ -61,4 +61,15 @@ void ParserTest::series(SeriesParser* parser, int index) {
 	EQ(parser->matches(fnam), true);
 	EQ(Parser::dotsToSpaces(fnam), filenames_nodots[index]);
 }
+void ParserTest::filenameEtc() {
+    EQ(Parser::directory("somedir/Film.2010.mp4"), "somedir/");
+    EQ(Parser::filename("somedir/Film.2010.mp4"), "Film.2010.mp4");
+    EQ(Parser::extension("somedir/Film.2010.mp4"), ".mp4");
+    EQ(Parser::extension("noext"), "");
+    EQ(Parser::filenameNoExt("somedir/Film.2010.mp4"), "Film.2010");
+    EQ(Parser::filenameNoExt("some.dir/noext"), "noext");
+    EQ(Parser::dotsToSpaces("Film.2010.mp4"), "Film 2010 mp4");
+}
+
+
 

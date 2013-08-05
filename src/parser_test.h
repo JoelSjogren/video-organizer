@@ -21,6 +21,7 @@ class ParserTest : public Test {
     
 	void film(FilmParser* parser, int index);
 	void series(SeriesParser* parser, int index);
+	void filenameEtc();
 public:
 	ParserTest();
 };
