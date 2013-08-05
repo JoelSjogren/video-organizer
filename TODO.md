@@ -6,5 +6,3 @@ The things listed here are by no means things I plan to do. They're a collection
  - add option to manually specify output file naming, e.g.
  
     vorg infile.avi -o OutFile.avi -m
- 
- - add test to Organizer::isSorted

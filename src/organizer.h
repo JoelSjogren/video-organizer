@@ -31,7 +31,8 @@ class Organizer {
 	void undo();
 	void sort();
 	// known by filename, not filelist
-	bool isSorted(std::string full);
+	static bool isSorted(std::string full);
+	friend class OrganizerTest;
 public:
 	Organizer(const Args& pargs);
 	~Organizer();

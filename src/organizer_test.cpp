@@ -21,6 +21,20 @@ bool onlyFileInDir(string file) {
            fileman.exists(file);
 }
 OrganizerTest::OrganizerTest() : Test("Organizer") {
+    sampleRuns();
+    isSorted();
+}
+void OrganizerTest::isSorted() {
+    EQ(Organizer::isSorted("dir/E01.avi"), true);
+    EQ(Organizer::isSorted("dir/E01.more.avi"), false);
+    EQ(Organizer::isSorted("CD02.mp4"), true);
+    EQ(Organizer::isSorted("some.dir/CD02"), true);
+    EQ(Organizer::isSorted("some.dir/"), false);
+    EQ(Organizer::isSorted("Chuck.S05E01.XviD.avi"), false);
+    EQ(Organizer::isSorted("E0x.avi"), false);
+    EQ(Organizer::isSorted("CD0x.avi"), false);
+}
+void OrganizerTest::sampleRuns() {
     const char* infiles[] = {
         "Chuck.S05E01.HDTV.XviD-LOL.avi",
         "Community.S04E02.HDTV.x264-LOL.mp4",
@@ -137,8 +151,6 @@ OrganizerTest::OrganizerTest() : Test("Organizer") {
         }
 	}
 }
-
-
 
 
 
