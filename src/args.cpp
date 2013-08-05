@@ -18,6 +18,8 @@
 #include <cerrno>
 #include <set>
 #include <sstream>
+#include <cctype>
+#include <cassert>
 using std::ostream;
 using std::cerr;
 using std::cout;
@@ -73,6 +75,39 @@ int Args::parseInt(string str) {
 	}
 	return result;
 }
+void Args::parseSize_err(string str) {
+    console.f("Unable to interpret size: %s", str.c_str());
+    exit(1);
+}
+/*long long parseLongLong(string str) {
+    long long result = 0;
+    for (string::iterator i = str.begin(); i != str.end(); i++) {
+        assert(isdigit(*i));
+        result *= 10;
+        result += *i - '0';
+    }
+    return result;
+}*/
+long long Args::parseSize(const string orig) {
+    string str(orig);
+    if (str.size() == 0) parseSize_err(orig);
+    string::iterator last = str.end() - 1;
+    long long suffix = 1;
+    if (isdigit(*last)) {}
+    else if (*last == 'K') suffix = (long long) 1024;
+    else if (*last == 'M') suffix = (long long) 1024 * 1024;
+    else if (*last == 'G') suffix = (long long) 1024 * 1024 * 1024;
+    else parseSize_err(orig);
+    if (!isdigit(*last)) str.erase(last);
+    for (int i = 0; i < str.size(); i++)
+        if (!isdigit(str[i]))
+            parseSize_err(orig);
+    errno = 0;
+    long long result = atol(str.c_str());
+    if (errno != 0) parseSize_err(orig);
+    result *= suffix;
+    return result;
+}
 bool Args::isDirectory(string path) {
 	struct stat buf;
 	if (stat(path.c_str(), &buf) != 0) {
@@ -83,26 +118,28 @@ bool Args::isDirectory(string path) {
 }
 std::ostream& operator<<(std::ostream& os, const Args& args) {
 	os << "Arguments:\n";
-	#define ARGS_D(X) os << "  " #X ": " << args.X << std::endl
+	#define ARGS_D(X) os << "  " #X ": " << args.X << endl
     os << std::boolalpha; // prettier output
 	ARGS_D(undo);
 	ARGS_D(outdir);
 	ARGS_D(infiles);
-	cout << "action: " << args.action_pretty() << endl;
-	ARGS_D(action);
+	cout << "  action: " << args.action_pretty() << endl;
 	ARGS_D(verbosity);
 	ARGS_D(recursive);
 	ARGS_D(include_part);
+	ARGS_D(clean);
 	os << std::noboolalpha;
 	#undef ARGS_D
 	return os;
 }
 Args::Args()
 	: undo(false), outdir("."), action(MOVE), verbosity(0),
-	  recursive(false), simulate(false), include_part(false) {}
+	  recursive(false), simulate(false), include_part(false),
+	  clean(0) {}
 Args::Args(int argc, char* const* argv)
 	: undo(false), outdir("."), action(MOVE), verbosity(0),
-	  recursive(false), simulate(false), include_part(false) {
+	  recursive(false), simulate(false), include_part(false),
+	  clean(0) {
 	static const struct option longopts[] = {
 		{ "undo",		no_argument,		NULL, 'u' },
 		{ "outdir",	 	required_argument,	NULL, 'o' },
@@ -117,6 +154,7 @@ Args::Args(int argc, char* const* argv)
 		{ "simulate",	no_argument,		NULL, 's' },
 		{ "part",   	no_argument,		NULL, 'p' },
 		{ "build-no",  	no_argument,		NULL, 'b' },
+		{ "clean",  	required_argument,	NULL,  0  },
 		{ NULL,			0,					NULL,  0  },
 	};
 	static const char* shortopts = ":uo:mclv:hrspb";
@@ -127,6 +165,11 @@ Args::Args(int argc, char* const* argv)
 		char c = getopt_long(argc, argv, shortopts,
 							 longopts, &index);
 		switch (c) {
+		case 0:
+		    if (strcmp("clean", longopts[index].name) == 0) {
+		        clean = parseSize(optarg);
+		    }
+		    break;
 //		case 0:
 //			if (strcmp("ls", longopts[index].name) == 0)
 //				ls = true;
@@ -197,9 +240,10 @@ Args::Args(int argc, char* const* argv)
 	}
 	if (console.show_d()) cout << *this;
 	markDirectories(); // append '/'
-	if (recursive) expandDirectories();
+//	if (recursive) expandDirectories();
 	checkFiles();
 }
+/*
 void::Args::expandDirectories() {
 	set<ino_t> expanded; // infinite looping is avoided by allowing
 						 // each inode to be expanded only once
@@ -248,6 +292,7 @@ void::Args::expandDirectories() {
 		}
 	}
 }
+*/
 void Args::checkFiles() {
 	console.d("Checking files");
 	{ // check output dir: must be a dir!
@@ -265,7 +310,7 @@ void Args::checkFiles() {
 		    outdir += "/";
 		console.d("  Accepted outdir: %s", outdir.c_str());
 	}
-	{ // check input files: omit directories
+	/*{ // check input files: omit directories
 		for (int i = 0; i < infiles.size(); i++) {
 			struct stat buf;
 			const char* infile = infiles[i].c_str();
@@ -280,8 +325,8 @@ void Args::checkFiles() {
 				i--; // to undo the next i++
 			}
 		}
-	}
-	{ // check input files: omit .part and filelist files
+	}*/
+	/*{ // check input files: omit .part and filelist files
 	    for (int i = 0; i < infiles.size(); i++) {
 	        bool part = !include_part &&
 	                    Parser::extension(infiles[i]) == ".part";
@@ -293,9 +338,9 @@ void Args::checkFiles() {
 				i--; // to undo the next i++
 	        }
 	    }
-	}
-	for (int i = 0; i < infiles.size(); i++)
-    	console.d("  Accepted infile: %s", infiles[i].c_str());
+	}*/
+	//for (int i = 0; i < infiles.size(); i++)
+    //	console.d("  Accepted infile: %s", infiles[i].c_str());
 }
 
 

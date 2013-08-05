@@ -20,6 +20,8 @@ using std::runtime_error;
 using std::ifstream;
 using std::ofstream;
 using std::ios_base;
+using boost::filesystem::recursive_directory_iterator;
+using boost::filesystem::file_size;
 FileMan::FileMan(const Args& pargs)
     : args(pargs), console(args.verbosity) {}
 void FileMan::move(string from, string to, int reg) {
@@ -171,5 +173,13 @@ int FileMan::fileCount(std::string directory) {
 bool FileMan::isEmpty(std::string directory) {
     return fileCount(directory) == 2;
 }
-
+long long FileMan::recursiveSize(string directory) {
+    long long result = 0;
+    for (recursive_directory_iterator i(directory);
+         i != recursive_directory_iterator(); i++) {
+        if (!is_directory(*i))
+            result += file_size(*i);
+    }
+    return result;
+}
 

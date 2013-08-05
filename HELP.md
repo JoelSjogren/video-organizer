@@ -6,10 +6,10 @@ vorg [OPTIONS] [FILES]
 
 ## OPTIONS ##
 
-    -u, --undo    
+    -u, --undo
         undo organization. FILES may be a *filelist*
 
-    -o DIRECTORY, --outdir=DIRECTORY
+    -o DIRECTORY, --outdir DIRECTORY
         use DIRECTORY as root of all output; default is .
         
     -m, --move
@@ -21,7 +21,7 @@ vorg [OPTIONS] [FILES]
     -l, --link
         hardlink FILES
         
-    -v NUM, --verbosity=NUM
+    -v NUM, --verbosity NUM
         choose how much info to output: (each level includes those above it)
         -2: fatal errors
         -1: errors
@@ -43,6 +43,9 @@ vorg [OPTIONS] [FILES]
         
     -b, --build-no
         just print the build number
+        
+    --clean SIZE
+        after organizing, for each folder that has been stepped into, remove it recursively if its total size (including children) is less than SIZE
 
 ## TIPS & TRICKS ##
 When vorg moves files out of directories, rendering them (almost) empty, it doesn't remove the directories. You may want to recursively remove directories smaller than a given size, say 1 MB. To do this, issue:

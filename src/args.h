@@ -13,6 +13,8 @@ class Args {
 	void checkFiles();
 	void expandDirectories();
 	int parseInt(std::string str);
+	long long parseSize(std::string str);
+	void parseSize_err(std::string str);
     bool isDirectory(std::string path);
     void markDirectories();
 public:
@@ -27,6 +29,7 @@ public:
 	bool recursive;
 	bool simulate;
 	bool include_part;
+	long long clean; // upper bound for cleaning
 	std::string action_pretty() const;
 	Args(); // for testing
 	Args(int argc, char* const* argv);

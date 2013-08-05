@@ -33,9 +33,10 @@ public:
 	// create directory structure so that *to* may be created
 	// if *to* is a directory (ends with '/'), create it as well
 	void dig(std::string to);
-	// make sure file exists
+	// create file if it does not exist
 	void touch(std::string file);
 	bool isEmpty(std::string directory);
+    long long recursiveSize(std::string directory);
 };
 
 

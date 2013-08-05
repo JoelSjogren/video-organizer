@@ -9,9 +9,10 @@
 #include "parser.h"
 #include <string>
 #include <vector>
+#include <boost/function.hpp>
 class Organizer {
 	/* configuration */
-	const Args& args;
+	const Args args;
 	
 	/* file operations */
 	FileMan fileman;
@@ -19,7 +20,8 @@ class Organizer {
 	/* filename parsing */
 	std::vector<FilmParser*> filmParsers;
 	std::vector<SeriesParser*> seriesParsers;
-	//  find a parser that is capable of parsing *fnam*
+	// find a parser that is capable of parsing *fnam*
+	// returns index
 	int findFilmParser(std::string fnam);
 	int findSeriesParser(std::string fnam);
 	
@@ -28,8 +30,18 @@ class Organizer {
 	
 	void initParsers();
 	// iterate over input files
-	void undo();
-	void sort();
+	void iterate(boost::function<void (Organizer*,
+	             std::string)> action);
+	void launch(boost::function<void (Organizer*,
+	            std::string)> action, std::string full);
+//	void undo();
+	// e.g. "somedir/CD01.mp4"
+	// a directory is valuable if it contains parsable files
+	bool isValuable(std::string directory);
+	void undo(std::string full);
+//	void sort();
+	// full - e.g. "somedir/Film.2010.mp4"
+	void sort(std::string full);
 	// known by filename, not filelist
 	static bool isSorted(std::string full);
 	friend class OrganizerTest;

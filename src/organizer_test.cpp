@@ -149,6 +149,66 @@ void OrganizerTest::sampleRuns() {
                 EQ(fileman.isEmpty(outdir), true);
             }
         }
+        { // Run with --clean
+            { // Prepare workspace
+                Args args;
+                FileMan fileman(args);
+                fileman.remove_all(getdir());
+                for (int j = 0; j < infilec; j++)
+                    fileman.touch(indir + infiles[j]);
+                fileman.dig(outdir);
+            }
+            { // Let it do its thing
+            	char* argv[] = {
+	                (char*) "video-organizer",
+	                (char*) indir.c_str(),
+	                (char*) "-v",
+	                (char*) "-1",
+	                (char*) "-o",
+	                (char*) outdir.c_str(),
+	                (char*) "-r",
+	                (char*) actions[i],
+	                (char*) "--clean=1M",
+                };
+                int argc = sizeof(argv) / sizeof(*argv);
+                Args args(argc, argv);
+                Organizer organizer(args);
+            }
+/*            { // Check partial results
+                Args args;
+                FileMan fileman(args);
+                EQ(fileman.isEmpty(outdir), false);
+                EQ(fileman.exists(indir), false);
+            }*/
+            { // Prepare workspace
+                Args args;
+                FileMan fileman(args);
+                fileman.dig(indir);
+            }
+            { // Let it undo its thing
+            	char* argv[] = {
+	                (char*) "video-organizer",
+	                (char*) outdir.c_str(),
+	                (char*) "-v",
+	                (char*) "-1",
+	                (char*) "-o",
+	                (char*) indir.c_str(),
+	                (char*) "-r",
+	                (char*) actions[i],
+	                (char*) "-u",
+	                (char*) "--clean=1M",
+                };
+                int argc = sizeof(argv) / sizeof(*argv);
+                Args args(argc, argv);
+                Organizer organizer(args);
+            }
+            { // Check results
+                Args args;
+                FileMan fileman(args);
+                EQ(fileman.isEmpty(indir), false);
+                EQ(fileman.exists(outdir), false);
+            }
+        }
 	}
 }
 

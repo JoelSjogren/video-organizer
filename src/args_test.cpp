@@ -27,24 +27,25 @@ ArgsTest::ArgsTest() : Test("Args") {
 	{ // Test 1: minimal
 		char* argv[] = {
 			(char*) "video-organizer",
-			(char*) indir.c_str(), // dir will be omitted
+			(char*) indir.c_str(),
 			(char*) "--verbosity=-1", // suppress warnings
 		};
 		int argc = sizeof(argv) / sizeof(*argv);
 		Args args(argc, argv);
 		EQ(args.undo, false);
 		EQ(args.outdir, "./");
-		EQ(args.infiles.size(), 0);
+		EQ(args.infiles.size(), 1);
 		EQ(args.action, Args::MOVE);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  false);
 		EQ(args.simulate,  false);
 		EQ(args.include_part, false);
+		EQ(args.clean, 0);
 	}
 	{ // Test 2: short options
 		char* argv[] = {
 			(char*) "video-organizer",
-			(char*) indir.c_str(), // dir will be omitted
+			(char*) indir.c_str(),
 			(char*) "-v",
 			(char*) "-1",
 			(char*) "-o",
@@ -58,35 +59,38 @@ ArgsTest::ArgsTest() : Test("Args") {
 		Args args(argc, argv);
 		EQ(args.undo,  false);
 		EQ(args.outdir,  outdir);
-		EQ(args.infiles.size(), 4);
+		EQ(args.infiles.size(), 1);
 		EQ(args.action,  Args::COPY);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  true);
 		EQ(args.simulate,  true);
 		EQ(args.include_part, true);
+		EQ(args.clean, 0);
 	}
 	{ // Test 3: long options
 		string outdirarg = "--outdir=" + outdir; // put on stack
 		char* argv[] = {
 			(char*) "video-organizer",
 			(char*) "--link",
-			(char*) indir.c_str(), // dir will be omitted
+			(char*) indir.c_str(),
 			(char*) "--verbosity=-1",
 			(char*) outdirarg.c_str(),
 			(char*) "--recursive",
 			(char*) "--simulate",
 			(char*) "--part",
+			(char*) "--clean=3M",
 		};
 		int argc = sizeof(argv) / sizeof(*argv);
 		Args args(argc, argv);
 		EQ(args.undo,  false);
 		EQ(args.outdir,  outdir);
-		EQ(args.infiles.size(), 4);
+		EQ(args.infiles.size(), 1);
 		EQ(args.action,  Args::LINK);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  true);
 		EQ(args.simulate,  true);
 		EQ(args.include_part, true);
+		EQ(args.clean, 3*1024*1024);
 	}
 }
 
