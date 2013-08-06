@@ -7,4 +7,5 @@
 int main(int argc, char* argv[]) {
 	Args args(argc, argv);
 	Organizer organizer(args);
+	organizer.run();
 }

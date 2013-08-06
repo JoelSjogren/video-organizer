@@ -77,6 +77,7 @@ void OrganizerTest::sampleRuns() {
                 int argc = sizeof(argv) / sizeof(*argv);
                 Args args(argc, argv);
                 Organizer organizer(args);
+                organizer.run();
             }
             { // Check results
                 Args args;
@@ -107,6 +108,7 @@ void OrganizerTest::sampleRuns() {
                 int argc = sizeof(argv) / sizeof(*argv);
                 Args args(argc, argv);
                 Organizer organizer(args);
+                organizer.run();
             }
             { // Check results
                 Args args;
@@ -142,6 +144,7 @@ void OrganizerTest::sampleRuns() {
                 int argc = sizeof(argv) / sizeof(*argv);
                 Args args(argc, argv);
                 Organizer organizer(args);
+                organizer.run();
             }
             { // Check results
                 Args args;
@@ -173,6 +176,7 @@ void OrganizerTest::sampleRuns() {
                 int argc = sizeof(argv) / sizeof(*argv);
                 Args args(argc, argv);
                 Organizer organizer(args);
+                organizer.run();
             }
 /*            { // Check partial results
                 Args args;
@@ -201,6 +205,7 @@ void OrganizerTest::sampleRuns() {
                 int argc = sizeof(argv) / sizeof(*argv);
                 Args args(argc, argv);
                 Organizer organizer(args);
+                organizer.run();
             }
             { // Check results
                 Args args;

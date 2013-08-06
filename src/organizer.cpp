@@ -19,9 +19,9 @@ using std::set;
 Organizer::Organizer(const Args& pargs)
 	: args(pargs), fileman(args), console(args.verbosity) {
 	initParsers();
-/*	if (args.undo) undo();
-	else sort();*/
 	assert(args.infiles.size() != 0);
+}
+void Organizer::run() {
 	function<void (Organizer*, string)> action;
 	if (args.undo) action = &Organizer::undo;
 	else action = &Organizer::sort;

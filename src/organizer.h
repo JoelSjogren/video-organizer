@@ -47,6 +47,7 @@ class Organizer {
 	friend class OrganizerTest;
 public:
 	Organizer(const Args& pargs);
+	void run();
 	~Organizer();
 };
 
