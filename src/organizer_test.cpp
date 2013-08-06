@@ -163,6 +163,7 @@ void OrganizerTest::sampleRuns() {
                 Args args;
                 FileMan fileman(args);
                 Organizer organizer(args);
+                EQ(fileman.exists(outdir), true);
                 EQ(fileman.isEmpty(outdir), true);
                 EQ(organizer.isValuable(indir), true);
                 EQ(organizer.isValuable(outdir), false);
