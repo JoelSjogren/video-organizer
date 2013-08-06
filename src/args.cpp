@@ -6,10 +6,10 @@
 #include "build_no.h"
 #include "parser.h"
 #include "ostream_overloads.h"
-#include <sys/stat.h>
-#include <unistd.h> // getopt
-#include <getopt.h> // also getopt
-#include <dirent.h>
+#include <sys/stat.h>   // stat - file info
+#include <unistd.h>     // getopt - argument parsing
+#include <getopt.h>     // also getopt
+#include <dirent.h>     // dirent - directory browsing
 #include <string>
 #include <vector>
 #include <ostream>

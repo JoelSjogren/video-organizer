@@ -2,8 +2,8 @@
 *  organizer.cpp                  *
 **********************************/
 #include "organizer.h"
-#include <boost/regex.hpp>
-#include <boost/filesystem.hpp>
+#include <boost/regex.hpp>      // regex matching
+#include <boost/filesystem.hpp> // filesystem operations
 #include <cstdlib>
 #include <set>
 #include <cassert>
@@ -19,9 +19,9 @@ using std::set;
 Organizer::Organizer(const Args& pargs)
 	: args(pargs), fileman(args), console(args.verbosity) {
 	initParsers();
-	assert(args.infiles.size() != 0);
 }
 void Organizer::run() {
+    assert(args.infiles.size() != 0);
 	function<void (Organizer*, string)> action;
 	if (args.undo) action = &Organizer::undo;
 	else action = &Organizer::sort;

@@ -5,7 +5,7 @@
 **********************************/
 #pragma once
 #include <string>
-#include <boost/regex.hpp>
+#include <boost/regex.hpp> // regex matching
 class Parser {
 public:
     // e.g. "somedir/Film.2010.mp4" -> "somedir/"

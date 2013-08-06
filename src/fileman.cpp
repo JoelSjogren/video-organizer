@@ -4,10 +4,9 @@
 #include "fileman.h"
 #include "filelist.h"
 #include "parser.h"
-#include <boost/filesystem.hpp>
-#include <dirent.h>
-#include <unistd.h>
-#include <sys/stat.h>
+#include <boost/filesystem.hpp> // filesystem operations
+#include <dirent.h>             // directory browsing
+#include <sys/stat.h>           // info about files
 #include <string>
 #include <cassert>
 #include <stdexcept>

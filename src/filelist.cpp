@@ -3,7 +3,7 @@
 **********************************/
 #include "filelist.h"
 #include "args.h"
-#include "tinyxml2.h"
+#include "tinyxml2.h" // XML parsing
 #include <stdexcept>
 using std::string;
 using tinyxml2::XMLDocument;

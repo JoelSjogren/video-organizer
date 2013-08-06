@@ -9,7 +9,7 @@
 #include "parser.h"
 #include <string>
 #include <vector>
-#include <boost/function.hpp>
+#include <boost/function.hpp> // passing functions as arguments
 class Organizer {
 	/* configuration */
 	const Args args;

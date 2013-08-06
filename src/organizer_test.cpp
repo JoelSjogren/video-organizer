@@ -53,6 +53,7 @@ void OrganizerTest::sampleRuns() {
     const string outdir = getdir() + "output/";
     const char* actions[] = { "--move", "--copy", "--link"};
     const int actionc = sizeof(actions) / sizeof(*actions);
+    const bool indirPreserved[] = { false, true, true };
     for (int i = 0; i < actionc; i++) {
         { // Normal run
             { // Prepare workspace
@@ -62,6 +63,9 @@ void OrganizerTest::sampleRuns() {
                 for (int j = 0; j < infilec; j++)
                     fileman.touch(indir + infiles[j]);
                 fileman.dig(outdir);
+                Organizer organizer(args);
+                EQ(organizer.isValuable(indir), true);
+                EQ(organizer.isValuable(outdir), false);
             }
             { // Let it do its thing
             	char* argv[] = {
@@ -89,6 +93,9 @@ void OrganizerTest::sampleRuns() {
                     EQ(fileman.exists(outfile), true);
                     EQ(fileman.exists(filelist), true);
                 }
+                Organizer organizer(args);
+                EQ(organizer.isValuable(indir), indirPreserved[i]);
+                EQ(organizer.isValuable(outdir), false);
             }
         }
         { // Undo the normal run
@@ -118,6 +125,9 @@ void OrganizerTest::sampleRuns() {
                     string outfiledir = Parser::directory(outfile);
                     EQ(fileman.exists(outfile), false);
                 }
+                Organizer organizer(args);
+                EQ(organizer.isValuable(indir), true);
+                EQ(organizer.isValuable(outdir), false);
             }
         }
         { // Simulated run
@@ -128,6 +138,9 @@ void OrganizerTest::sampleRuns() {
                 for (int j = 0; j < infilec; j++)
                     fileman.touch(indir + infiles[j]);
                 fileman.dig(outdir);
+                Organizer organizer(args);
+                EQ(organizer.isValuable(indir), true);
+                EQ(organizer.isValuable(outdir), false);
             }
             { // Let it do its thing
             	char* argv[] = {
@@ -149,7 +162,10 @@ void OrganizerTest::sampleRuns() {
             { // Check results
                 Args args;
                 FileMan fileman(args);
+                Organizer organizer(args);
                 EQ(fileman.isEmpty(outdir), true);
+                EQ(organizer.isValuable(indir), true);
+                EQ(organizer.isValuable(outdir), false);
             }
         }
         { // Run with --clean
@@ -160,6 +176,9 @@ void OrganizerTest::sampleRuns() {
                 for (int j = 0; j < infilec; j++)
                     fileman.touch(indir + infiles[j]);
                 fileman.dig(outdir);
+                Organizer organizer(args);
+                EQ(organizer.isValuable(indir), true);
+                EQ(organizer.isValuable(outdir), false);
             }
             { // Let it do its thing
             	char* argv[] = {
@@ -178,12 +197,12 @@ void OrganizerTest::sampleRuns() {
                 Organizer organizer(args);
                 organizer.run();
             }
-/*            { // Check partial results
+            { // Check partial results
                 Args args;
                 FileMan fileman(args);
                 EQ(fileman.isEmpty(outdir), false);
-                EQ(fileman.exists(indir), false);
-            }*/
+                EQ(fileman.exists(indir), indirPreserved[i]);
+            }
             { // Prepare workspace
                 Args args;
                 FileMan fileman(args);
@@ -210,8 +229,10 @@ void OrganizerTest::sampleRuns() {
             { // Check results
                 Args args;
                 FileMan fileman(args);
+                Organizer organizer(args);
                 EQ(fileman.isEmpty(indir), false);
                 EQ(fileman.exists(outdir), false);
+                EQ(organizer.isValuable(indir), true);
             }
         }
 	}

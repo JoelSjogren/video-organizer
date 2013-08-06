@@ -1,3 +1,8 @@
+###################################
+#  SConscript                     #
+#                                 #
+#  Builds vorg, test-suite.       #
+###################################
 import subprocess
 import os
 import random

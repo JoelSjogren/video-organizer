@@ -5,7 +5,7 @@
 #include "args.h"
 #include "filelist.h"
 #include "fileman.h"
-#include <dirent.h>
+#include <dirent.h> // directory browsing
 FileListTest::FileListTest() : Test("FileList") {
 	const char* records[][2] = {
 		{ "Some.Film.2013.asdf.asdf.mkv", "Some Film.mkv" },
