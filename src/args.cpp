@@ -79,15 +79,6 @@ void Args::parseSize_err(string str) {
     console.f("Unable to interpret size: %s", str.c_str());
     exit(1);
 }
-/*long long parseLongLong(string str) {
-    long long result = 0;
-    for (string::iterator i = str.begin(); i != str.end(); i++) {
-        assert(isdigit(*i));
-        result *= 10;
-        result += *i - '0';
-    }
-    return result;
-}*/
 long long Args::parseSize(const string orig) {
     string str(orig);
     if (str.size() == 0) parseSize_err(orig);
@@ -147,9 +138,7 @@ Args::Args(int argc, char* const* argv)
 		{ "copy",	 	no_argument,		NULL, 'c' },
 		{ "link",	 	no_argument,		NULL, 'l' },
 		{ "verbosity", 	required_argument,	NULL, 'v' },
-//		{ "quiet",		no_argument,		NULL, 'q' },
 		{ "help",	 	no_argument,		NULL, 'h' },
-//		{ "ls",		 	no_argument,		NULL,  0  },
 		{ "recursive", 	no_argument,		NULL, 'r' },
 		{ "simulate",	no_argument,		NULL, 's' },
 		{ "part",   	no_argument,		NULL, 'p' },
@@ -166,14 +155,9 @@ Args::Args(int argc, char* const* argv)
 							 longopts, &index);
 		switch (c) {
 		case 0:
-		    if (strcmp("clean", longopts[index].name) == 0) {
+		    if (strcmp("clean", longopts[index].name) == 0)
 		        clean = parseSize(optarg);
-		    }
 		    break;
-//		case 0:
-//			if (strcmp("ls", longopts[index].name) == 0)
-//				ls = true;
-//			break;
 		case 'u':
 			undo = true;
 			break;
@@ -240,59 +224,8 @@ Args::Args(int argc, char* const* argv)
 	}
 	if (console.show_d()) cout << *this;
 	markDirectories(); // append '/'
-//	if (recursive) expandDirectories();
 	checkFiles();
 }
-/*
-void::Args::expandDirectories() {
-	set<ino_t> expanded; // infinite looping is avoided by allowing
-						 // each inode to be expanded only once
-	vector<string>::iterator i = infiles.begin();
-	while (i < infiles.end()) {
-		struct stat buf;
-		if (stat(i->c_str(), &buf) != 0) {
-			console.e("%s: %s", strerror(errno), i->c_str());
-			infiles.erase(i);
-			continue;
-		}
-		if (S_ISDIR(buf.st_mode)) {
-			const string exp = *i;
-			console.d("Expanding directory: %s", exp.c_str());
-			i = infiles.erase(i); // i will be replaced by its contents
-			DIR* dir = opendir(exp.c_str());
-			if (dir == NULL) {
-				console.e("%s: %s", strerror(errno), exp.c_str());
-				continue;
-			}
-			dirent* dent;
-			while (dent = readdir(dir)) {
-        		string full(exp + dent->d_name);
-				if (dent->d_type == DT_DIR) full += "/";
-				{ // ignore . and ..
-					if (strcmp(dent->d_name, ".") == 0 ||
-						strcmp(dent->d_name, "..") == 0)
-						continue;
-				}
-				{ // avoid infinite looping
-					if (expanded.count(dent->d_fileno) != 0) {
-					    console.w("Directory has already been "
-					              "expanded: %s", full.c_str());
-					    continue;
-					}
-	            }
-	            { // expand
-					expanded.insert(dent->d_fileno);
-					i = infiles.insert(i, full);
-					console.d("  Expanded: %s", full.c_str());
-				}
-			}
-			closedir(dir);
-		} else {
-			i++;
-		}
-	}
-}
-*/
 void Args::checkFiles() {
 	console.d("Checking files");
 	{ // check output dir: must be a dir!
@@ -310,37 +243,6 @@ void Args::checkFiles() {
 		    outdir += "/";
 		console.d("  Accepted outdir: %s", outdir.c_str());
 	}
-	/*{ // check input files: omit directories
-		for (int i = 0; i < infiles.size(); i++) {
-			struct stat buf;
-			const char* infile = infiles[i].c_str();
-			int ret = stat(infile, &buf);
-			if (ret) {
-				console.f("%s: %s", strerror(errno), infile);
-				exit(1);
-			}
-			if (buf.st_mode & S_IFDIR) {
-				console.w("Omitting directory: %s", infile);
-				infiles.erase(infiles.begin() + i);
-				i--; // to undo the next i++
-			}
-		}
-	}*/
-	/*{ // check input files: omit .part and filelist files
-	    for (int i = 0; i < infiles.size(); i++) {
-	        bool part = !include_part &&
-	                    Parser::extension(infiles[i]) == ".part";
-	        bool filelist = Parser::filename(infiles[i]) ==
-	                        "filelist";
-	        if (part || filelist) {
-	            console.w("Omitting file: %s", infiles[i].c_str());
-	            infiles.erase(infiles.begin() + i);
-				i--; // to undo the next i++
-	        }
-	    }
-	}*/
-	//for (int i = 0; i < infiles.size(); i++)
-    //	console.d("  Accepted infile: %s", infiles[i].c_str());
 }
 
 
