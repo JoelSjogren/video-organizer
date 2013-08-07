@@ -141,46 +141,24 @@ void Organizer::launch(function<void (Organizer*, string)> action,
     }
     action(this, full);
 }
-/*void Organizer::undo() {
-	for (int i = 0; i < args.infiles.size(); i++) {
-	    const string full = args.infiles[i];
-		if (!exists(full)) {
-	        console.f("%s: %s", strerror(ENOENT), full.c_str());
-	        exit(1);
-	    }
-		if (is_directory(full)) {
-	        if (args.recursive) {
-	            typedef recursive_directory_iterator RecDirIt;
-	            for (RecDirIt j(full); j != RecDirIt(); j++) {
-	                if (!is_directory(*j)) {
-        	            undo(j->path().string());
-        	        }
-	            }
-	        } else {
-	            console.w("Omitting directory: %s", full.c_str());
-	        }
-	    }
-	    else undo(full);
-	}
-}*/
 void Organizer::undo(const string full) {
-		const string fnam = Parser::filename(full);
-		const string dir = Parser::directory(full);
-	    console.d("Undoing: %s", full.c_str());
-		console.d("  fnam: %s", fnam.c_str());
-		console.d("  dir: %s", dir.c_str());
-		if (!fileman.exists(dir + "filelist")) {
-		    console.e("Could not find matching filelist for: %s",
-		              full.c_str());
-		    return;
-		}
-		FileList list(dir, args);
-		if (!list.find(fnam)) {
-			console.e("File unknown to filelist: %s", full.c_str());
-			return;
-	    }
-		const Record rec = list.get(fnam);
-		fileman.undo(dir, rec);
+	const string fnam = Parser::filename(full);
+	const string dir = Parser::directory(full);
+    console.d("Undoing: %s", full.c_str());
+	console.d("  fnam: %s", fnam.c_str());
+	console.d("  dir: %s", dir.c_str());
+	if (!fileman.exists(dir + "filelist")) {
+	    console.e("Could not find matching filelist for: %s",
+	              full.c_str());
+	    return;
+	}
+	FileList list(dir, args);
+	if (!list.find(fnam)) {
+		console.e("File unknown to filelist: %s", full.c_str());
+		return;
+    }
+	const Record rec = list.get(fnam);
+	fileman.undo(dir, rec);
 }
 bool Organizer::isSorted(string full) {
 	const string name = Parser::filenameNoExt(full);
@@ -194,28 +172,6 @@ bool Organizer::isSorted(string full) {
 	        return true;
 	return false;
 }
-/*void Organizer::sort() {
-	for (int i = 0; i < args.infiles.size(); i++) {
-	    const string full = args.infiles[i];
-	    if (!exists(full)) {
-	        console.f("%s: %s", strerror(ENOENT), full.c_str());
-	        exit(1);
-	    }
-	    if (is_directory(full)) {
-	        if (args.recursive) {
-	            typedef recursive_directory_iterator RecDirIt;
-	            for (RecDirIt j(full); j != RecDirIt(); j++) {
-	                if (!is_directory(*j)) {
-        	            sort(j->path().string());
-        	        }
-	            }
-	        } else {
-	            console.w("Omitting directory: %s", full.c_str());
-	        }
-	    }
-	    else sort(full);
-	}
-}*/
 void Organizer::sort(const string full) {
 	const string file = Parser::filename(full);
 	const string ext = Parser::extension(file);
