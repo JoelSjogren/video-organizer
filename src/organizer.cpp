@@ -2,6 +2,7 @@
 *  organizer.cpp                  *
 **********************************/
 #include "organizer.h"
+#include "ostream_overloads.h"
 #include <boost/regex.hpp>      // regex matching
 #include <boost/filesystem.hpp> // filesystem operations
 #include <cstdlib>
@@ -97,34 +98,32 @@ void Organizer::iterate(function<void (Organizer*, string)> action) {
 	    else launch(action, full);
 	}
 	// clean
-	if (0 < usedDirs.size()) {
+	console.d("Clean?");
+   	console.d("  usedDirs: %s", console.str(usedDirs).c_str());
+	if (0 < usedDirs.size() && 0 < args.clean) {
 	    set<string>::iterator i = usedDirs.begin();
-	    set<string>::iterator j = i;
-	    j++;
-	    if (j == usedDirs.end()) j = usedDirs.begin();
-	    // Loop until all directories have been considered
-	    // consecutively without any being removed.
-	    // Maybe this should be replaced by a tree-like approach?
-	    while (i != j) {
-	        console.d("Remove?: %s", j->c_str());
-	        if (exists(*j)) {
+	    int consecutive = 0;
+	    while (consecutive != usedDirs.size()) {
+	        console.d("Remove?: %s", i->c_str());
+	        if (exists(*i)) {
 	            console.d("  exists");
-	            long long size = fileman.recursiveSize(*j);
-                console.d("size: %d, clean: %d", size, args.clean);
+	            long long size = fileman.recursiveSize(*i);
+                console.d("  size: %d, clean: %d", size, args.clean);
 	            if (size < args.clean) {
-	                if (isValuable(*j)) {
+	                if (isValuable(*i)) {
 	                    console.w("Not removing directory because "
 	                              "it contains files that may be "
-	                              "sorted: %s", j->c_str());
+	                              "sorted: %s", i->c_str());
 	                } else {
-	                    fileman.remove_all(*j);
-	                    i = j;
 	                    console.d("  yes");
+	                    fileman.remove_all(*i);
+	                    consecutive = 0;
 	                }
 	            }
 	        }
-	        j++;
-	        if (j == usedDirs.end()) j = usedDirs.begin();
+	        i++;
+	        if (i == usedDirs.end()) i = usedDirs.begin();
+	        consecutive++;
 	    }
 	}
 }

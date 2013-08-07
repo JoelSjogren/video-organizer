@@ -7,14 +7,34 @@
 #pragma once
 #include <ostream>
 #include <vector>
-template <class T>
+// For vector-like containers
+template <class T,
+    template <class T,
+        class=std::allocator<T> > class Container>
 std::ostream&
-operator<<(std::ostream& os, const std::vector<T>& vec) {
-	if (vec.size() == 0) return os << "[]";
-	os << "[";
-	int i;
-	for (i = 0; i < vec.size() - 1; i++)
-		os << vec[i] << ", ";
-	os << vec[i] << "]";
+operator<<(std::ostream& os, const Container<T>& cont) {
+    typename Container<T>::const_iterator i = cont.begin();
+	if (i == cont.end()) return os << "[]";
+	os << "[" << *i++;
+	for (/* i is set */; i != cont.end(); i++)
+		os << ", " << *i;
+    os << "]";
 	return os;
 }
+// For set-like containers
+template <class T,
+    template <class T,
+        class=std::less<T>,
+        class=std::allocator<T> > class Container>
+std::ostream&
+operator<<(std::ostream& os, const Container<T>& cont) {
+    typename Container<T>::const_iterator i = cont.begin();
+	if (i == cont.end()) return os << "[]";
+	os << "[" << *i++;
+	for (/* i is set */; i != cont.end(); i++)
+		os << ", " << *i;
+    os << "]";
+	return os;
+}
+
+

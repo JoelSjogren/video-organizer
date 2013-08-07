@@ -5,6 +5,7 @@
 **********************************/
 #pragma once
 #include <string>
+#include <sstream>
 class Console {
 	int verbosity;
 public:
@@ -29,4 +30,12 @@ public:
 	bool show_w() const;
 	bool show_v() const;
 	bool show_d() const;
+	template <class T>
+	std::string str(T t);
 };
+template <class T>
+std::string Console::str(T t) {
+    std::ostringstream os;
+    os << t;
+    return os.str();
+}
