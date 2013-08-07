@@ -45,15 +45,9 @@ vorg [OPTIONS] [FILES]
         just print the build number
         
     --clean SIZE
-        after organizing, for each folder that has been stepped into, remove it recursively if its total size (including children) is less than SIZE
+        after organizing, for each folder that has been stepped into, remove it recursively if its total size (including children) is less than SIZE.
 
 ## TIPS & TRICKS ##
-When vorg moves files out of directories, rendering them (almost) empty, it doesn't remove the directories. You may want to recursively remove directories smaller than a given size, say 1 MB. To do this, issue:
-
-    $ du -sk [FILES] |
-      awk 'BEGIN { FS="\t" }; { if($1 < 1000) printf "%s\0",$2 }' |
-      xargs -0 rm -rf
-
 To download subtitles, check out [addic7ed-cli](https://github.com/BenoitZugmeyer/addic7ed-cli). Because it supports the *filelist* format that vorg uses to save file information, downloading subtitles is as easy as
 
     $ addic7ed E19.avi
