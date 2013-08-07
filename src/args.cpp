@@ -81,7 +81,7 @@ void Args::parseSize_err(string str) {
 }
 long long Args::parseSize(const string orig) {
     string str(orig);
-    if (str.size() == 0) parseSize_err(orig);
+    if (str.size() == 0 || !isdigit(str[0])) parseSize_err(orig);
     string::iterator last = str.end() - 1;
     long long suffix = 1;
     if (isdigit(*last)) {}

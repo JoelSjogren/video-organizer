@@ -45,7 +45,7 @@ vorg [OPTIONS] [FILES]
         just print the build number
         
     --clean SIZE
-        after organizing, for each folder that has been stepped into, remove it recursively if its total size (including children) is less than SIZE.
+        after organizing, for each folder that was part of the input, remove it recursively if its total size (including children) is less than SIZE bytes. SIZE is a natural number, optionally suffixed by K, M or G (2K = 2 * 1024).
 
 ## TIPS & TRICKS ##
 To download subtitles, check out [addic7ed-cli](https://github.com/BenoitZugmeyer/addic7ed-cli). Because it supports the *filelist* format that vorg uses to save file information, downloading subtitles is as easy as
