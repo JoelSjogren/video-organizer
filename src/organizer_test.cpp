@@ -6,20 +6,19 @@
 #include "args.h"
 #include "fileman.h"
 #include "parser.h"
-#include <dirent.h>
 #include <cassert>
 #include <iostream>
 #include <string>
 using std::string;
 using std::cout;
 using std::endl;
-// except for . and .., of course
+/*// except for . and .., of course
 bool onlyFileInDir(string file) {
     Args args;
     FileMan fileman(args);
     return fileman.fileCount(Parser::directory(file)) == 3 &&
            fileman.exists(file);
-}
+}*/
 OrganizerTest::OrganizerTest() : Test("Organizer") {
     sampleRuns();
     isSorted();
@@ -227,7 +226,7 @@ void OrganizerTest::sampleRuns() {
                 Organizer organizer(args);
                 organizer.run();
             }
-            { // Check results
+            { // Check final results
                 Args args;
                 FileMan fileman(args);
                 Organizer organizer(args);
