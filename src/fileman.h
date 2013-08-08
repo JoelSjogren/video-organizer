@@ -39,5 +39,21 @@ public:
 	bool isDirectory(std::string file);
     long long recursiveSize(std::string directory);
 };
+// Recursive
+class FileIterator {
+    const Args& args;
+    Console console;
+public:
+    FileIterator(const Args& pargs);
+    FileIterator& operator++();
+    std::string operator*();
+}
+
+
+
+
+
+
+
 
 

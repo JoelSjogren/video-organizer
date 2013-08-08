@@ -11,10 +11,10 @@
 using boost::regex_match;
 using boost::regex;
 using std::string;
-using boost::filesystem::recursive_directory_iterator;
-using boost::filesystem::is_directory;
-using boost::filesystem::exists;
-using boost::filesystem::file_size;
+//using boost::filesystem::recursive_directory_iterator;
+//using boost::filesystem::is_directory;
+//using boost::filesystem::exists;
+//using boost::filesystem::file_size;
 using boost::function;
 using std::set;
 Organizer::Organizer(const Args& pargs)

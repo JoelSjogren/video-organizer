@@ -21,6 +21,9 @@ using std::ofstream;
 using std::ios_base;
 using boost::filesystem::recursive_directory_iterator;
 using boost::filesystem::file_size;
+/**********************************************
+*  FileMan									  *
+**********************************************/
 FileMan::FileMan(const Args& pargs)
     : args(pargs), console(args.verbosity) {}
 void FileMan::move(string from, string to, int reg) {
@@ -194,4 +197,7 @@ long long FileMan::recursiveSize(string directory) {
     }
     return result;
 }
+/**********************************************
+*  FileIterator								  *
+**********************************************/
 

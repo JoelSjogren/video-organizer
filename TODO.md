@@ -4,5 +4,3 @@ The things listed here are by no means things I plan to do. They're a collection
  - write a gui
  - fix minor bug when combining --simulate and --clean: no record is kept about which files are removed; hence clean sees files that it shouldn't
  - shallow sort, i.e. don't create directories
- - move as much file operations as possible into FileMan to improve extensibility
-
