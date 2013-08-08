@@ -6,10 +6,9 @@
 #include "build_no.h"
 #include "parser.h"
 #include "ostream_overloads.h"
-#include <sys/stat.h>   // stat - file info
+#include "fileman.h"
 #include <unistd.h>     // getopt - argument parsing
 #include <getopt.h>     // also getopt
-#include <dirent.h>     // dirent - directory browsing
 #include <string>
 #include <vector>
 #include <ostream>
@@ -39,10 +38,6 @@ void build_no() {
         cout << build_no_txt[i];
     cout << endl;
 }
-/*bool aEndsWithB(string a, string b) {
-    if (a.size() < b.size()) return false;
-    return a.substr(a.size() - b.size()) == b;
-}*/
 string Args::action_pretty() const {
 	switch (action) {
 	case MOVE:
@@ -57,11 +52,13 @@ string Args::action_pretty() const {
 	}
 }
 void Args::markDirectories() {
+    FileMan fileman(*this);
     for (int i = 0; i < infiles.size(); i++) {
         string& infile = infiles[i];
-	    console.d("isDir: %s - %s", infile.c_str(),
-                  isDirectory(infile)?"true":"false");
-	    if (isDirectory(infile) && *infile.rbegin() != '/')
+        bool isdir = fileman.isDirectory(infile);
+	    console.d("directory?: %s - %s", infile.c_str(),
+                  isdir?"true":"false");
+	    if (isdir && *infile.rbegin() != '/')
 	        infile += "/";
     }
 }
@@ -98,14 +95,6 @@ long long Args::parseSize(const string orig) {
     if (errno != 0) parseSize_err(orig);
     result *= suffix;
     return result;
-}
-bool Args::isDirectory(string path) {
-	struct stat buf;
-	if (stat(path.c_str(), &buf) != 0) {
-		console.f("%s: %s", strerror(errno), path.c_str());
-		exit(1);
-	}
-    return S_ISDIR(buf.st_mode);
 }
 std::ostream& operator<<(std::ostream& os, const Args& args) {
 	os << "Arguments:\n";
@@ -229,13 +218,8 @@ Args::Args(int argc, char* const* argv)
 void Args::checkFiles() {
 	console.d("Checking files");
 	{ // check output dir: must be a dir!
-		struct stat buf;
-		int ret = stat(outdir.c_str(), &buf);
-		if (ret) {
-			console.f("%s: %s", strerror(errno), outdir.c_str());
-			exit(1);	
-		}
-		if (buf.st_mode & S_IFDIR == 0) {
+	    FileMan fileman(*this);
+		if (!fileman.isDirectory(outdir)) {
 			console.f("%s: %s", strerror(ENOTDIR), outdir.c_str());
 			exit(1);	
 		}

@@ -36,6 +36,7 @@ public:
 	// create file if it does not exist
 	void touch(std::string file);
 	bool isEmpty(std::string directory);
+	bool isDirectory(std::string file);
     long long recursiveSize(std::string directory);
 };
 

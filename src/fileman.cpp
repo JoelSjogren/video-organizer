@@ -172,6 +172,19 @@ int FileMan::fileCount(std::string directory) {
 bool FileMan::isEmpty(std::string directory) {
     return fileCount(directory) == 2;
 }
+bool FileMan::isDirectory(std::string file) {
+    using boost::filesystem::is_directory;
+    return is_directory(file);
+}
+/* Alternative implementation
+bool FileMan::isDirectory(string path) {
+	struct stat buf;
+	if (stat(path.c_str(), &buf) != 0) {
+		console.f("%s: %s", strerror(errno), path.c_str());
+		exit(1);
+	}
+    return S_ISDIR(buf.st_mode);
+}*/
 long long FileMan::recursiveSize(string directory) {
     long long result = 0;
     for (recursive_directory_iterator i(directory);
