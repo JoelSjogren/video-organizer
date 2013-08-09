@@ -56,7 +56,7 @@ void Console::d(string msg, ...) const {
 	}
 }
 bool Console::show_f() const { return true; }
-bool Console::show_e() const { return ERROR <= verbosity; } 
-bool Console::show_w() const { return WARNING <= verbosity; }
-bool Console::show_v() const { return VERBOSE <= verbosity; }
-bool Console::show_d() const { return DEBUG <= verbosity; }
+bool Console::show_e() const { return ERROR <= args.verbosity; } 
+bool Console::show_w() const { return WARNING <= args.verbosity; }
+bool Console::show_v() const { return VERBOSE <= args.verbosity; }
+bool Console::show_d() const { return DEBUG <= args.verbosity; }

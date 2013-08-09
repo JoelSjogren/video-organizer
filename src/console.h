@@ -4,12 +4,13 @@
 *  Provides conditional output.   *
 **********************************/
 #pragma once
+#include "args.h"
 #include <string>
 #include <sstream>
 class Console {
-	int verbosity;
+    const class Args& args;
 public:
-	Console(int pverbosity=0) : verbosity(pverbosity) {}
+	Console(const Args& pargs) : args(pargs) {}
 	enum Verbosity {
 	    SILENT = -2,
 	    ERROR,
@@ -17,7 +18,7 @@ public:
 	    VERBOSE,
 	    DEBUG,
 	};
-	void setVerbosity(int pv) { verbosity = pv; }
+//	void setVerbosity(int pv) { verbosity = pv; }
 	// printf wrappers
 	void f(std::string, ...) const; // always printed
 	void e(std::string, ...) const;

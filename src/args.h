@@ -5,11 +5,9 @@
 *  line arguments.                *
 **********************************/
 #pragma once
-#include "console.h"
 #include <vector>
 #include <string>
 class Args {
-	Console console;
 	void checkFiles();
 	void expandDirectories();
 	int parseInt(std::string str);

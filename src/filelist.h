@@ -23,6 +23,7 @@
 #pragma once
 #include "args.h"
 #include "tinyxml2.h" // XML parsing
+#include "console.h"
 #include <string>
 #include <vector>
 #include <stdexcept>

@@ -2,7 +2,6 @@
 *  filelist.cpp                  *
 **********************************/
 #include "filelist.h"
-#include "args.h"
 #include "tinyxml2.h" // XML parsing
 #include <stdexcept>
 using std::string;
@@ -12,7 +11,7 @@ using tinyxml2::XMLError;
 using std::logic_error;
 
 FileList::FileList(string pdir, const Args& pargs)
-	: dir(pdir), args(pargs), console(args.verbosity) {
+	: dir(pdir), args(pargs), console(args) {
 	read();
 }
 int FileList::getIndex(string to) const {

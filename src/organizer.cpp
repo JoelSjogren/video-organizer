@@ -3,6 +3,7 @@
 **********************************/
 #include "organizer.h"
 #include "ostream_overloads.h"
+#include "fileman.h"
 #include <boost/regex.hpp>      // regex matching
 #include <boost/filesystem.hpp> // filesystem operations
 #include <cstdlib>
@@ -18,7 +19,7 @@ using std::string;
 using boost::function;
 using std::set;
 Organizer::Organizer(const Args& pargs)
-	: args(pargs), fileman(args), console(args.verbosity) {
+	: args(pargs), fileman(args), console(args) {
 	initParsers();
 }
 void Organizer::run() {
@@ -57,11 +58,10 @@ void Organizer::initParsers() {
 	seriesParsers.push_back(new SeriesParser2);
 }
 bool Organizer::isValuable(const string directory) {
-    typedef recursive_directory_iterator RecDirIt;
-    for (RecDirIt i(directory); i != RecDirIt(); i++) {
-        const string full = i->path().string();
+    for (FileIterator i(directory, args); i; i++) {
+        const string full = *i;
         const string fnam = Parser::filename(full);
-        if (!is_directory(*i)) {
+        if (!fileman.isDirectory(full)) {
             if(0 <= findFilmParser(fnam) ||
                0 <= findSeriesParser(fnam)) {
                 return true;
@@ -74,17 +74,16 @@ void Organizer::iterate(function<void (Organizer*, string)> action) {
     set<string> usedDirs;
 	for (int i = 0; i < args.infiles.size(); i++) {
 	    const string full = args.infiles[i];
-		if (!exists(full)) {
+		if (!fileman.exists(full)) {
 	        console.f("%s: %s", strerror(ENOENT), full.c_str());
 	        exit(1);
 	    }
-		if (is_directory(full)) {
+		if (fileman.isDirectory(full)) {
 	        if (args.recursive) {
 	            usedDirs.insert(full);
-	            typedef recursive_directory_iterator RecDirIt;
-	            for (RecDirIt j(full); j != RecDirIt(); j++) {
-	                string iFull = j->path().string();
-	                if (is_directory(*j)) {
+	            for (FileIterator j(full, args); j; j++) {
+	                string iFull = *j;
+	                if (fileman.isDirectory(iFull)) {
 	                    if (*iFull.rbegin() != '/') iFull += "/";
 	                    usedDirs.insert(iFull);
 	                } else {
@@ -105,7 +104,7 @@ void Organizer::iterate(function<void (Organizer*, string)> action) {
 	    int consecutive = 0;
 	    while (consecutive != usedDirs.size()) {
 	        console.d("Remove?: %s", i->c_str());
-	        if (exists(*i)) {
+	        if (fileman.exists(*i)) {
 	            console.d("  exists");
 	            long long size = fileman.recursiveSize(*i);
                 console.d("  size: %d, clean: %d", size, args.clean);

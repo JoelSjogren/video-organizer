@@ -7,6 +7,7 @@
 #include "parser.h"
 #include "ostream_overloads.h"
 #include "fileman.h"
+#include "console.h"
 #include <unistd.h>     // getopt - argument parsing
 #include <getopt.h>     // also getopt
 #include <string>
@@ -39,6 +40,7 @@ void build_no() {
     cout << endl;
 }
 string Args::action_pretty() const {
+    Console console(*this);
 	switch (action) {
 	case MOVE:
 	    return "move";
@@ -52,6 +54,7 @@ string Args::action_pretty() const {
 	}
 }
 void Args::markDirectories() {
+    Console console(*this);
     FileMan fileman(*this);
     for (int i = 0; i < infiles.size(); i++) {
         string& infile = infiles[i];
@@ -67,12 +70,14 @@ int Args::parseInt(string str) {
 	istringstream iss(optarg);
     iss >> result;
     if (iss.fail()) {
+        Console console(*this);
 		console.f("Unable to interpret integer: %s", str.c_str());
 		exit(1);
 	}
 	return result;
 }
 void Args::parseSize_err(string str) {
+    Console console(*this);
     console.f("Unable to interpret size: %s", str.c_str());
     exit(1);
 }
@@ -120,6 +125,7 @@ Args::Args(int argc, char* const* argv)
 	: undo(false), outdir("."), action(MOVE), verbosity(0),
 	  recursive(false), simulate(false), include_part(false),
 	  clean(0) {
+	Console console(*this);
 	static const struct option longopts[] = {
 		{ "undo",		no_argument,		NULL, 'u' },
 		{ "outdir",	 	required_argument,	NULL, 'o' },
@@ -199,7 +205,7 @@ Args::Args(int argc, char* const* argv)
 			exit(1);
 		}
 	}
-	console.setVerbosity(verbosity);
+//	console.setVerbosity(verbosity);
 	// parse input filenames
 	for (/*optind is set*/; optind < argc; optind++) {
 	    string infile = argv[optind];
@@ -216,6 +222,7 @@ Args::Args(int argc, char* const* argv)
 	checkFiles();
 }
 void Args::checkFiles() {
+    Console console(*this);
 	console.d("Checking files");
 	{ // check output dir: must be a dir!
 	    FileMan fileman(*this);

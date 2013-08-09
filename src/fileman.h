@@ -7,6 +7,7 @@
 #pragma once
 #include "args.h"
 #include "filelist.h"
+#include "console.h"
 #include <boost/filesystem.hpp>
 #include <string>
 class FileMan {
@@ -47,8 +48,10 @@ class FileIterator {
     boost::filesystem::recursive_directory_iterator iterator;
 public:
     FileIterator(std::string directory, const Args& pargs);
-    FileIterator& operator++();
+    FileIterator& operator++(int);
     std::string operator*();
+//    std::string operator->();
+    operator bool();
 };
 
 

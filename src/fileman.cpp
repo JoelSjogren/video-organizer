@@ -25,7 +25,7 @@ using boost::filesystem::file_size;
 *  FileMan									  *
 **********************************************/
 FileMan::FileMan(const Args& pargs)
-    : args(pargs), console(args.verbosity) {}
+    : args(pargs), console(args) {}
 void FileMan::move(string from, string to, int reg) {
 	console.v("Moving: %s -> %s", from.c_str(), to.c_str());
 	if (args.simulate) return;
@@ -202,12 +202,23 @@ long long FileMan::recursiveSize(string directory) {
 **********************************************/
 FileIterator::FileIterator(string directory, const Args& pargs)
     : args(pargs), console(args), iterator(directory) {}
-FileIterator& FileIterator::operator++() {
+FileIterator& FileIterator::operator++(int) {
     iterator++;
     return *this;
 }
 std::string FileIterator::operator*() {
-    string result = iterator->string();
-    console.d("Iterating to %s", result);
+    string result = iterator->path().string();
+    console.d("Iterating to %s", result.c_str());
     return result;
 }
+FileIterator::operator bool() {
+    using boost::filesystem::recursive_directory_iterator;
+    return iterator != recursive_directory_iterator();
+}
+/*std::string FileIterator::operator->() {
+    return iterator->path().string();
+}*/
+
+
+
+
