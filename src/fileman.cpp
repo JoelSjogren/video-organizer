@@ -200,4 +200,14 @@ long long FileMan::recursiveSize(string directory) {
 /**********************************************
 *  FileIterator								  *
 **********************************************/
-
+FileIterator::FileIterator(string directory, const Args& pargs)
+    : args(pargs), console(args), iterator(directory) {}
+FileIterator& FileIterator::operator++() {
+    iterator++;
+    return *this;
+}
+std::string FileIterator::operator*() {
+    string result = iterator->string();
+    console.d("Iterating to %s", result);
+    return result;
+}
