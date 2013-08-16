@@ -34,16 +34,14 @@ class Organizer {
 	             std::string)> action);
 	void launch(boost::function<void (Organizer*,
 	            std::string)> action, std::string full);
-//	void undo();
-	// e.g. "somedir/CD01.mp4"
 	// a directory is valuable if it contains parsable files
 	bool isValuable(std::string directory);
-	void undo(std::string full);
-//	void sort();
 	// full - e.g. "somedir/Film.2010.mp4"
+	void undo(std::string full);
 	void sort(std::string full);
 	// known by filename, not filelist
 	static bool isSorted(std::string full);
+	bool shouldClean(std::string directory);
 	friend class OrganizerTest;
 public:
 	Organizer(const Args& pargs);

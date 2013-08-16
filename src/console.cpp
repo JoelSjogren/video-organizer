@@ -2,11 +2,14 @@
 *  console.cpp                    *
 **********************************/
 #include "console.h"
-#include <stdarg.h>
-#include <stdio.h>
+#include <cstdarg>
+#include <cstdio>
+#include <cctype>
+#include <iostream>
 using std::string;
+using std::cin;
 void Console::f(string msg, ...) const {
-    if (show_f()) { // always true
+    if (true) {
 	    fprintf(stderr, "E: ");
 	    va_list args;
 	    va_start(args, msg);
@@ -37,7 +40,6 @@ void Console::w(string msg, ...) const {
 }
 void Console::v(string msg, ...) const {
 	if (show_v()) {
-//		printf("V: ");
 		va_list args;
 		va_start(args, msg);
 		vprintf(msg.c_str(), args);
@@ -47,7 +49,6 @@ void Console::v(string msg, ...) const {
 }
 void Console::d(string msg, ...) const {
 	if (show_d()) {
-//		printf("D: ");
 		va_list args;
 		va_start(args, msg);
 		vprintf(msg.c_str(), args);
@@ -55,7 +56,41 @@ void Console::d(string msg, ...) const {
 		printf("\n");
 	}
 }
-bool Console::show_f() const { return true; }
+void Console::ui(string msg, ...) const {
+	if (true) {
+		va_list args;
+		va_start(args, msg);
+		vprintf(msg.c_str(), args);
+		va_end(args);
+	}
+}
+bool yn(bool def) {
+    const char response = cin.get();
+    const char nocase = tolower(response);
+    if (nocase == '\n') return def;
+    cin.ignore(1000, '\n');
+    if (nocase == 'y') return true;
+    if (nocase == 'n') return false;
+    return false;
+}
+bool Console::Yn(string msg, ...) const {
+	if (true) {
+		va_list args;
+		va_start(args, msg);
+		vprintf(msg.c_str(), args);
+		va_end(args);
+	}
+	return yn(true);
+}
+bool Console::yN(string msg, ...) const {
+	if (true) {
+		va_list args;
+		va_start(args, msg);
+		vprintf(msg.c_str(), args);
+		va_end(args);
+	}
+	return yn(false);
+}
 bool Console::show_e() const { return ERROR <= args.verbosity; } 
 bool Console::show_w() const { return WARNING <= args.verbosity; }
 bool Console::show_v() const { return VERBOSE <= args.verbosity; }

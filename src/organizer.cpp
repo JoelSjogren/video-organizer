@@ -12,10 +12,6 @@
 using boost::regex_match;
 using boost::regex;
 using std::string;
-//using boost::filesystem::recursive_directory_iterator;
-//using boost::filesystem::is_directory;
-//using boost::filesystem::exists;
-//using boost::filesystem::file_size;
 using boost::function;
 using std::set;
 Organizer::Organizer(const Args& pargs)
@@ -97,28 +93,18 @@ void Organizer::iterate(function<void (Organizer*, string)> action) {
 	    else launch(action, full);
 	}
 	// clean
-	console.d("Clean?");
-   	console.d("  usedDirs: %s", console.str(usedDirs).c_str());
-	if (0 < usedDirs.size() && 0 < args.clean) {
+	if (0 < args.clean) {
+    	console.v("== Cleaning ==");
 	    set<string>::iterator i = usedDirs.begin();
 	    int consecutive = 0;
 	    while (consecutive != usedDirs.size()) {
-	        console.d("Remove?: %s", i->c_str());
-	        if (fileman.exists(*i)) {
-	            console.d("  exists");
-	            long long size = fileman.recursiveSize(*i);
-                console.d("  size: %d, clean: %d", size, args.clean);
-	            if (size < args.clean) {
-	                if (isValuable(*i)) {
-	                    console.w("Not removing directory because "
-	                              "it contains files that may be "
-	                              "sorted: %s", i->c_str());
-	                } else {
-	                    console.d("  yes");
-	                    fileman.remove_all(*i);
-	                    consecutive = 0;
-	                }
-	            }
+	        console.d("Clean?: %s", i->c_str());
+	        if (fileman.exists(*i) && shouldClean(*i)) {
+                console.d("  yes");
+                fileman.remove_all(*i);
+                consecutive = 0;
+	        } else {
+	            console.d("  no");
 	        }
 	        i++;
 	        if (i == usedDirs.end()) i = usedDirs.begin();
@@ -196,4 +182,19 @@ void Organizer::sort(const string full) {
 				  file.c_str());
 	}
 }
+const char* albo(bool a) { return a ? "true" : "false"; }
+bool Organizer::shouldClean(std::string directory) {
+    const long long size = fileman.recursiveSize(directory);
+    if (args.clean <= size) return false;
+    if (isValuable(directory)) return false;
+    if (!args.ask_clean) return true;
+    { // Show directory tree TODO
+        console.ui("Regarding %s,\n", directory.c_str());
+    }
+    return console.Yn("Do you want to delete it [Y/n]? ");
+}
+
+
+
+
 

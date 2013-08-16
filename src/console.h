@@ -20,13 +20,15 @@ public:
 	};
 //	void setVerbosity(int pv) { verbosity = pv; }
 	// printf wrappers
-	void f(std::string, ...) const; // always printed
+	void f(std::string, ...) const; // always print
 	void e(std::string, ...) const;
 	void w(std::string, ...) const;
 	void v(std::string, ...) const;
 	void d(std::string, ...) const;
+	void ui(std::string, ...) const; // always print, no \n
+	bool Yn(std::string, ...) const; // always print, no \n, def: yes
+	bool yN(std::string, ...) const; // always print, no \n, def: no
 	// fallback if printf is not sufficient
-	bool show_f() const;
 	bool show_e() const;
 	bool show_w() const;
 	bool show_v() const;

@@ -18,11 +18,10 @@ Do you want to clean it [Y/n]? Y
 Removing Family.Guy.S01.XviD/ recursively
 $
 
-$ vorg --ask-clean Family.Guy.S01.XviD/ -v1
+$ vorg --ask-clean Family.Guy.S01.XviD/ -v0
 Directory Family.Guy.S01.XviD/ contains
-.
-├── Torrent Downloaded From ExtraTorrent.com.txt
-└── Another Worthless File
+    .
+    ├── Torrent Downloaded From ExtraTorrent.com.txt
+    └── Another Worthless File
 Do you want to clean it [Y/n]? Y
-Removing Family.Guy.S01.XviD/ recursively
 $

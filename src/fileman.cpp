@@ -208,7 +208,7 @@ FileIterator& FileIterator::operator++(int) {
 }
 std::string FileIterator::operator*() {
     string result = iterator->path().string();
-    console.d("Iterating to %s", result.c_str());
+//    console.d("Iterating to %s", result.c_str());
     return result;
 }
 FileIterator::operator bool() {

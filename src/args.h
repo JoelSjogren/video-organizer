@@ -28,6 +28,7 @@ public:
 	bool simulate;
 	bool include_part;
 	long long clean; // upper bound for cleaning
+	bool ask_clean;
 	std::string action_pretty() const;
 	Args(); // for testing
 	Args(int argc, char* const* argv);

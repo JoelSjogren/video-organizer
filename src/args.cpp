@@ -120,11 +120,11 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 Args::Args()
 	: undo(false), outdir("."), action(MOVE), verbosity(0),
 	  recursive(false), simulate(false), include_part(false),
-	  clean(0) {}
+	  clean(0), ask_clean(false) {}
 Args::Args(int argc, char* const* argv)
 	: undo(false), outdir("."), action(MOVE), verbosity(0),
 	  recursive(false), simulate(false), include_part(false),
-	  clean(0) {
+	  clean(0), ask_clean(false) {
 	Console console(*this);
 	static const struct option longopts[] = {
 		{ "undo",		no_argument,		NULL, 'u' },
@@ -139,6 +139,7 @@ Args::Args(int argc, char* const* argv)
 		{ "part",   	no_argument,		NULL, 'p' },
 		{ "build-no",  	no_argument,		NULL, 'b' },
 		{ "clean",  	required_argument,	NULL,  0  },
+		{ "ask-clean",  no_argument,    	NULL,  0  },
 		{ NULL,			0,					NULL,  0  },
 	};
 	static const char* shortopts = ":uo:mclv:hrspb";
@@ -150,8 +151,10 @@ Args::Args(int argc, char* const* argv)
 							 longopts, &index);
 		switch (c) {
 		case 0:
-		    if (strcmp("clean", longopts[index].name) == 0)
+		    if (strcmp(longopts[index].name, "clean") == 0)
 		        clean = parseSize(optarg);
+		    if (strcmp(longopts[index].name, "ask-clean") == 0)
+		        ask_clean = true;
 		    break;
 		case 'u':
 			undo = true;
