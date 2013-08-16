@@ -30,6 +30,7 @@ public:
 	bool include_part;
 	clean_t clean; // upper bound for cleaning
 	bool ask_clean;
+	bool shallow_output;
 	std::string action_pretty() const;
 	std::string human_readable_size(clean_t size) const;
 	Args(); // for testing

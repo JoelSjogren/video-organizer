@@ -168,14 +168,17 @@ void Organizer::sort(const string full) {
 	if (0 <= (j = findFilmParser(file))) {
 		const string film = filmParsers[j]->name(file);
 		const string cd = filmParsers[j]->cd(file);
-		const string to = args.outdir + film + "/" + cd + ext;
+		string to = args.outdir;
+		if (!args.shallow_output) to += film + "/";
+		to += cd + ext;
 		fileman.action(full, to);
 	} else if (0 <= (j = findSeriesParser(file))) {
 		const string series = seriesParsers[j]->name(file);
 		const string se = seriesParsers[j]->season(file);
 		const string ep = seriesParsers[j]->episode(file);
-		const string to = args.outdir + series + "/"
-					      + se + "/" + ep + ext;
+		string to = args.outdir;
+		if (!args.shallow_output) to += series + "/" + se + "/";
+		to += ep + ext;
 		fileman.action(full, to);
 	} else {
 		console.e("Unable to interpret filename: %s",
