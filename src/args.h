@@ -26,7 +26,6 @@ public:
 	} action;
 	int verbosity;
 	bool recursive;
-	bool simulate;
 	bool include_part;
 	clean_t clean; // upper bound for cleaning
 	bool ask_clean;

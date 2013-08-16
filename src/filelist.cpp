@@ -82,7 +82,6 @@ void FileList::read() {
 	}
 }
 void FileList::write() {
-	if (args.simulate) return;
 	XMLDocument doc;
 	{
 		XMLElement* filelist = doc.NewElement("filelist");

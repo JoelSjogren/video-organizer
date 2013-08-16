@@ -33,7 +33,6 @@ FileMan::FileMan(const Args& pargs)
     : args(pargs), console(args) {}
 void FileMan::move(string from, string to, int reg) {
 	console.v("Moving: %s -> %s", from.c_str(), to.c_str());
-	if (args.simulate) return;
 	if (exists(to)) {
 		console.e("%s: %s", strerror(EEXIST), to.c_str());
 		return;
@@ -48,7 +47,6 @@ void FileMan::move(string from, string to, int reg) {
 }
 void FileMan::copy(string from, string to, int reg) {
 	console.v("Copying: %s -> %s", from.c_str(), to.c_str());
-	if (args.simulate) return;
 	if (exists(to)) {
 		console.e("%s: %s", strerror(EEXIST), to.c_str());
 		return;
@@ -66,7 +64,6 @@ void FileMan::copy(string from, string to, int reg) {
 }
 void FileMan::link(string from, string to, int reg) {
 	console.v("Linking: %s -> %s", from.c_str(), to.c_str());
-	if (args.simulate) return;
 	if (exists(to)) {
 		console.e("%s: %s", strerror(EEXIST), to.c_str());
 		return;
@@ -143,7 +140,6 @@ void FileMan::undo(string dir, const Record& rec) {
 }
 void FileMan::remove(string file) {
 	console.v("Removing: %s", file.c_str());
-	if (args.simulate) return;
 	int ret = ::remove(file.c_str());
 	if (ret) {
 		console.e("%s: %s", strerror(errno), file.c_str());
@@ -152,12 +148,10 @@ void FileMan::remove(string file) {
 }
 void FileMan::remove_all(string file) {
     console.v("Removing recursively: %s", file.c_str());
-    if (args.simulate) return;
     boost::filesystem::remove_all(file);
 }
 void FileMan::touch(std::string file) {
     console.v("Touching: %s", file.c_str());
-    if (args.simulate) return;
     if (!exists(file)) {
         dig(file);
         ofstream of(file.c_str());

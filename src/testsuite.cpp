@@ -8,6 +8,7 @@
 #include "filelist_test.h"
 #include "args_test.h"
 #include "organizer_test.h"
+#include "console.h"
 int main() {
 	ParserTest t1;
 	FileListTest t2;

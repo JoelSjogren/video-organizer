@@ -122,11 +122,11 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 }
 Args::Args()
 	: undo(false), outdir("."), action(MOVE), verbosity(0),
-	  recursive(false), simulate(false), include_part(false),
+	  recursive(false), include_part(false),
 	  clean(0), ask_clean(false), shallow_output(false) {}
 Args::Args(int argc, char* const* argv)
 	: undo(false), outdir("."), action(MOVE), verbosity(0),
-	  recursive(false), simulate(false), include_part(false),
+	  recursive(false), include_part(false),
 	  clean(0), ask_clean(false), shallow_output(false) {
 	Console console(*this);
 	static const struct option longopts[] = {
@@ -138,7 +138,6 @@ Args::Args(int argc, char* const* argv)
 		{ "verbosity", 	    required_argument,	NULL, 'v' },
 		{ "help",	 	    no_argument,		NULL, 'h' },
 		{ "recursive", 	    no_argument,		NULL, 'r' },
-		{ "simulate",	    no_argument,		NULL, 's' },
 		{ "part",   	    no_argument,		NULL, 'p' },
 		{ "build-no",  	    no_argument,		NULL, 'b' },
 		{ "clean",  	    required_argument,	NULL,  0  },
@@ -185,9 +184,6 @@ Args::Args(int argc, char* const* argv)
 			exit(0);
 		case 'r':
 			recursive = true;
-			break;
-		case 's':
-			simulate = true;
 			break;
 		case 'p': 
 		    include_part = true;

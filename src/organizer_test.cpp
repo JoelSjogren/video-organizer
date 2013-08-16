@@ -129,45 +129,6 @@ void OrganizerTest::sampleRuns() {
                 EQ(organizer.isValuable(outdir), false);
             }
         }
-        { // Simulated run
-            { // Prepare workspace
-                Args args;
-                FileMan fileman(args);
-                fileman.remove_all(getdir());
-                for (int j = 0; j < infilec; j++)
-                    fileman.touch(indir + infiles[j]);
-                fileman.dig(outdir);
-                Organizer organizer(args);
-                EQ(organizer.isValuable(indir), true);
-                EQ(organizer.isValuable(outdir), false);
-            }
-            { // Let it do its thing
-            	char* argv[] = {
-	                (char*) "video-organizer",
-	                (char*) indir.c_str(),
-	                (char*) "-v",
-	                (char*) "-1",
-	                (char*) "-o",
-	                (char*) outdir.c_str(),
-	                (char*) "-r",
-	                (char*) actions[i],
-	                (char*) "-s",
-                };
-                int argc = sizeof(argv) / sizeof(*argv);
-                Args args(argc, argv);
-                Organizer organizer(args);
-                organizer.run();
-            }
-            { // Check results
-                Args args;
-                FileMan fileman(args);
-                Organizer organizer(args);
-                EQ(fileman.exists(outdir), true);
-                EQ(fileman.isEmpty(outdir), true);
-                EQ(organizer.isValuable(indir), true);
-                EQ(organizer.isValuable(outdir), false);
-            }
-        }
         { // Run with --clean
             { // Prepare workspace
                 Args args;

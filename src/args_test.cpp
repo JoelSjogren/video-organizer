@@ -38,7 +38,6 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.action, Args::MOVE);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  false);
-		EQ(args.simulate,  false);
 		EQ(args.include_part, false);
 		EQ(args.clean, 0);
 	}
@@ -52,7 +51,6 @@ ArgsTest::ArgsTest() : Test("Args") {
 			(char*) outdir.c_str(),
 			(char*) "-c",
 			(char*) "-r",
-			(char*) "-s",
 			(char*) "-p",
 		};
 		int argc = sizeof(argv) / sizeof(*argv);
@@ -63,7 +61,6 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.action,  Args::COPY);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  true);
-		EQ(args.simulate,  true);
 		EQ(args.include_part, true);
 		EQ(args.clean, 0);
 	}
@@ -76,7 +73,6 @@ ArgsTest::ArgsTest() : Test("Args") {
 			(char*) "--verbosity=-1",
 			(char*) outdirarg.c_str(),
 			(char*) "--recursive",
-			(char*) "--simulate",
 			(char*) "--part",
 			(char*) "--clean=3M",
 		};
@@ -88,7 +84,6 @@ ArgsTest::ArgsTest() : Test("Args") {
 		EQ(args.action,  Args::LINK);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  true);
-		EQ(args.simulate,  true);
 		EQ(args.include_part, true);
 		EQ(args.clean, 3*1024*1024);
 	}

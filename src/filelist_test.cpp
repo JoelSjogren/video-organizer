@@ -37,27 +37,6 @@ FileListTest::FileListTest() : Test("FileList") {
 		    }
 	    }
 	}
-	{ // Simulated run
-        { // Prepare workspace
-            fileman.remove_all(getdir());
-            getdir();
-        }
-	    { // Write to filelist
-	        Args simargs;
-	        simargs.simulate = true;
-		    FileList fl(getdir(), simargs);
-		    for (int i = 0; i < records_length; i++) {
-			    fl.add(records[i][0], records[i][1]);
-		    }
-		    for (int i = 0; i < records_length; i++) {
-			    EQ(fl.get(records[i][1]).from, records[i][0]);
-		    }
-		    fl.write();
-	    } // Close filelist
-	    { // Check that the outdir is empty
-            EQ(fileman.isEmpty(getdir()), true);
-	    }
-    }
 }
 
 
