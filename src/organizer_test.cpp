@@ -54,6 +54,47 @@ void OrganizerTest::sampleRuns() {
     const int actionc = sizeof(actions) / sizeof(*actions);
     const bool indirPreserved[] = { false, true, true };
     for (int i = 0; i < actionc; i++) {
+        { // Shallow output
+            for (int j = 0; j < infilec; j++) {
+                { // Prepare workspace
+                    Args args;
+                    FileMan fileman(args);
+                    fileman.remove_all(getdir());
+                    for (int j = 0; j < infilec; j++)
+                        fileman.touch(indir + infiles[j]);
+                    fileman.dig(outdir);
+                    Organizer organizer(args);
+                    EQ(organizer.isValuable(indir), true);
+                    EQ(organizer.isValuable(outdir), false);
+                }        
+                { // Let it do its thing
+                    string infile = indir + infiles[j];
+                	char* argv[] = {
+	                    (char*) "video-organizer",
+	                    (char*) infile.c_str(),
+	                    (char*) "-v",
+	                    (char*) "-1",
+	                    (char*) "-o",
+	                    (char*) outdir.c_str(),
+	                    (char*) actions[i],
+	                    (char*) "--shallow-output",
+                    };
+                    int argc = sizeof(argv) / sizeof(*argv);
+                    Args args(argc, argv);
+                    Organizer organizer(args);
+                    organizer.run();
+                }
+                { // Check results
+                    Args args;
+                    FileMan fileman(args);
+                    string outfile = outdir +
+                                     Parser::filename(outfiles[j]);
+                    string filelist = outdir + "filelist";
+                    EQ(fileman.exists(outfile), true);
+                    EQ(fileman.exists(filelist), true);
+                }
+            }
+        }
         { // Normal run
             { // Prepare workspace
                 Args args;
