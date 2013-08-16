@@ -40,6 +40,8 @@ public:
 	bool isEmpty(std::string directory);
 	bool isDirectory(std::string file);
     long long recursiveSize(std::string directory);
+    void tree(std::string file);
+    void markDirectory(std::string& file);
 };
 // Recursive
 class FileIterator {

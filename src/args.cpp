@@ -28,6 +28,7 @@ using std::string;
 using std::set;
 using std::vector;
 using std::istringstream;
+using std::ostringstream;
 using std::ios_base;
 void help() {
 	for (int i = 0; i < ___HELP_md_len; i++)
@@ -238,6 +239,14 @@ void Args::checkFiles() {
 		console.d("  Accepted outdir: %s", outdir.c_str());
 	}
 }
-
+string Args::human_readable_size(clean_t size) const {
+    const string k("K"), m("M"), g("G");
+    ostringstream oss;
+    if (size < 1024L) oss << size;
+    else if (size < 1024L * 1024) oss << size / 1024 << k;
+    else if (size < 1024L * 1024) oss << size / 1024 / 1024 << m;
+    else oss << size / 1024 / 1024 / 1024 << g;
+    return oss.str();
+}
 
 

@@ -183,15 +183,18 @@ void Organizer::sort(const string full) {
 	}
 }
 const char* albo(bool a) { return a ? "true" : "false"; }
-bool Organizer::shouldClean(std::string directory) {
+bool Organizer::shouldClean(const std::string directory) {
     const long long size = fileman.recursiveSize(directory);
     if (args.clean <= size) return false;
     if (isValuable(directory)) return false;
     if (!args.ask_clean) return true;
-    { // Show directory tree TODO
-        console.ui("Regarding %s,\n", directory.c_str());
+    { // Show directory tree
+        console.ui("Found directory to clean:\n");
+        fileman.tree(directory);
+        console.ui("size: %s\n", args.human_readable_size(size)
+                                 .c_str());
     }
-    return console.Yn("Do you want to delete it [Y/n]? ");
+    return console.Yn("Do you want to clean it [Y/n]? ");
 }
 
 

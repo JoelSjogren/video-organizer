@@ -14,12 +14,17 @@
 #include <cstring>
 #include <cstdio>
 #include <fstream>
+#include <algorithm>
+#include <vector>
 using std::string;
 using std::runtime_error;
 using std::ifstream;
 using std::ofstream;
 using std::ios_base;
+using std::vector;
+using std::sort;
 using boost::filesystem::recursive_directory_iterator;
+using boost::filesystem::directory_iterator;
 using boost::filesystem::file_size;
 /**********************************************
 *  FileMan									  *
@@ -190,12 +195,94 @@ bool FileMan::isDirectory(string path) {
 }*/
 long long FileMan::recursiveSize(string directory) {
     long long result = 0;
+    int count = 0;
     for (recursive_directory_iterator i(directory);
          i != recursive_directory_iterator(); i++) {
         if (!is_directory(*i))
             result += file_size(*i);
+        count++;
     }
+    console.d("size of %s: %d. file count: %d",
+              directory.c_str(), result, count);
     return result;
+}
+void FileMan::markDirectory(string& file) {
+    bool isdir = isDirectory(file);
+    console.d("directory?: %s - %s", file.c_str(),
+              isdir?"true":"false");
+    if (isdir && *file.rbegin() != '/')
+        file += "/";
+}
+void FileMan::tree(string file) {
+    class Branch {
+        FileMan& fileman;
+        Console& console;
+        string file;
+        Branch* parent;
+        enum Trail {
+            THREE, VERTICAL, BENT, NONE
+        } trail;
+        void printTrail() {
+            if (parent) parent->printTrail();
+            switch (trail) {
+            case THREE:
+                console.ui("├── ");
+                trail = VERTICAL;
+                break;
+            case VERTICAL:
+                console.ui("│   ");
+                break;
+            case BENT:
+                console.ui("└── ");
+                trail = NONE;          
+                break;
+            case NONE:
+                console.ui("    ");
+                break;
+            }
+        }
+        string filename(string file) {
+            for (int i = file.size() - 2; 0 <= i; i--)
+                if (file[i] == '/') return file.substr(i + 1);
+            return file;
+        }
+    public:
+        Branch(FileMan& pfileman, Console& pconsole, string pfile,
+               Branch* pparent=NULL)
+            : fileman(pfileman), console(pconsole), file(pfile),
+              parent(pparent) {}
+        void printWhole() {
+            { // print this entry
+                console.ui("  ");
+                if (parent) {
+                    parent->printTrail();
+                    console.ui("%s\n", filename(file).c_str());
+                } else {
+                    console.ui("%s\n", file.c_str());
+                }
+            }
+            { // print contents
+                if (fileman.isDirectory(file)) {
+                    vector<string> children;
+                    { // fill vector
+                        typedef directory_iterator DirIt;
+                        for (DirIt i(file); i != DirIt(); i++)
+                            children.push_back(i->path().string());
+                    }
+                    sort(children.begin(), children.end());
+                    for (int i = 0; i < children.size(); i++) {
+                        trail = THREE;
+                        if (i == children.size() - 1) trail = BENT;
+                        string childName = children[i];
+                        fileman.markDirectory(childName);
+                        Branch(fileman, console, childName,
+                               this).printWhole();
+                    }
+                }
+            }
+        }
+    };
+    Branch(*this, console, file).printWhole();
 }
 /**********************************************
 *  FileIterator								  *

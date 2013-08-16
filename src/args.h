@@ -7,6 +7,7 @@
 #pragma once
 #include <vector>
 #include <string>
+typedef long long clean_t;
 class Args {
 	void checkFiles();
 	void expandDirectories();
@@ -27,9 +28,10 @@ public:
 	bool recursive;
 	bool simulate;
 	bool include_part;
-	long long clean; // upper bound for cleaning
+	clean_t clean; // upper bound for cleaning
 	bool ask_clean;
 	std::string action_pretty() const;
+	std::string human_readable_size(clean_t size) const;
 	Args(); // for testing
 	Args(int argc, char* const* argv);
 };
