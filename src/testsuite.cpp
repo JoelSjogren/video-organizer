@@ -10,8 +10,8 @@
 #include "organizer_test.h"
 #include "console.h"
 int main() {
-	ParserTest t1;
-	FileListTest t2;
-	ArgsTest t3;
-	OrganizerTest t4;
+	ParserTest();
+	FileListTest();
+	ArgsTest();
+	OrganizerTest();
 }
