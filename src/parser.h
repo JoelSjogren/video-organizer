@@ -9,15 +9,15 @@
 class Parser {
 public:
     // e.g. "somedir/Film.2010.mp4" -> "somedir/"
-	static std::string directory(std::string path);
+	static std::string directory(std::string file);
 	// e.g. "somedir/Film.2010.mp4" -> "Film.2010.mp4"
-	static std::string filename(std::string path);
+	static std::string filename(std::string file);
 	// e.g. "somedir/Film.2010.mp4" -> ".mp4"
 	// e.g. "noext" -> ""
-	static std::string extension(std::string path);
+	static std::string extension(std::string file);
 	// e.g. "somedir/Film.2010.mp4" -> "Film.2010"
 	// e.g. "noext" -> "noext"
-	static std::string filenameNoExt(std::string path);
+	static std::string filenameNoExt(std::string file);
 	static std::string dotsToSpaces(std::string str);
 	virtual bool matches(std::string fnam) = 0;
 	virtual ~Parser() {}
@@ -29,11 +29,11 @@ protected:
 	virtual boost::regex cd_rex();
 	virtual size_t cd_rex_len();
 public:
-	virtual bool matches(std::string fnam);
+	virtual bool matches(std::string file);
 	// e.g. "Film.2.2010.mp4" -> "Film 2"
-	virtual std::string name(std::string fnam);
+	virtual std::string name(std::string file);
 	// e.g. "Film.2010.DVDRip.CD01.avi" -> "CD01"
-	virtual std::string cd(std::string fnam);
+	virtual std::string cd(std::string file);
 };
 class SeriesParser : public Parser {
 protected:

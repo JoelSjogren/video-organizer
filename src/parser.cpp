@@ -48,17 +48,20 @@ string Parser::dotsToSpaces(string str) {
 /**********************************************
 *  FilmParser                                 *
 **********************************************/
-bool FilmParser::matches(string fnam) {
+bool FilmParser::matches(string file) {
+    const string fnam = filename(file);
     return regex_search(fnam, name_rex());
 }
-std::string FilmParser::name(std::string fnam) {
-	for (string::iterator i = fnam.begin(); i < fnam.end(); i++)
+std::string FilmParser::name(std::string file) {
+    const string fnam = filename(file);
+	for (string::const_iterator i = fnam.begin(); i < fnam.end(); i++)
 		if (regex_match(i, i + name_rex_len(), name_rex()))
 			return dotsToSpaces(string(fnam.begin(), i));
 	throw logic_error("FilmParser::name failed. fnam: " + fnam);    
 }
-std::string FilmParser::cd(std::string fnam) {
-	for (string::iterator i = fnam.begin(); i < fnam.end(); i++)
+std::string FilmParser::cd(std::string file) {
+    const string fnam = filename(file);
+	for (string::const_iterator i = fnam.begin(); i < fnam.end(); i++)
 		if (regex_match(i, i + cd_rex_len(), cd_rex()))
 			return dotsToSpaces(string(i + 1, i + 5));
 	return "CD01";
