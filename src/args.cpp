@@ -114,6 +114,8 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 	ARGS_D(recursive);
 	ARGS_D(include_part);
 	ARGS_D(clean);
+	ARGS_D(ask_clean);
+	ARGS_D(shallow_output);
 	os << std::noboolalpha;
 	#undef ARGS_D
 	return os;

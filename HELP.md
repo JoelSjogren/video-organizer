@@ -22,7 +22,7 @@ vorg [OPTIONS] [FILES]
         hardlink FILES
         
     -v NUM, --verbosity NUM
-        choose how much info to output: (each level includes those above it)
+        choose how much info to output: (each level includes those above it. interactive output is always visible)
         -2: fatal errors
         -1: errors
         0: warnings (default)
@@ -34,9 +34,6 @@ vorg [OPTIONS] [FILES]
 
     -r, --recursive
         step into directories instead of omitting them
-
-    -s, --simulate
-        (deprecated) do not write changes to disk
 
     -p, --part
         do not omit .part files
