@@ -19,7 +19,7 @@ public:
 	// e.g. "noext" -> "noext"
 	static std::string filenameNoExt(std::string file);
 	static std::string dotsToSpaces(std::string str);
-	virtual bool matches(std::string fnam) = 0;
+	virtual bool matches(std::string file) = 0;
 	virtual ~Parser() {}
 };
 class FilmParser : public Parser {
@@ -40,17 +40,17 @@ protected:
 	virtual boost::regex name_rex() = 0;
 	virtual size_t name_rex_len() = 0;
 	// e.g. "The.Series.S02E01" -> 10, i.e. index of ".S"
-	virtual int identifierStart(std::string fnam);
+	virtual int identifierStart(std::string file);
 	virtual int seasonOffset() = 0;
 	virtual int episodeOffset() = 0;
 public:
-	virtual bool matches(std::string fnam);
+	virtual bool matches(std::string file);
 	// e.g. "The.Series.S02E01.mp4" -> "The Series"
-	virtual std::string name(std::string fnam);
+	virtual std::string name(std::string file);
 	// e.g. "The.Series.S02E01.mp4" -> "S02"
-	virtual std::string season(std::string fnam);
+	virtual std::string season(std::string file);
 	// e.g. "The.Series.S02E01.mp4" -> "E01"
-	virtual std::string episode(std::string fnam);
+	virtual std::string episode(std::string file);
 };
 // e.g. The Film 2010 XviD.avi or The.Film.2010.XviD.avi
 class FilmParser2 : public FilmParser {
@@ -80,8 +80,8 @@ protected:
 	virtual int seasonOffset();
 	virtual int episodeOffset();
 public:
-	virtual std::string season(std::string fnam); // override
-	virtual std::string episode(std::string fnam); // override
+	virtual std::string season(std::string file); // override
+	virtual std::string episode(std::string file); // override
 };
 
 

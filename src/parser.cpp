@@ -93,26 +93,31 @@ size_t FilmParser3::name_rex_len() {
 /**********************************************
 *  SeriesParser							      *
 **********************************************/
-bool SeriesParser::matches(string fnam) {
+bool SeriesParser::matches(string file) {
+    const string fnam = filename(file);
 	// search for ".SddEdd" where d are digits
 	return regex_search(fnam, name_rex());
 }
-std::string SeriesParser::name(std::string fnam) {
+std::string SeriesParser::name(std::string file) {
+    const string fnam = filename(file);
 	int i = identifierStart(fnam);
 	return dotsToSpaces(string(fnam.begin(), fnam.begin() + i));
 }
-std::string SeriesParser::season(std::string fnam) {
+std::string SeriesParser::season(std::string file) {
+    const string fnam = filename(file);
 	int i = identifierStart(fnam);
-	string::iterator start = fnam.begin() + i + seasonOffset();
+	string::const_iterator start = fnam.begin() + i + seasonOffset();
 	return string(start, start + 3);
 }
-std::string SeriesParser::episode(std::string fnam) {
+std::string SeriesParser::episode(std::string file) {
+    const string fnam = filename(file);
 	int i = identifierStart(fnam);
-	string::iterator start = fnam.begin() + i + episodeOffset();
+	string::const_iterator start = fnam.begin() + i + episodeOffset();
 	return string(start, start + 3);
 }
-int SeriesParser::identifierStart(string fnam) {
-	for (string::iterator i = fnam.begin(); i < fnam.end(); i++)
+int SeriesParser::identifierStart(string file) {
+    const string fnam = filename(file);
+	for (string::const_iterator i = fnam.begin(); i < fnam.end(); i++)
 		if (regex_match(i, i + name_rex_len(), name_rex()))
 			return i - fnam.begin();
 	throw logic_error("SeriesParser::identifierStart failed. "
@@ -148,11 +153,13 @@ int SeriesParser2::seasonOffset() {
 int SeriesParser2::episodeOffset() {
     return string(" - 01").size();
 }
-std::string SeriesParser2::season(std::string fnam) {
+std::string SeriesParser2::season(std::string file) {
+    const string fnam = filename(file);
     // e.g. getting " 01", returning "S01"
     return SeriesParser::season(fnam).replace(0, 1, "S");
 }
-std::string SeriesParser2::episode(std::string fnam) {
+std::string SeriesParser2::episode(std::string file) {
+    const string fnam = filename(file);
     // e.g. getting "x01", returning "E01"
     return SeriesParser::episode(fnam).replace(0, 1, "E");
 }
