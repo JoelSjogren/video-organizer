@@ -6,8 +6,11 @@
 using boost::regex_search;
 using boost::regex_match;
 using boost::regex;
+using boost::regex_constants::syntax_option_type;
 using std::string;
 using std::logic_error;
+static const syntax_option_type regex_syntax = regex::icase |
+                                               regex::extended;
 bool containsDirectory(string path) {
 	return path.find("/") != string::npos;
 }
@@ -67,7 +70,7 @@ std::string FilmParser::cd(std::string file) {
 	return "CD01";
 }
 boost::regex FilmParser::cd_rex() {
-    return regex("[. ]CD[0-9]{2}", regex::extended);
+    return regex("[. ]CD[0-9]{2}", regex_syntax);
 }
 size_t FilmParser::cd_rex_len() {
     return string(".CD01").size();
@@ -76,7 +79,7 @@ size_t FilmParser::cd_rex_len() {
 *  FilmParser2                                *
 **********************************************/
 boost::regex FilmParser2::name_rex() {
-    return regex("[. ][0-9]{4}", regex::extended);
+    return regex("[. ][0-9]{4}", regex_syntax);
 }
 size_t FilmParser2::name_rex_len() {
     return string(".2010").size();
@@ -85,7 +88,7 @@ size_t FilmParser2::name_rex_len() {
 *  FilmParser3								  *
 **********************************************/
 boost::regex FilmParser3::name_rex() {
-    return regex("[. ][([][0-9]{4}[])]", regex::extended);
+    return regex("[. ][([][0-9]{4}[])]", regex_syntax);
 }
 size_t FilmParser3::name_rex_len() {
     return string(".(2010)").size();
@@ -127,7 +130,7 @@ int SeriesParser::identifierStart(string file) {
 *  SeriesParser1							  *
 **********************************************/
 boost::regex SeriesParser1::name_rex() {
-    return regex("[. ]S[0-9]{2}E[0-9]{2}", regex::extended);
+    return regex("[. ]S[0-9]{2}E[0-9]{2}", regex_syntax);
 }
 size_t SeriesParser1::name_rex_len() {
     return string(".S01E01").size();
@@ -142,7 +145,7 @@ int SeriesParser1::episodeOffset() {
 *  SeriesParser2							  *
 **********************************************/
 boost::regex SeriesParser2::name_rex() {
-    return regex(" - [0-9]{2}x[0-9]{2}", regex::extended);
+    return regex(" - [0-9]{2}x[0-9]{2}", regex_syntax);
 }
 size_t SeriesParser2::name_rex_len() {
     return string(" - 01x01").size();
