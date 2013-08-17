@@ -12,16 +12,21 @@
 using std::string;
 using std::cout;
 using std::endl;
-/*// except for . and .., of course
-bool onlyFileInDir(string file) {
-    Args args;
-    FileMan fileman(args);
-    return fileman.fileCount(Parser::directory(file)) == 3 &&
-           fileman.exists(file);
-}*/
-OrganizerTest::OrganizerTest() : Test("Organizer") {
+OrganizerTest::OrganizerTest() : Test("Organizer"),
+    indir(getdir() + "input/"), outdir(getdir() + "output/") {
     sampleRuns();
     isSorted();
+}
+void OrganizerTest::prepareWorkspace() {
+    Args args;
+    FileMan fileman(args);
+    fileman.remove_all(getdir());
+    for (int j = 0; j < infilec; j++)
+        fileman.touch(indir + infiles[j]);
+    fileman.dig(outdir);
+    Organizer organizer(args);
+    EQ(organizer.isValuable(indir), true);
+    EQ(organizer.isValuable(outdir), false);
 }
 void OrganizerTest::isSorted() {
     EQ(Organizer::isSorted("dir/E01.avi"), true);
@@ -34,45 +39,10 @@ void OrganizerTest::isSorted() {
     EQ(Organizer::isSorted("CD0x.avi"), false);
 }
 void OrganizerTest::sampleRuns() {
-    const char* infiles[] = {
-        "Chuck.S05E01.HDTV.XviD-LOL.avi",
-        "Community.S04E02.HDTV.x264-LOL.mp4",
-        "subdir/Chuck.s05E02.HDTV.XviD-LOL.avi", // note '.s05'
-        "The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
-    };
-    const int infilec = sizeof(infiles) / sizeof(*infiles);
-    const char* outfiles[] = {
-        "Chuck/S05/E01.avi",
-        "Community/S04/E02.mp4",
-        "Chuck/S05/E02.avi",
-        "The Prestige/CD01.mp4",
-    };
-    const char* outfiles_ABC[] = { // --manual-name ABC
-        "ABC/S05/E01.avi",
-        "ABC/S04/E02.mp4",
-        "ABC/S05/E02.avi",
-        "ABC/CD01.mp4",
-    };
-    const int outfilec = sizeof(outfiles) / sizeof(*outfiles);
-    const string indir = getdir() + "input/";
-    const string outdir = getdir() + "output/";
-    const char* actions[] = { "--move", "--copy", "--link"};
-    const int actionc = sizeof(actions) / sizeof(*actions);
-    const bool indirPreserved[] = { false, true, true };
     for (int i = 0; i < actionc; i++) {
         { // Shallow output
             for (int j = 0; j < infilec; j++) {
-                { // Prepare workspace
-                    Args args;
-                    FileMan fileman(args);
-                    fileman.remove_all(getdir());
-                    for (int j = 0; j < infilec; j++)
-                        fileman.touch(indir + infiles[j]);
-                    fileman.dig(outdir);
-                    Organizer organizer(args);
-                    EQ(organizer.isValuable(indir), true);
-                    EQ(organizer.isValuable(outdir), false);
-                }        
+                prepareWorkspace();   
                 { // Let it do its thing
                     string infile = indir + infiles[j];
                 	char* argv[] = {
@@ -103,17 +73,7 @@ void OrganizerTest::sampleRuns() {
         }
         { // Manual name
             for (int j = 0; j < infilec; j++) {
-                { // Prepare workspace
-                    Args args;
-                    FileMan fileman(args);
-                    fileman.remove_all(getdir());
-                    for (int j = 0; j < infilec; j++)
-                        fileman.touch(indir + infiles[j]);
-                    fileman.dig(outdir);
-                    Organizer organizer(args);
-                    EQ(organizer.isValuable(indir), true);
-                    EQ(organizer.isValuable(outdir), false);
-                }        
+                prepareWorkspace();       
                 { // Let it do its thing
                     string infile = indir + infiles[j];
                 	char* argv[] = {
@@ -144,17 +104,7 @@ void OrganizerTest::sampleRuns() {
             }
         }
         { // Normal run
-            { // Prepare workspace
-                Args args;
-                FileMan fileman(args);
-                fileman.remove_all(getdir());
-                for (int j = 0; j < infilec; j++)
-                    fileman.touch(indir + infiles[j]);
-                fileman.dig(outdir);
-                Organizer organizer(args);
-                EQ(organizer.isValuable(indir), true);
-                EQ(organizer.isValuable(outdir), false);
-            }
+            prepareWorkspace();
             { // Let it do its thing
             	char* argv[] = {
 	                (char*) "video-organizer",
@@ -219,17 +169,7 @@ void OrganizerTest::sampleRuns() {
             }
         }
         { // Run with --clean
-            { // Prepare workspace
-                Args args;
-                FileMan fileman(args);
-                fileman.remove_all(getdir());
-                for (int j = 0; j < infilec; j++)
-                    fileman.touch(indir + infiles[j]);
-                fileman.dig(outdir);
-                Organizer organizer(args);
-                EQ(organizer.isValuable(indir), true);
-                EQ(organizer.isValuable(outdir), false);
-            }
+            prepareWorkspace();
             { // Let it do its thing
             	char* argv[] = {
 	                (char*) "video-organizer",
