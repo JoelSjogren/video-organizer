@@ -79,9 +79,6 @@ protected:
 	virtual size_t name_rex_len();
 	virtual int seasonOffset();
 	virtual int episodeOffset();
-public:
-	virtual std::string season(std::string file); // override
-	virtual std::string episode(std::string file); // override
 };
 
 

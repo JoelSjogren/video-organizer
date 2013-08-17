@@ -110,13 +110,13 @@ std::string SeriesParser::season(std::string file) {
     const string fnam = filename(file);
 	int i = identifierStart(fnam);
 	string::const_iterator start = fnam.begin() + i + seasonOffset();
-	return string(start, start + 3);
+	return string(start, start + 3).replace(0, 1, "S");
 }
 std::string SeriesParser::episode(std::string file) {
     const string fnam = filename(file);
 	int i = identifierStart(fnam);
 	string::const_iterator start = fnam.begin() + i + episodeOffset();
-	return string(start, start + 3);
+	return string(start, start + 3).replace(0, 1, "E");
 }
 int SeriesParser::identifierStart(string file) {
     const string fnam = filename(file);
@@ -156,16 +156,5 @@ int SeriesParser2::seasonOffset() {
 int SeriesParser2::episodeOffset() {
     return string(" - 01").size();
 }
-std::string SeriesParser2::season(std::string file) {
-    const string fnam = filename(file);
-    // e.g. getting " 01", returning "S01"
-    return SeriesParser::season(fnam).replace(0, 1, "S");
-}
-std::string SeriesParser2::episode(std::string file) {
-    const string fnam = filename(file);
-    // e.g. getting "x01", returning "E01"
-    return SeriesParser::episode(fnam).replace(0, 1, "E");
-}
-
 
 
