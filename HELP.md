@@ -46,6 +46,9 @@ vorg [OPTIONS] [FILES]
     
     --ask-clean
         ask before cleaning a directory. see --clean
+    
+    --manual-name NAME
+        override vorg's parser when parsing names, e.g. Community. this is useful if the filename is all lowercase.
 
 ## TIPS & TRICKS ##
 To download subtitles, check out [addic7ed-cli](https://github.com/BenoitZugmeyer/addic7ed-cli). Because it supports the *filelist* format that vorg uses to save file information, downloading subtitles is as easy as
