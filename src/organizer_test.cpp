@@ -37,7 +37,7 @@ void OrganizerTest::sampleRuns() {
     const char* infiles[] = {
         "Chuck.S05E01.HDTV.XviD-LOL.avi",
         "Community.S04E02.HDTV.x264-LOL.mp4",
-        "subdir/Chuck.S05E02.HDTV.XviD-LOL.avi",
+        "subdir/Chuck.s05E02.HDTV.XviD-LOL.avi", // note '.s05'
         "The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
     };
     const int infilec = sizeof(infiles) / sizeof(*infiles);
@@ -46,6 +46,12 @@ void OrganizerTest::sampleRuns() {
         "Community/S04/E02.mp4",
         "Chuck/S05/E02.avi",
         "The Prestige/CD01.mp4",
+    };
+    const char* outfiles_ABC[] = { // --manual-name ABC
+        "ABC/S05/E01.avi",
+        "ABC/S04/E02.mp4",
+        "ABC/S05/E02.avi",
+        "ABC/CD01.mp4",
     };
     const int outfilec = sizeof(outfiles) / sizeof(*outfiles);
     const string indir = getdir() + "input/";
@@ -90,6 +96,48 @@ void OrganizerTest::sampleRuns() {
                     string outfile = outdir +
                                      Parser::filename(outfiles[j]);
                     string filelist = outdir + "filelist";
+                    EQ(fileman.exists(outfile), true);
+                    EQ(fileman.exists(filelist), true);
+                }
+            }
+        }
+        { // Manual name
+            for (int j = 0; j < infilec; j++) {
+                { // Prepare workspace
+                    Args args;
+                    FileMan fileman(args);
+                    fileman.remove_all(getdir());
+                    for (int j = 0; j < infilec; j++)
+                        fileman.touch(indir + infiles[j]);
+                    fileman.dig(outdir);
+                    Organizer organizer(args);
+                    EQ(organizer.isValuable(indir), true);
+                    EQ(organizer.isValuable(outdir), false);
+                }        
+                { // Let it do its thing
+                    string infile = indir + infiles[j];
+                	char* argv[] = {
+	                    (char*) "video-organizer",
+	                    (char*) infile.c_str(),
+	                    (char*) "-v",
+	                    (char*) "-1",
+	                    (char*) "-o",
+	                    (char*) outdir.c_str(),
+	                    (char*) actions[i],
+	                    (char*) "--manual-name",
+	                    (char*) "ABC",
+                    };
+                    int argc = sizeof(argv) / sizeof(*argv);
+                    Args args(argc, argv);
+                    Organizer organizer(args);
+                    organizer.run();
+                }
+                { // Check results
+                    Args args;
+                    FileMan fileman(args);
+                    string outfile = outdir + outfiles_ABC[j];
+                    string outfiledir = Parser::directory(outfile);
+                    string filelist = outfiledir + "filelist";
                     EQ(fileman.exists(outfile), true);
                     EQ(fileman.exists(filelist), true);
                 }
