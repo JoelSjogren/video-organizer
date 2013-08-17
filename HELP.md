@@ -57,4 +57,4 @@ To download subtitles, check out [addic7ed-cli](https://github.com/BenoitZugmeye
 
 For syncing your video folders, for example [local hdd] -> [usb hdd], rsync is handy:
 
-    $ rsync -a /home/joel/Video /media/USB-HDD/Video
+    $ rsync -a ~/Video /media/USB-HDD/Video
