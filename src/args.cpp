@@ -116,6 +116,7 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 	ARGS_D(clean);
 	ARGS_D(ask_clean);
 	ARGS_D(shallow_output);
+	ARGS_D(manual_name);
 	os << std::noboolalpha;
 	#undef ARGS_D
 	return os;
@@ -143,6 +144,7 @@ Args::Args(int argc, char* const* argv)
 		{ "clean",  	    required_argument,	NULL,  0  },
 		{ "ask-clean",      no_argument,    	NULL,  0  },
 		{ "shallow-output", no_argument,    	NULL,  0  },
+		{ "manual-name",    required_argument,  NULL,  0  },
 		{ NULL,		    	0,					NULL,  0  },
 	};
 	static const char* shortopts = ":uo:mclv:hrspb";
@@ -160,6 +162,8 @@ Args::Args(int argc, char* const* argv)
 		        ask_clean = true;
             if (strcmp(longopts[index].name, "shallow-output") == 0)
                 shallow_output = true;
+            if (strcmp(longopts[index].name, "manual-name") == 0)
+                manual_name = optarg;
 		    break;
 		case 'u':
 			undo = true;

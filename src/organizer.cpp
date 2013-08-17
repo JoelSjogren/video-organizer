@@ -166,18 +166,24 @@ void Organizer::sort(const string full) {
 	}
 	int j;
 	if (0 <= (j = findFilmParser(file))) {
-		const string film = filmParsers[j]->name(file);
+		string name;
+		if (args.manual_name.size() == 0)
+		    name = filmParsers[j]->name(file);
+		else name = args.manual_name;
 		const string cd = filmParsers[j]->cd(file);
 		string to = args.outdir;
-		if (!args.shallow_output) to += film + "/";
+		if (!args.shallow_output) to += name + "/";
 		to += cd + ext;
 		fileman.action(full, to);
 	} else if (0 <= (j = findSeriesParser(file))) {
-		const string series = seriesParsers[j]->name(file);
+		string name;
+		if (args.manual_name.size() == 0)
+		    name = seriesParsers[j]->name(file);
+		else name = args.manual_name;
 		const string se = seriesParsers[j]->season(file);
 		const string ep = seriesParsers[j]->episode(file);
 		string to = args.outdir;
-		if (!args.shallow_output) to += series + "/" + se + "/";
+		if (!args.shallow_output) to += name + "/" + se + "/";
 		to += ep + ext;
 		fileman.action(full, to);
 	} else {
