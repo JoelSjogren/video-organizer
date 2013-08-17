@@ -6,3 +6,4 @@ The things listed here are by no means things I plan to do. They're a collection
  - build for mac
  - build for both 64-bit and 32-bit
  - colorize console output
+ - add option to move directories when cleaning instead of removing them
