@@ -3,6 +3,16 @@
 *                                 *
 *  The core of all organization.  *
 **********************************/
+/****************************************************
+*  When the console arguments have been parsed, an  *
+*  Organizer is constructed. Then the following     *
+*  functions call each other:                       *
+*                                                   *
+*  1. run()                                         *
+*  2. iterate()                                     *
+*  3. launch() for each file                        *
+*  4. argument action() -> sort() or undo()         *
+****************************************************/
 #pragma once
 #include "args.h"
 #include "fileman.h"
