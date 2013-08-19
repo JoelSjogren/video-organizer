@@ -53,9 +53,9 @@ void FileMan::copy(string from, string to, int reg) {
 	}
 	dig(to);
 	try {
-		ifstream src(from.c_str());
-		ofstream dst(to.c_str());
-		dst << src;
+		ifstream src(from.c_str(), ifstream::binary);
+		ofstream dst(to.c_str(), ofstream::binary);
+		dst << src.rdbuf();
 	} catch (ios_base::failure e) {
 		console.e("%s", e.what());
 		return;
