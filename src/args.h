@@ -22,7 +22,7 @@ public:
 	std::vector<std::string> infiles;
 	enum Action {
     	// Values, e.g. MOVE = 0, must not change!
-		MOVE, COPY, LINK
+		MOVE, COPY, LINK,
 	} action;
 	int verbosity;
 	bool recursive;

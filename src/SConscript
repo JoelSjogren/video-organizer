@@ -39,7 +39,8 @@ link = env.Object(
      'filelist.cpp', 'filelist_test.cpp', 'fileman.cpp',
      'help.cpp', 'organizer.cpp', 'organizer_test.cpp',
      'parser.cpp', 'parser_test.cpp', 'parser_test_data.cpp',
-     'test.cpp', 'tinyxml2.cpp', 'organizer_test_data.cpp'])
+     'test.cpp', 'tinyxml2.cpp', 'organizer_test_data.cpp',
+     'fileman_test.cpp'])
 LIBS = ['boost_regex', 'boost_filesystem', 'boost_system']
 
 ### build ###
