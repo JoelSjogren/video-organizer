@@ -3,22 +3,24 @@
 *                                 *
 *  Provides conditional output.   *
 **********************************/
+// TODO: do we really need all the constness?
 #pragma once
 #include "args.h"
+#include "colormod.h"
 #include <string>
+#include <cstdio>
 #include <sstream>
 class Console {
     const class Args& args;
 public:
-	Console(const Args& pargs) : args(pargs) {}
+	Console(const Args& pargs);
 	enum Verbosity {
 	    SILENT = -2,
 	    ERROR,
 	    WARNING,
 	    VERBOSE,
 	    DEBUG,
-	};
-//	void setVerbosity(int pv) { verbosity = pv; }
+	}; // TODO move to Args
 	// printf wrappers
 	void f(std::string, ...) const; // always print
 	void e(std::string, ...) const;

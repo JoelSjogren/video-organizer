@@ -4,11 +4,15 @@
 #include "console.h"
 #include <cstdarg>
 #include <cstdio>
+#include <cstdlib>
 #include <cctype>
 #include <iostream>
+#include <printf.h>
 #include "colormod.h"
 using std::string;
 using std::cin;
+using std::ostringstream;
+Console::Console(const Args& pargs) : args(pargs) {}
 void Console::f(string msg, ...) const {
     Color::Modifier red(Color::FG_RED);
     Color::Modifier def(Color::FG_DEFAULT);

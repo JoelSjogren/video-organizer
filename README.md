@@ -28,6 +28,8 @@ Packages needed:
  - scons
  - libboost-regex-dev
  - libboost-filesystem-dev
+
+You'll also need glibc.
     
 To compile, run:
 
