@@ -6,11 +6,14 @@
 #include <cstdio>
 #include <cctype>
 #include <iostream>
+#include "colormod.h"
 using std::string;
 using std::cin;
 void Console::f(string msg, ...) const {
+    Color::Modifier red(Color::FG_RED);
+    Color::Modifier def(Color::FG_DEFAULT);
     if (true) {
-	    fprintf(stderr, "E: ");
+	    fprintf(stderr, "%sE:%s ", str(red).c_str(), str(def).c_str());
 	    va_list args;
 	    va_start(args, msg);
 	    vfprintf(stderr, msg.c_str(), args);
@@ -19,8 +22,10 @@ void Console::f(string msg, ...) const {
 	}
 }
 void Console::e(string msg, ...) const {
+    Color::Modifier red(Color::FG_RED);
+    Color::Modifier def(Color::FG_DEFAULT);
 	if (show_e()) {
-		fprintf(stderr, "E: ");
+		fprintf(stderr, "%sE:%s ", str(red).c_str(), str(def).c_str());
 		va_list args;
 		va_start(args, msg);
 		vfprintf(stderr, msg.c_str(), args);
@@ -29,8 +34,10 @@ void Console::e(string msg, ...) const {
 	}
 }
 void Console::w(string msg, ...) const {
+    Color::Modifier yel(Color::FG_YELLOW);
+    Color::Modifier def(Color::FG_DEFAULT);
 	if (show_w()) {
-		printf("W: ");
+		printf("%sW:%s ", str(yel).c_str(), str(def).c_str());
 		va_list args;
 		va_start(args, msg);
 		vprintf(msg.c_str(), args);

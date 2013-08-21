@@ -34,10 +34,10 @@ public:
 	bool show_v() const;
 	bool show_d() const;
 	template <class T>
-	std::string str(T t);
+	std::string str(T t) const;
 };
 template <class T>
-std::string Console::str(T t) {
+std::string Console::str(T t) const {
     std::ostringstream os;
     os << t;
     return os.str();
