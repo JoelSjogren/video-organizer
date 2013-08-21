@@ -92,7 +92,7 @@ void Organizer::iterate(function<void (Organizer*, string)> action) {
 	    }
 	    else launch(action, full);
 	}
-	// clean
+	// clean. time complexity seems to be quadratic. improve?
 	if (0 < args.clean) {
     	console.v("== Cleaning ==");
 	    set<string>::iterator i = usedDirs.begin();
