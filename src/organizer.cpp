@@ -4,6 +4,7 @@
 #include "organizer.h"
 #include "ostream_overloads.h"
 #include "fileman.h"
+#include "colormod.h"
 #include <boost/regex.hpp>      // regex matching
 #include <boost/filesystem.hpp> // filesystem operations
 #include <cstdlib>
