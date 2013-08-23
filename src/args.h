@@ -16,6 +16,8 @@ class Args {
 	void parseSize_err(std::string str);
     bool isDirectory(std::string path);
     void markDirectories();
+    void help();
+    void build_no();
 public:
 	bool undo;
 	std::string outdir;
@@ -31,10 +33,10 @@ public:
 	bool ask_clean;
 	bool shallow_output;
 	std::string manual_name;
-	std::string action_pretty() const;
-	std::string human_readable_size(clean_t size) const;
 	Args(); // for testing
 	Args(int argc, char* const* argv);
+    std::string action_pretty() const;
+	std::string human_readable_size(clean_t size) const;
 };
 
 

@@ -30,12 +30,14 @@ using std::vector;
 using std::istringstream;
 using std::ostringstream;
 using std::ios_base;
-void help() {
-	for (unsigned i = 0; i < ___HELP_md_len; i++)
+void Args::help() {
+    unsigned max = ___HELP_md_len - 1;
+    while (isspace(___HELP_md[max]) && max != 0) max--;
+	for (unsigned i = 0; i <= max; i++)
 		cout << ___HELP_md[i];
 	cout << endl;
 }
-void build_no() {
+void Args::build_no() {
     for (unsigned i = 0; i < build_no_txt_len; i++)
         cout << build_no_txt[i];
     cout << endl;
