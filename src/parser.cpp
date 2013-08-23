@@ -18,30 +18,30 @@ bool containsDirectory(string path) {
 *  Parser									  *
 **********************************************/
 string Parser::directory(string path) {
-	int lastSlash = path.rfind("/");
+	size_t lastSlash = path.rfind("/");
 	if (lastSlash == string::npos) return "./";
 	return path.substr(0, lastSlash + 1);
 }
 string Parser::filename(string path) {
-	int lastSlash = path.rfind('/');
+	size_t lastSlash = path.rfind('/');
 	if (lastSlash == string::npos) return path;
 	return path.substr(lastSlash + 1, string::npos);
 }
 string Parser::extension(string path) {
 	string fnam = filename(path);
-	int i = fnam.rfind(".");
+	size_t i = fnam.rfind(".");
 	if (i == string::npos) return "";
 	return fnam.substr(i, string::npos);
 }
 string Parser::filenameNoExt(string path) {
 	string fnam = filename(path);
-	int i = fnam.rfind(".");
+	size_t i = fnam.rfind(".");
 	if (i == string::npos) return fnam;
 	return fnam.substr(0, i);
 }
 string Parser::dotsToSpaces(string str) {
-	int lookHere = 0;
-	int foundHere;
+	size_t lookHere = 0;
+	size_t foundHere;
 	while ((foundHere = str.find(".", lookHere)) != string::npos) {
 		str.replace(foundHere, 1, " ");
 		lookHere = foundHere + 1;
