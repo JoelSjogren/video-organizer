@@ -36,13 +36,13 @@ Organizer::~Organizer() {
 	}
 }
 int Organizer::findFilmParser(string fnam) {
-	for (int i = 0; i < filmParsers.size(); i++)
+	for (unsigned i = 0; i < filmParsers.size(); i++)
 		if (filmParsers[i]->matches(fnam))
 			return i;
 	return -1;
 }
 int Organizer::findSeriesParser(string fnam) {
-	for (int i = 0; i < seriesParsers.size(); i++)
+	for (unsigned i = 0; i < seriesParsers.size(); i++)
 		if (seriesParsers[i]->matches(fnam))
 			return i;
 	return -1;
@@ -68,7 +68,7 @@ bool Organizer::isValuable(const string directory) {
 }
 void Organizer::iterate(function<void (Organizer*, string)> action) {
     set<string> usedDirs;
-	for (int i = 0; i < args.infiles.size(); i++) {
+	for (unsigned i = 0; i < args.infiles.size(); i++) {
 	    const string full = args.infiles[i];
 		if (!fileman.exists(full)) {
 	        console.f("%s: %s", strerror(ENOENT), full.c_str());
@@ -96,7 +96,7 @@ void Organizer::iterate(function<void (Organizer*, string)> action) {
 	if (0 < args.clean) {
     	console.v("== Cleaning ==");
 	    set<string>::iterator i = usedDirs.begin();
-	    int consecutive = 0;
+	    unsigned consecutive = 0;
 	    while (consecutive != usedDirs.size()) {
 	        console.d("Clean?: %s", i->c_str());
 	        if (fileman.exists(*i) && shouldClean(*i)) {
