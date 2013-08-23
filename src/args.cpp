@@ -31,12 +31,12 @@ using std::istringstream;
 using std::ostringstream;
 using std::ios_base;
 void help() {
-	for (int i = 0; i < ___HELP_md_len; i++)
+	for (unsigned i = 0; i < ___HELP_md_len; i++)
 		cout << ___HELP_md[i];
 	cout << endl;
 }
 void build_no() {
-    for (int i = 0; i < build_no_txt_len; i++)
+    for (unsigned i = 0; i < build_no_txt_len; i++)
         cout << build_no_txt[i];
     cout << endl;
 }
@@ -57,7 +57,7 @@ string Args::action_pretty() const {
 void Args::markDirectories() {
     Console console(*this);
     FileMan fileman(*this);
-    for (int i = 0; i < infiles.size(); i++) {
+    for (unsigned i = 0; i < infiles.size(); i++) {
         string& infile = infiles[i];
         bool isdir = fileman.isDirectory(infile);
 	    console.d("directory?: %s - %s", infile.c_str(),
@@ -93,7 +93,7 @@ long long Args::parseSize(const string orig) {
     else if (*last == 'G') suffix = (long long) 1024 * 1024 * 1024;
     else parseSize_err(orig);
     if (!isdigit(*last)) str.erase(last);
-    for (int i = 0; i < str.size(); i++)
+    for (unsigned i = 0; i < str.size(); i++)
         if (!isdigit(str[i]))
             parseSize_err(orig);
     errno = 0;
