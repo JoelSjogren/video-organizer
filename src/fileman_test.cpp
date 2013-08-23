@@ -12,9 +12,8 @@ using std::string;
 const unsigned int random_seed = 10325;
 void FileManTest::writeRandom(string outfile, size_t bytec) {
     srand(random_seed);
-    const int bufsz = 1000;
+    const size_t bufsz = 1000;
     char buf[bufsz];
-//    memset(buf, 0, bufsz);
     size_t bufi = 0;
     ofstream ofs(outfile.c_str(), ofstream::binary);
     for (size_t i = 0; i < bytec; i++, bufi++) {
@@ -32,10 +31,8 @@ void FileManTest::writeRandom(string outfile, size_t bytec) {
 }
 void FileManTest::checkRandom(string infile, size_t bytec) {
     srand(random_seed);
-    const int bufsz = 1000;
+    const size_t bufsz = 1000;
     char buf[bufsz];
-//    memset(buf, 0, bufsz
-    size_t bufi = 0;
     ifstream ifs(infile.c_str(), ifstream::binary);
     size_t readc = 0;
     while (ifs) {
