@@ -11,7 +11,7 @@ using tinyxml2::XMLError;
 using std::logic_error;
 
 FileList::FileList(string pdir, const Args& pargs)
-	: dir(pdir), args(pargs), console(args) {
+	: args(pargs), dir(pdir), console(args) {
 	read();
 }
 int FileList::getIndex(string to) const {
@@ -87,7 +87,7 @@ void FileList::write() {
 		XMLElement* filelist = doc.NewElement("filelist");
 		filelist->SetAttribute("application", "video-organizer");
 		filelist->SetAttribute("version", "1.0");
-		for (int i = 0; i < records.size(); i++) {
+		for (unsigned i = 0; i < records.size(); i++) {
 			XMLElement* record = doc.NewElement("record");
 			record->SetAttribute("from", records[i].from.c_str());
 			record->SetAttribute("to", records[i].to.c_str());
