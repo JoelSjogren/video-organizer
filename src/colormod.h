@@ -1,3 +1,8 @@
+/**********************************
+*  colormod.h                     *
+*                                 *
+*  Colorizes console output.      *
+**********************************/
 #pragma once
 #include <ostream>
 #include <string>

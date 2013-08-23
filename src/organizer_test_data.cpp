@@ -1,3 +1,8 @@
+/**********************************
+*  organizer_test_data.cpp        *
+*                                 *
+*  Declared in organizer_test.h.  *
+**********************************/
 #include "organizer_test.h"
 using std::string;
 const char* OrganizerTest::infiles[] = {
