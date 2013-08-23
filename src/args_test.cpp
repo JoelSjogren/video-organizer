@@ -34,7 +34,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		Args args(argc, argv);
 		EQ(args.undo, false);
 		EQ(args.outdir, "./");
-		EQ(args.infiles.size(), 1);
+		EQ(args.infiles.size(), (unsigned) 1);
 		EQ(args.action, Args::MOVE);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  false);
@@ -57,7 +57,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		Args args(argc, argv);
 		EQ(args.undo,  false);
 		EQ(args.outdir,  outdir);
-		EQ(args.infiles.size(), 1);
+		EQ(args.infiles.size(), (unsigned) 1);
 		EQ(args.action,  Args::COPY);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  true);
@@ -80,7 +80,7 @@ ArgsTest::ArgsTest() : Test("Args") {
 		Args args(argc, argv);
 		EQ(args.undo,  false);
 		EQ(args.outdir,  outdir);
-		EQ(args.infiles.size(), 1);
+		EQ(args.infiles.size(), (unsigned) 1);
 		EQ(args.action,  Args::LINK);
 		EQ(args.verbosity,  -1);
 		EQ(args.recursive,  true);
