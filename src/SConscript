@@ -41,9 +41,9 @@ link = env.Object(
      'parser.cpp', 'parser_test.cpp', 'parser_test_data.cpp',
      'test.cpp', 'tinyxml2.cpp', 'organizer_test_data.cpp',
      'fileman_test.cpp'])
-LIBS = ['boost_regex', 'boost_filesystem', 'boost_system']
+env['LIBS'] = ['boost_regex', 'boost_filesystem', 'boost_system']
 
 ### build ###
-vorg = env.Program('../vorg', ['vorg.cpp'] + link, LIBS=LIBS)
-testsuite = env.Program('../test-suite', ['testsuite.cpp'] + link, LIBS=LIBS)
+vorg = env.Program('../vorg', ['vorg.cpp'] + link)
+testsuite = env.Program('../test-suite', ['testsuite.cpp'] + link)
 
