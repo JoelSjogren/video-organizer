@@ -164,7 +164,7 @@ int FileMan::fileCount(std::string directory) {
     dirent* dent;
     int count = 0;
     errno = 0; // no error
-    while (dent = readdir(dir)) count++;
+    while ((dent = readdir(dir))) count++;
     if (errno != 0)
         throw runtime_error(strerror(errno) + (": " + directory));
     if (closedir(dir))
@@ -264,7 +264,7 @@ void FileMan::tree(string file) {
                             children.push_back(i->path().string());
                     }
                     sort(children.begin(), children.end());
-                    for (int i = 0; i < children.size(); i++) {
+                    for (unsigned i = 0; i < children.size(); i++) {
                         trail = THREE;
                         if (i == children.size() - 1) trail = BENT;
                         string childName = children[i];
