@@ -59,11 +59,15 @@ void Console::v(string msg, ...) const {
 	}
 }
 void Console::d(string msg, ...) const {
+    Color::Modifier dim(Color::DIM_SET);
+    Color::Modifier def(Color::DIM_UNSET);
 	if (show_d()) {
+		printf("%s", str(dim).c_str());
 		va_list args;
 		va_start(args, msg);
 		vprintf(msg.c_str(), args);
 		va_end(args);
+    	printf("%s", str(def).c_str());
 		printf("\n");
 	}
 }

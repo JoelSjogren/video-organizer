@@ -109,7 +109,7 @@ std::ostream& operator<<(std::ostream& os, const Args& args) {
 	ARGS_D(undo);
 	ARGS_D(outdir);
 	ARGS_D(infiles);
-	cout << "  action: " << args.action_pretty() << endl;
+	os << "  action: " << args.action_pretty() << endl;
 	ARGS_D(verbosity);
 	ARGS_D(recursive);
 	ARGS_D(include_part);
@@ -226,7 +226,7 @@ Args::Args(int argc, char* const* argv)
 		          argv[0]);
 		exit(1);
 	}
-	if (console.show_d()) cout << *this;
+	console.d("%s", console.str(*this).c_str());
 	markDirectories(); // append '/'
 	checkFiles();
 }

@@ -7,3 +7,4 @@ The things listed here are by no means things I plan to do. They're a collection
  - integrate exit(1) into Console::f()
  - add --overwrite option
  - dim debug output
+ - remove trailing newlines from --help and --build-no output
