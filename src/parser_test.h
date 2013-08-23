@@ -10,7 +10,7 @@
 class ParserTest : public Test {
     // test data
     static const char* files[];
-    static const int filec;
+    static const unsigned filec;
     static const char* fileNames[];
     static const char* titles[];
     static const char* ext[];

@@ -19,24 +19,24 @@ ParserTest::ParserTest() : Test("Parser") {
 	seriesParsers.push_back(new SeriesParser1);
 	seriesParsers.push_back(new SeriesParser2);
 	vector<Parser*> parsers;
-	for (int i = 0; i < filmParsers.size(); i++)
+	for (unsigned i = 0; i < filmParsers.size(); i++)
 		parsers.push_back(filmParsers[i]);
-	for (int i = 0; i < seriesParsers.size(); i++)
+	for (unsigned i = 0; i < seriesParsers.size(); i++)
 		parsers.push_back(seriesParsers[i]);
 	// iterate over *files* and parse them
-	for (int i = 0; i < filec; i++) {
+	for (unsigned i = 0; i < filec; i++) {
 		const char* const file = files[i];
 		{ // check for false positives and false negatives
 			int matches = 0;
-			for (int j = 0; j < parsers.size(); j++)
+			for (unsigned j = 0; j < parsers.size(); j++)
 				if (parsers[j]->matches(file))
 					matches++;
 			EQ(matches, 1);
 		}
-		for (int j = 0; j < filmParsers.size(); j++)
+		for (unsigned j = 0; j < filmParsers.size(); j++)
 			if (filmParsers[j]->matches(file))
 				film(filmParsers[j], i);
-		for (int j = 0; j < seriesParsers.size(); j++)
+		for (unsigned j = 0; j < seriesParsers.size(); j++)
 			if (seriesParsers[j]->matches(file))
 				series(seriesParsers[j], i);
 	}

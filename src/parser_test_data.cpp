@@ -27,7 +27,7 @@ const char* ParserTest::files[] = {
 	"../The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD01.avi",
 	"/The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD02.avi",
 };
-const int ParserTest::filec = sizeof(files) / sizeof(*files);
+const unsigned ParserTest::filec = sizeof(files) / sizeof(*files);
 const char* ParserTest::fileNames[] = {
 	"The.Prestige.2006.720p.Bluray.x264.anoXmous.mp4",
 	"Paranormal.Activity.3.2011.UNRATED.DVDRip.XviD-SPARKS.avi",
