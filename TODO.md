@@ -6,3 +6,4 @@ The things listed here are by no means things I plan to do. They're a collection
  - write an exception printer in Console. it should exit(1) the program.
  - integrate exit(1) into Console::f()
  - add --overwrite option
+ - add support for Dexter-S08E12-HDTV-x264-EVOLVE[ettv].torrent
