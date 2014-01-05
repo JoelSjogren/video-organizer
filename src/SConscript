@@ -43,6 +43,7 @@ link = env.Object(
      'fileman_test.cpp'])
 env['LIBS'] = ['boost_regex', 'boost_filesystem', 'boost_system']
 env['CXXFLAGS'] = ['-Wall']
+env['tools'] = ['mingw']
 
 ### build ###
 vorg = env.Program('../vorg', ['vorg.cpp'] + link)
