@@ -24,6 +24,7 @@ void Console::f(string msg, ...) const {
 	    va_end(args);
 	    fprintf(stderr, "\n");
 	}
+	exit(1);
 }
 void Console::e(string msg, ...) const {
     Color::Modifier red(Color::FG_RED);

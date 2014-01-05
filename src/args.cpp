@@ -53,7 +53,7 @@ string Args::action_pretty() const {
 	    return "link";
 	default:
 	    console.f("Invalid Args::Action: %d", action);
-	    exit(1);
+	    return "";
 	}
 }
 void Args::markDirectories() {
@@ -75,14 +75,12 @@ int Args::parseInt(string str) {
     if (iss.fail()) {
         Console console(*this);
 		console.f("Unable to interpret integer: %s", str.c_str());
-		exit(1);
 	}
 	return result;
 }
 void Args::parseSize_err(string str) {
     Console console(*this);
     console.f("Unable to interpret size: %s", str.c_str());
-    exit(1);
 }
 long long Args::parseSize(const string orig) {
     string str(orig);
@@ -204,16 +202,13 @@ Args::Args(int argc, char* const* argv)
 			console.f("Got unexpected option: %s\n"
 			          "Try `%s --help' for more information.",
 			          argv[optind - 1], argv[0]); // FIXME safe?
-			exit(1);
 		case ':':
 		    console.f("Missing option argument for: %s\n"
 		              "Try `%s --help' for more information.",
 		              argv[optind - 1], argv[0]);
-		    exit(1);
 		default:
 			console.f("Failed to interpret command line "
 			          "arguments. getopt returned %d", c);
-			exit(1);
 		}
 	}
 //	console.setVerbosity(verbosity);
@@ -226,7 +221,6 @@ Args::Args(int argc, char* const* argv)
 		console.f("Missing file operand.\n"
 		          "Try `%s --help' for more information.",
 		          argv[0]);
-		exit(1);
 	}
 	console.d("%s", console.str(*this).c_str());
 	markDirectories(); // append '/'
@@ -239,7 +233,6 @@ void Args::checkFiles() {
 	    FileMan fileman(*this);
 		if (!fileman.isDirectory(outdir)) {
 			console.f("%s: %s", strerror(ENOTDIR), outdir.c_str());
-			exit(1);	
 		}
 		if (*outdir.rbegin() != '/')
 		    outdir += "/";

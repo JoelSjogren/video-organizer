@@ -183,7 +183,6 @@ bool FileMan::isDirectory(string path) {
 	struct stat buf;
 	if (stat(path.c_str(), &buf) != 0) {
 		console.f("%s: %s", strerror(errno), path.c_str());
-		exit(1);
 	}
     return S_ISDIR(buf.st_mode);
 }*/

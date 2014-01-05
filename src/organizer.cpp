@@ -73,7 +73,6 @@ void Organizer::iterate(function<void (Organizer*, string)> action) {
 	    const string full = args.infiles[i];
 		if (!fileman.exists(full)) {
 	        console.f("%s: %s", strerror(ENOENT), full.c_str());
-	        exit(1);
 	    }
 		if (fileman.isDirectory(full)) {
 	        if (args.recursive) {

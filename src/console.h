@@ -41,7 +41,7 @@ public:
 	    DEBUG,
 	}; // TODO move to Args
 	// printf wrappers
-	void f(std::string, ...) const; // always print
+	void f(std::string, ...) const; // always print, exit(1)
 	void e(std::string, ...) const;
 	void w(std::string, ...) const;
 	void v(std::string, ...) const;
