@@ -26,6 +26,9 @@ const char* ParserTest::files[] = {
 	"./Cube.Zero.2004.SWESUB.AC3.DVDRip.XviD-Pride86.CD02.avi",
 	"../The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD01.avi",
 	"/The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD02.avi",
+	// series: naming convention 3
+	"The.Series-S04E05-A-B-C.mp4",
+	"./Dexter-S08E12-HDTV-x264-EVOLVE[ettv].torrent",
 };
 const unsigned ParserTest::filec = sizeof(files) / sizeof(*files);
 const char* ParserTest::fileNames[] = {
@@ -46,6 +49,8 @@ const char* ParserTest::fileNames[] = {
 	"Cube.Zero.2004.SWESUB.AC3.DVDRip.XviD-Pride86.CD02.avi",
 	"The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD01.avi",
 	"The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD02.avi",
+	"The.Series-S04E05-A-B-C.mp4",
+	"Dexter-S08E12-HDTV-x264-EVOLVE[ettv].torrent",
 };
 const char* ParserTest::titles[] = {
 	"The Prestige",
@@ -64,6 +69,8 @@ const char* ParserTest::titles[] = {
 	"Cube Zero",
 	"The Book Of Eli",
 	"The Book Of Eli",
+	"The Series",
+	"Dexter",
 };
 const char* ParserTest::ext[] = {
 	".mp4",
@@ -82,6 +89,8 @@ const char* ParserTest::ext[] = {
 	".avi",
 	".avi",
 	".avi",
+	".mp4",
+	".torrent",
 };
 const char* ParserTest::season[] = {
 	NULL,
@@ -100,6 +109,8 @@ const char* ParserTest::season[] = {
 	NULL,
 	NULL,
 	NULL,
+	"S04",
+	"S08",
 };
 const char* ParserTest::episode[] = {
 	NULL,
@@ -118,6 +129,8 @@ const char* ParserTest::episode[] = {
 	NULL,
 	NULL,
 	NULL,
+	"E05",
+	"E12",
 };
 const char* ParserTest::filenames_nodots[] = {
 	"The Prestige 2006 720p Bluray x264 anoXmous mp4",
@@ -137,6 +150,8 @@ const char* ParserTest::filenames_nodots[] = {
 	"Cube Zero 2004 SWESUB AC3 DVDRip XviD-Pride86 CD02 avi",
 	"The Book Of Eli 2010 SWESUB DVDRip XviD-Pride86 CD01 avi",
 	"The Book Of Eli 2010 SWESUB DVDRip XviD-Pride86 CD02 avi",
+	"The Series-S04E05-A-B-C mp4",
+	"Dexter-S08E12-HDTV-x264-EVOLVE[ettv] torrent",
 };
 const char* ParserTest::cd[] = {
     "CD01",
@@ -155,6 +170,8 @@ const char* ParserTest::cd[] = {
     "CD02",
     "CD01",
     "CD02",
+    NULL,
+    NULL,
 };
 
 

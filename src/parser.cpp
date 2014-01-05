@@ -156,5 +156,20 @@ int SeriesParser2::seasonOffset() {
 int SeriesParser2::episodeOffset() {
     return string(" - 01").size();
 }
+/**********************************************
+*  SeriesParser3							  *
+**********************************************/
+boost::regex SeriesParser3::name_rex() {
+    return regex("-S[0-9]{2}E[0-9]{2}", regex_syntax);
+}
+size_t SeriesParser3::name_rex_len() {
+    return string(" S01E01").size();
+}
+int SeriesParser3::seasonOffset() {
+    return string("-").size();
+}
+int SeriesParser3::episodeOffset() {
+    return string("-S01").size();
+}
 
 

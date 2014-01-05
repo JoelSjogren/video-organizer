@@ -80,6 +80,14 @@ protected:
 	virtual int seasonOffset();
 	virtual int episodeOffset();
 };
+// e.g. The.Series-S02E01.avi
+class SeriesParser3 : public SeriesParser {
+protected:
+	virtual boost::regex name_rex();
+	virtual size_t name_rex_len();
+	virtual int seasonOffset();
+	virtual int episodeOffset();
+};
 
 
 

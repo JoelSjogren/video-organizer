@@ -18,6 +18,7 @@ ParserTest::ParserTest() : Test("Parser") {
 	filmParsers.push_back(new FilmParser3);
 	seriesParsers.push_back(new SeriesParser1);
 	seriesParsers.push_back(new SeriesParser2);
+	seriesParsers.push_back(new SeriesParser3);
 	vector<Parser*> parsers;
 	for (unsigned i = 0; i < filmParsers.size(); i++)
 		parsers.push_back(filmParsers[i]);
