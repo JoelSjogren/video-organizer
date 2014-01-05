@@ -5,4 +5,3 @@ The things listed here are by no means things I plan to do. They're a collection
  - add option to move directories when cleaning instead of removing them
  - write an exception printer in Console. it should exit(1) the program.
  - add --overwrite option
- - how to handle boost errors?
