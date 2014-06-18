@@ -39,6 +39,3 @@ To install, copy the generated executable to a directory in your $PATH. I sugges
 
 ## OPTIONS ##
 See *HELP.md*.
-
-## REPORTING BUGS ##
-If you are dissatisfied with the results, please attach the appropriate *filelist* in your bugreport.
