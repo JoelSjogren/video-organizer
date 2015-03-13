@@ -171,5 +171,28 @@ int SeriesParser3::seasonOffset() {
 int SeriesParser3::episodeOffset() {
     return string("-S01").size();
 }
+/**********************************************
+*  SeriesParser4							  *
+**********************************************/
+boost::regex SeriesParser4::name_rex() {
+    return regex("\\.[0-9]{3}\\.", regex_syntax);
+}
+size_t SeriesParser4::name_rex_len() {
+    return string(".101.").size();
+}
+int SeriesParser4::seasonOffset() {
+    return -1; // unused
+}
+int SeriesParser4::episodeOffset() {
+    return string(".").size();
+}
+std::string SeriesParser4::season(std::string file) {
+    const string fnam = filename(file);
+	int i = identifierStart(fnam);
+	string::const_iterator start = fnam.begin() + i + 1;
+	return "S0" + string(start, start + 1);
+}
+
+
 
 

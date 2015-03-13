@@ -88,8 +88,16 @@ protected:
 	virtual int seasonOffset();
 	virtual int episodeOffset();
 };
-
-
+// e.g. the.series-201.avi
+class SeriesParser4 : public SeriesParser {
+protected:
+	virtual boost::regex name_rex();
+	virtual size_t name_rex_len();
+	virtual int seasonOffset();
+	virtual int episodeOffset();
+public:
+	virtual std::string season(std::string file);
+};
 
 
 

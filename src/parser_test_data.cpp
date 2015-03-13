@@ -29,6 +29,8 @@ const char* ParserTest::files[] = {
 	// series: naming convention 3
 	"The.Series-S04E05-A-B-C.mp4",
 	"./Dexter-S08E12-HDTV-x264-EVOLVE[ettv].torrent",
+	// series: naming convention 4
+	"a.to.z.109.hdtv-lol.mp4",
 };
 const unsigned ParserTest::filec = sizeof(files) / sizeof(*files);
 const char* ParserTest::fileNames[] = {
@@ -51,6 +53,7 @@ const char* ParserTest::fileNames[] = {
 	"The.Book.Of.Eli.2010.SWESUB.DVDRip.XviD-Pride86.CD02.avi",
 	"The.Series-S04E05-A-B-C.mp4",
 	"Dexter-S08E12-HDTV-x264-EVOLVE[ettv].torrent",
+	"a.to.z.109.hdtv-lol.mp4",
 };
 const char* ParserTest::titles[] = {
 	"The Prestige",
@@ -71,6 +74,7 @@ const char* ParserTest::titles[] = {
 	"The Book Of Eli",
 	"The Series",
 	"Dexter",
+	"a to z",
 };
 const char* ParserTest::ext[] = {
 	".mp4",
@@ -91,6 +95,7 @@ const char* ParserTest::ext[] = {
 	".avi",
 	".mp4",
 	".torrent",
+	".mp4",
 };
 const char* ParserTest::season[] = {
 	NULL,
@@ -111,6 +116,7 @@ const char* ParserTest::season[] = {
 	NULL,
 	"S04",
 	"S08",
+	"S01",
 };
 const char* ParserTest::episode[] = {
 	NULL,
@@ -131,6 +137,7 @@ const char* ParserTest::episode[] = {
 	NULL,
 	"E05",
 	"E12",
+	"E09",
 };
 const char* ParserTest::filenames_nodots[] = {
 	"The Prestige 2006 720p Bluray x264 anoXmous mp4",
@@ -152,6 +159,7 @@ const char* ParserTest::filenames_nodots[] = {
 	"The Book Of Eli 2010 SWESUB DVDRip XviD-Pride86 CD02 avi",
 	"The Series-S04E05-A-B-C mp4",
 	"Dexter-S08E12-HDTV-x264-EVOLVE[ettv] torrent",
+	"a to z 109 hdtv-lol mp4",
 };
 const char* ParserTest::cd[] = {
     "CD01",
@@ -170,6 +178,7 @@ const char* ParserTest::cd[] = {
     "CD02",
     "CD01",
     "CD02",
+    NULL,
     NULL,
     NULL,
 };

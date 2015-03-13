@@ -53,6 +53,7 @@ void Organizer::initParsers() {
 	seriesParsers.push_back(new SeriesParser1);
 	seriesParsers.push_back(new SeriesParser2);
 	seriesParsers.push_back(new SeriesParser3);
+	seriesParsers.push_back(new SeriesParser4);
 }
 bool Organizer::isValuable(const string directory) {
     for (FileIterator i(directory, args); i; i++) {
